@@ -258,9 +258,133 @@ footer p{color:var(--mut);font-size:.84rem}
 }
 .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* STUDENT HORIZONTAL CARDS */
+.students-horiz{display:flex;flex-direction:column;gap:1.5rem}
+.student-hcard{display:flex;gap:2rem;padding:2rem;background:var(--surf);border:1px solid var(--bd);border-radius:16px;align-items:flex-start;transition:all .2s}
+.student-hcard:hover{border-color:rgba(79,142,247,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.student-photo-wrap{position:relative;width:130px;min-height:150px;border-radius:14px;overflow:hidden;background:var(--surf2);border:1px solid var(--bd2);flex-shrink:0}
+.student-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;min-height:150px}
+.student-ph-fallback{width:100%;min-height:150px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--acc);background:linear-gradient(135deg,var(--surf2),var(--surf3))}
+.student-photo-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(7,9,14,.88);font-size:.6rem;color:var(--acc);font-family:var(--mono);text-align:center;padding:3px;line-height:1.3}
+.student-info{flex:1}
+.student-name-lg{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.student-badge{display:inline-block;background:rgba(79,142,247,.12);color:var(--acc);border:1px solid rgba(79,142,247,.25);font-size:.75rem;font-family:var(--mono);padding:.25rem .75rem;border-radius:20px;margin-bottom:.6rem;letter-spacing:.04em}
+.student-dept{font-size:.84rem;color:var(--mut);margin-bottom:.5rem}
+.student-status{font-size:.8rem;color:var(--acc3);margin-bottom:.75rem}
+.student-desc{color:var(--mut);font-size:.87rem;line-height:1.75}
+@media(max-width:700px){.student-hcard{flex-direction:column}.student-photo-wrap{width:100%;min-height:180px}}
+
+/* NEWS TICKER */
+.news-ticker-wrap{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);z-index:90;width:198px}
+@media(max-width:1150px){.news-ticker-wrap{display:none}}
+.news-ticker-box{background:rgba(11,13,20,.96);backdrop-filter:blur(16px);border:1px solid var(--bd2);border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.news-ticker-hdr{padding:.6rem 1rem;background:rgba(79,142,247,.1);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.5rem}
+.news-ticker-hdr .nh-icon{font-size:.85rem}
+.news-ticker-hdr .nh-txt{font-family:var(--mono);font-size:.7rem;color:var(--acc);letter-spacing:.08em;text-transform:uppercase;font-weight:500;flex:1}
+.news-ticker-hdr .nh-dot{width:7px;height:7px;background:var(--acc3);border-radius:50%;animation:pulse 2s infinite}
+.news-scroll-outer{height:280px;overflow:hidden;position:relative}
+.news-scroll-inner{display:flex;flex-direction:column;animation:newsScroll 30s linear infinite}
+.news-scroll-inner:hover{animation-play-state:paused}
+@keyframes newsScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
+.news-item{padding:.8rem 1rem;border-bottom:1px solid var(--bd);flex-shrink:0}
+.news-date{font-family:var(--mono);font-size:.63rem;color:var(--acc);margin-bottom:.28rem;letter-spacing:.04em}
+.news-text{font-size:.73rem;color:var(--txt);line-height:1.55}
+.news-text strong{color:#fff}
+.news-tag{display:inline-block;font-size:.59rem;padding:.1rem .42rem;border-radius:10px;margin-top:.28rem;font-family:var(--mono);letter-spacing:.03em}
+.ntg{background:rgba(71,200,168,.12);color:var(--acc3);border:1px solid rgba(71,200,168,.2)}
+.ntb{background:rgba(79,142,247,.12);color:var(--acc);border:1px solid rgba(79,142,247,.2)}
+.ntgold{background:rgba(226,176,74,.12);color:var(--gold);border:1px solid rgba(226,176,74,.2)}
 </style>
 </head>
 <body>
+
+<!-- FLOATING NEWS TICKER -->
+<div class="news-ticker-wrap">
+  <div class="news-ticker-box">
+    <div class="news-ticker-hdr">
+      <span class="nh-icon">📢</span>
+      <span class="nh-txt">Recent News</span>
+      <span class="nh-dot"></span>
+    </div>
+    <div class="news-scroll-outer">
+      <div class="news-scroll-inner" id="newsTicker">
+        <!-- Items duplicated for seamless loop -->
+        <div class="news-item">
+          <div class="news-date">May 2026</div>
+          <div class="news-text">Presenting at <strong>ACC 2026</strong>, New Orleans — "Safety-Critical Adaptive Spiking NN Control"</div>
+          <span class="news-tag ntg">Conference</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">May 2026</div>
+          <div class="news-text">Presenting at <strong>ACC 2026</strong>, New Orleans — "Energy-Efficient Intent Estimation for Human–Multi-Robot Collaboration"</div>
+          <span class="news-tag ntg">Conference</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2026</div>
+          <div class="news-text">Received <strong>Summer Mentoring Grant</strong> — $9,559 · Wilkes University · TurtleBot robotics research with students</div>
+          <span class="news-tag ntgold">Grant Awarded</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Mar 2026</div>
+          <div class="news-text">Paper published in <strong>IEEE Trans. SMC</strong> — Safety Aware Continual RL-Based Output Tracking Control</div>
+          <span class="news-tag ntb">Journal</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2026</div>
+          <div class="news-text">Paper accepted in <strong>IEEE Trans. Cybernetics</strong> — Safe Optimal Control for Human–Robot Cooperative Manipulation</div>
+          <span class="news-tag ntb">Journal</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2025</div>
+          <div class="news-text"><strong>Dean's Scholar Award</strong> — Missouri S&amp;T College of Engineering. One of six Ph.D. students recognized.</div>
+          <span class="news-tag ntgold">Award</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2025</div>
+          <div class="news-text">Joined <strong>Wilkes University</strong> as Assistant Professor, Mechanical &amp; Electrical Engineering</div>
+          <span class="news-tag ntb">New Position</span>
+        </div>
+        <!-- DUPLICATE for seamless loop -->
+        <div class="news-item">
+          <div class="news-date">May 2026</div>
+          <div class="news-text">Presenting at <strong>ACC 2026</strong>, New Orleans — "Safety-Critical Adaptive Spiking NN Control"</div>
+          <span class="news-tag ntg">Conference</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">May 2026</div>
+          <div class="news-text">Presenting at <strong>ACC 2026</strong>, New Orleans — "Energy-Efficient Intent Estimation for Human–Multi-Robot Collaboration"</div>
+          <span class="news-tag ntg">Conference</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2026</div>
+          <div class="news-text">Received <strong>Summer Mentoring Grant</strong> — $9,559 · Wilkes University · TurtleBot robotics research with students</div>
+          <span class="news-tag ntgold">Grant Awarded</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">Mar 2026</div>
+          <div class="news-text">Paper published in <strong>IEEE Trans. SMC</strong> — Safety Aware Continual RL-Based Output Tracking Control</div>
+          <span class="news-tag ntb">Journal</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2026</div>
+          <div class="news-text">Paper accepted in <strong>IEEE Trans. Cybernetics</strong> — Safe Optimal Control for Human–Robot Cooperative Manipulation</div>
+          <span class="news-tag ntb">Journal</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2025</div>
+          <div class="news-text"><strong>Dean's Scholar Award</strong> — Missouri S&amp;T College of Engineering. One of six Ph.D. students recognized.</div>
+          <span class="news-tag ntgold">Award</span>
+        </div>
+        <div class="news-item">
+          <div class="news-date">2025</div>
+          <div class="news-text">Joined <strong>Wilkes University</strong> as Assistant Professor, Mechanical &amp; Electrical Engineering</div>
+          <span class="news-tag ntb">New Position</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -269,11 +393,12 @@ footer p{color:var(--mut);font-size:.84rem}
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Research</a></li>
     <li><a href="#publications">Publications</a></li>
+    <li><a href="#students">Students</a></li>
     <li><a href="#teaching">Teaching</a></li>
     <li><a href="#awards">Awards</a></li>
     <li><a href="#professional">Activities</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="resume.html" target="_blank" class="btn btn-o" style="padding:.35rem 1rem;font-size:.82rem">CV ↗</a></li>
+    <li><a href="cv/cv.pdf" target="_blank" class="btn btn-o" style="padding:.35rem 1rem;font-size:.82rem" id="cvNavBtn">CV ↗</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>
@@ -283,7 +408,7 @@ footer p{color:var(--mut);font-size:.84rem}
   <div class="glow g1"></div><div class="glow g2"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-tag">Assistant Professor · <a href="https://www.wilkes.edu/" target="_blank" style="color:inherit;text-decoration:none">Wilkes University</a></div>
+      <div class="hero-tag">Assistant Professor · <a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank" style="color:inherit;text-decoration:none">Wilkes University</a></div>
       <h1>Irfan Ahmad<br>Ganie</h1>
       <p class="hero-sub">Mechanical &amp; Electrical Engineering</p>
       <p class="hero-desc">Research at the intersection of adaptive optimal control, safe deep reinforcement learning, human–robot teaming, and neuromorphic computing — building systems that are safe, adaptive, and cooperative.</p>
@@ -453,24 +578,41 @@ footer p{color:var(--mut);font-size:.84rem}
 <!-- CURRENT STUDENTS -->
 <section id="students">
 <div class="container">
-  <div class="sec-label">Mentorship</div>
-  <h2 class="sec-title">Students</h2>
-  <div class="student-grid">
-    <div class="student-card fade-in">
-      <div class="student-av">MK</div>
-      <div class="student-name">Matthew Kralj</div>
-      <div class="student-role">Undergraduate Research Student<br>Wilkes University, 2025–Present</div>
+  <div class="sec-label">Research Team</div>
+  <h2 class="sec-title">Current Research Students</h2>
+  <p class="sec-desc">Undergraduate students currently conducting research under my supervision at Wilkes University.</p>
+  <div class="students-horiz">
+
+    <div class="student-hcard fade-in">
+      <div class="student-photo-wrap">
+        <img src="img/matthew_kralj.jpg" alt="Matthew Kralj" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="student-ph-fallback">MK</div>
+        <div class="student-photo-hint">Upload: img/matthew_kralj.jpg</div>
+      </div>
+      <div class="student-info">
+        <div class="student-name-lg">Matthew Kralj</div>
+        <div class="student-badge">Undergraduate Researcher</div>
+        <div class="student-dept">Mechanical &amp; Electrical Engineering<br>Wilkes University</div>
+        <div class="student-status">● Currently working under my supervision</div>
+        <p class="student-desc">Working on implementation and experimental validation of adaptive control algorithms on TurtleBot robotic platforms. Research involves trajectory tracking, formation control, and real-time ROS2 integration.</p>
+      </div>
     </div>
-    <div class="student-card fade-in">
-      <div class="student-av">JR</div>
-      <div class="student-name">Joshua Roman</div>
-      <div class="student-role">Undergraduate Research Student<br>Wilkes University, 2025–Present</div>
+
+    <div class="student-hcard fade-in">
+      <div class="student-photo-wrap">
+        <img src="img/joshua_roman.jpg" alt="Joshua Roman" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="student-ph-fallback">JR</div>
+        <div class="student-photo-hint">Upload: img/joshua_roman.jpg</div>
+      </div>
+      <div class="student-info">
+        <div class="student-name-lg">Joshua Roman</div>
+        <div class="student-badge">Undergraduate Researcher</div>
+        <div class="student-dept">Mechanical &amp; Electrical Engineering<br>Wilkes University</div>
+        <div class="student-status">● Currently working under my supervision</div>
+        <p class="student-desc">Working on safe reinforcement learning-based control and hardware-in-the-loop testing using TurtleBot 4 and TurtleBot 4 Lite. Research involves obstacle avoidance and barrier Lyapunov function implementation.</p>
+      </div>
     </div>
-    <div class="student-card fade-in">
-      <div class="student-av">NR</div>
-      <div class="student-name">Nick Romas</div>
-      <div class="student-role">M.S. Mechanical Engineering<br>Thesis Committee Member, 2026</div>
-    </div>
+
   </div>
 </div>
 </section>
@@ -480,7 +622,7 @@ footer p{color:var(--mut);font-size:.84rem}
 <div class="container">
   <div class="sec-label">Education</div>
   <h2 class="sec-title">Teaching</h2>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#fff;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.9rem"><a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank" style="color:#fff;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
   <div class="course-grid fade-in" style="margin-bottom:2rem">
     <div class="course-item"><div class="course-code">EE-314 / S'26</div><div class="course-name">Control Systems</div></div>
     <div class="course-item"><div class="course-code">EE-314-L / S'26</div><div class="course-name">Control Systems Lab</div></div>
