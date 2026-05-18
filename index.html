@@ -1,915 +1,2123 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <style>
-        :root {
-            --theme_color: #2929ab;
-            --theme_end: #0f0f1a;
-        }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Irfan Ahmad Ganie | Assistant Professor</title>
+  <meta name="description" content="Faculty website of Irfan Ahmad Ganie, Assistant Professor at Wilkes University">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --surface: #111318;
+      --surface2: #181c24;
+      --border: rgba(255,255,255,0.07);
+      --accent: #4f8ef7;
+      --accent2: #7c6af7;
+      --accent3: #47c8a8;
+      --gold: #e2b04a;
+      --text: #e8eaf0;
+      --muted: #8891a8;
+      --heading: #Playfair Display, Georgia, serif;
+      --body: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
 
-        #header:link,
-        #header:visited {
-            background-color: var(--theme_end);
-            color: white;
-            padding: 14px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        #header:hover,
-        #header:active {
-            background-color: var(--theme_color);
-        }
+    html { scroll-behavior: smooth; }
 
-        #testi {
-            color: black;
-            background-color: transparent;
-        }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
 
-        h1.ex1 {
-            margin-top: -200px;
-        }
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
 
-        div.set {
-            border-radius: 0%;
-        }
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        .responsibities-list {
-            padding-inline-start: 0px;
-        }
-    </style>
-    <!-- div.absolute { position: relative; top: 100px; right: 0;} -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Irfan Ahmad Ganie</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
-    <!-- Google fonts - Roboto + Roboto Slab-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700%7CRoboto:400,700,300">
-    <!-- owl carousel-->
-    <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.css">
-    <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.css">
-    <!-- animate.css-->
-    <link rel="stylesheet" href="vendor/animate.css/animate.css">
-    <!-- theme stylesheet-->
-    <link rel="stylesheet" href="css/style.black.css" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="css/custom.css">
-    <!-- Leaflet CSS - For the map-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css">
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.png">
-    <!-- Tweaks for older IEs-->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-</head>
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
 
-<body>
-    <!-- Reference item-->
-    <!-- navbar-->
-    <header class="header">
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <button type="button" data-toggle="collapse" data-target="#navbarcollapse"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                class="navbar-toggler navbar-toggler-right"><span class="fa fa-bars"></span></button>
-            <div id="navbarcollapse" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="#intro" class="nav-link link-scroll">profile</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link link-scroll">About</a></li>
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
 
-                    <li class="nav-item"><a href="#work_ex" class="nav-link link-scroll">Work Experience</a></li>
-                    <li class="nav-item"><a href="#projects" class="nav-link link-scroll">Projects</a></li>
-                    <!-- <li class="nav-item"><a href="#customers" class="nav-link link-scroll">Clients</a></li> -->
-                    <li class="nav-item"><a href="#pub" class="nav-link link-scroll">Publications</a></li>
-                    <li class="nav-item"><a href="resume.html" class="nav-link link-scroll" target="_blank">CV</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link link-scroll">Contact</a></li>
-                </ul>
-            </div>
-            </div>
-        </nav>
-    </header>
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
 
-    <section id="intro" class="about-section">
-        <div class="container">
-            <div class="row">
-                <div data-animate="fadeInUp" class="col-sm-6 mx-auto mt-5"><img src="img/profile.png"
-                        alt="This is me - Control Engineer" class="image rounded-0 img-fluid"></div>
-                <div data-animate="fadeInUp" class="about-section col-lg-6 mx-auto mt-5">
-                    <header class="text-center">
-                        <h2 data-animate="fadeInDown" class="title"><strong>Irfan Ahmad Ganie</strong></h2>
-                    </header>
+    .nav-links a:hover { color: var(--text); background: var(--surface2); }
 
-                    <p align="justify">As a PhD candidate and Graduate Research Assistant at <a href="https://mst.edu" target="_blank">Missouri University
-                        of Science and Technology, USA</a>, under the guidance of Dr. Sarangapani, my
-                        research delves into the compelling nexus of continual lifelong online deep reinforcement learning and safety control mechanisms within nonlinear systems.
-                        This study focuses on multitasking environments and includes Human-Robot
-                        Interaction (HRI) and Human-Swarm Interaction (HSI). The scope of my work
-                        spans a wide range of potential applications, encompassing robotics, mobile
-                        robots, and unmanned aerial and ground vehicles, emphasizing the ability to
-                        continuously learn and adapt from new data throughout their operational lifetime.
-                    </p>
-                    <h3>Research Interests: </h3>
-                    <ul>
-                    <li>
-                            <strong>Reinforcement Learning:</strong> Exploring dynamic
-                        strategies and algorithms.
-                    </li>
-                    <li>
-                        <strong>Optimal Control:</strong> Developing methods to achieve the best performance
-                        under given constraints.
-                    </li>
-                    <li><strong>Deep Neural Networks:</strong> Harnessing deep learning architectures for complex problem-solving.</li>
-                    <li><strong>Artificial Intelligence Applications:</strong> Implementing AI in nonlinear systems for enhanced functionality.</li>
-                    <li><strong>Machine Learning in Control Systems:</strong> Integrating ML techniques to improve control in nonlinear environments.</li>
-                    <li><strong>Robotics and Autonomous Vehicles:</strong> Advancing automation in robotics and vehicle systems.</li>
-                    <li><strong>Human-Robot Interaction (HRI):</strong> Fostering effective communication and cooperation between humans and robots.</li>
-                    <li><strong>Safety and Security in Nonlinear Systems:</strong> Ensuring robustness and resilience in critical system operations.</li>
-                    <li><strong>Energy Systems:</strong> Innovating within microgrids and smart grids to optimize energy distribution and consumption.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="main-icon">
-                <div class="col-sm-6 mx-auto mt-5">
-                    <p style="text-align: center;" class="social" data-animate="fadeInUp"><a
-                            href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank"
-                            class="external linkedin wow fadeInUp"><img width="48" height="48"
-                                src="https://img.icons8.com/color/48/linkedin-circled--v1.png"
-                                alt="linkedin-circled--v1" /></a>
-                        <a href="https://scholar.google.com/citations?user=PJ-ZmA0AAAAJ&hl=en" target="_blank"><img
-                                src="https://img.icons8.com/color/48/000000/google-scholar--v3.png" /></a>
+    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { width: 22px; height: 2px; background: var(--muted); transition: all 0.3s; display: block; }
 
-                        <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank"
-                            class="external github wow fadeInUp"><img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/1200px-ResearchGate_icon_SVG.svg.png"
-                                width="48" height="48" /></a>
-                    </p>
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
 
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+    }
+    .glow-1 { top: -100px; right: -100px; background: radial-gradient(circle, rgba(79,142,247,0.12), transparent 70%); }
+    .glow-2 { bottom: -100px; left: -100px; background: radial-gradient(circle, rgba(124,106,247,0.1), transparent 70%); }
 
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
 
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.2);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .hero-tag::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
 
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About-->
-    <section id="about" class="about-section">
-        <div class="container">
-            <header class="text-center">
-                <h2 data-animate="fadeInDown" class="title">Academic Background and Research Initiatives</h2>
-            </header>
-            <div class="row">
-                <div data-animate="fadeInUp" class="col-lg-6">
-                    <p align="justify">I completed my M-Tech degree in Cyber-physical Systems from the distinguished <a href="https://www.iitj.ac.in/" target="_blank">IIT Jodhpur, India</a>, where I refined my expertise in problem formulation
-                        and experimental techniques using advanced tools such as MATLAB, DSpace, and Opal RT. My thesis project focused on developing advanced control mechanisms for power electronic converters and microgrids, utilizing the Integral
-                        Sliding Mode Control technique to effectively reduce power fluctuations. This research was supported by generous funding from the Department of Science and Technology (DST).</p>
-                    <p align="justify">
-                        During my tenure at <a href="https://www.iitj.ac.in/" target="_blank">IIT Jodhpur</a>, I embarked on several innovative projects
-                        in Cyber Physical Systems and Autonomous Cars, employing image-based inputs through technologies like OpenCV and YOLO. My passion for cutting-edge
-                        research led me to pursue further studies at <a href="https://mst.edu" target="_blank">
-                            Missouri University of Science and
-                            Technology, USA
-                        </a>, where my work now revolves around deep learning-based
-                        control systems for nonlinear, multitasking environments. Here, I focus on the
-                        safety and control of robotic and unmanned vehicles (both ground and aerial),
-                        incorporating extensive human interaction. My research toolkit has expanded
-                        to include MATLAB, ROS2, GAZEBO, MOVEIT for robotics simulation, and
-                        SLAM for real-time mapping and navigation.
-                    </p>
-                    <p align="justify">
-                        Additionally, I have hands-on experience with Hardware-in-the-Loop (HIL)
-                        simulations, specifically using differential drive robots, and Quanser’s innovative
-                        platforms like Qcars, Qbots, and Qdrones. These projects have significantly
-                        enhanced my practical understanding of dynamic system behaviors and realtime control challenges.
-                    </p>
-                    <p align="justify">
-                        My research has been funded by esteemed organizations such as the Army
-                        Research Office, Office of Naval Research, and the Intelligent Systems Centre.
-                        I have contributed to numerous international conferences and journals, with
-                        my publications—garnering over 300 citations—covering a broad spectrum of
-                        topics, including Cyber Physical Systems, Nonlinear Control, Safety, Machine
-                        Learning, Deep Learning, Lifelong Learning, and Robotics.
-                    </p>
-                    <p align="justify">
-                        I am eagerly looking forward to advancing my research and exploring new partnerships in this dynamic field of technology.
-                    </p>
-                </div>
-                <div data-animate="fadeInUp" class="col-lg-6">
-                    <strong>Software Proficiency & Skills</strong>
-                    <div class="skill-item">
-                        <div class="progress-title">MATLAB</div>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 90%" aria-valuenow="0" aria-valuemin="0"
-                                aria-valuemax="0" class="progress-bar progress-bar-skill1"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="progress-title">ROS2</div>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 90%" aria-valuenow="0" aria-valuemin="0"
-                                aria-valuemax="0" class="progress-bar progress-bar-skill1"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="progress-title">PYTHON</div>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 80%" aria-valuenow="70" aria-valuemin="60"
-                                aria-valuemax="100" class="progress-bar progress-bar-skill2"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="progress-title">C++</div>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="60"
-                                aria-valuemax="100" class="progress-bar progress-bar-skill2"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="progress-title">C</div>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="60"
-                                aria-valuemax="100" class="progress-bar progress-bar-skill2"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="progress-title">embedded assembly language.</div>
-                        <div class="progress">
-                            <div role="progressbar" style="width: 60%" aria-valuenow="80" aria-valuemin="0"
-                                aria-valuemax="100" class="progress-bar progress-bar-skill3"></div>
-                        </div>
-                    </div>
+    @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
 
-                    <div class="container" align="justify" data-animate="fadeInUp" class="contact-section contact">
-                        <ul class="responsibities-list">
-                            <li><strong>MATLAB: </strong>Formulated and implemented the adaptive control
-                                and estimation algorithms, published in American Control
-                                Conferences and Journals.</li>
-            
-                            <li><strong>Python: </strong>Devised learning based algorithms (Deep Learning and
-                                Reinforcement Learning using Image data for autonomous vehicles)
-                                published in conferences.</li>
-            
-                            <li><strong>Robot Operating System (ROS2):</strong> I have developed a working
-                                knowledge of the Robot Operating System (ROS2). This framework
-                                allows me to efficiently create complex and robust robot behavior
-                                across a wide variety of robotic platforms.</li>
-            
-                            <li><strong> Network simulator: </strong>Implemented it on smart field monitoring
-                                and in vehicular ADHOC networks, published in conferences.</li>
-            
-                            <li><strong> dSPACE/HIL (Power electronics):</strong> Used to integrate Simscape
-                                Electrical™ models in a dSPACE hardware-in-the-loop (HIL)
-                                environment for testing microgrid converters</li>
-            
-                            <li><strong>C++: </strong>Devised a working knowledge of C++, that helps in easier implementation of hardware integration with the software.</li>
-                            <li><strong>MoveIT: </strong>Used for ROS2 robotic manipulation.</li>
-                            <li><strong>SLAM: </strong>Used for navigation and mapping for differential drive robot and wheeled robots in ROS2.</li>
-                            <li><strong>Gazebo: </strong>Used to create environment in ROS2 for various projects as mentioned in projects section.</li>
-                        </ul>
-                    </div>
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
 
-                </div>
-            </div>
-        </div>
-    </section>
+    .hero-title-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
 
-    <!--         <section id="Check" data-animate="bounceIn" class="contact-section contact">
-      <div class="container">
-        <header class="text-center">
-          <h2 class="title">Sasi me</h2>
-        </header>
-        <p>Phone: <strong>+1-615-938-8594</strong></p>
-        <p>E-Mail: <strong>akhileshraj91@gmail.com</strong></p>
-      </div>
-    </section> -->
-    <!-- <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <form id="contact-form" method="post" action="">
-              <div class="messages"></div>
-              <div class="controls">
-                <div class="row">
-                  <div class="col-md-6">
-                    <input type="text" name="name" placeholder="Your firstname *" required="required" class="form-control">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" name="surname" placeholder="Your lastname *" required="required" class="form-control">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" name="email" placeholder="Your email *" required="required" class="form-control">
-                  </div>
-                  <div class="col-md-6">
-                    <input type="text" name="phone" placeholder="Your phone" class="form-control">
-                  </div>
-                  <div class="col-md-12">
-                    <textarea name="message" placeholder="Message for me *" rows="4" required="required" class="form-control"></textarea>
-                  </div>
-                  <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-outline-primary">Send message</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </section> -->
-    <!-- Service-->
-    <section id="work_ex" class="contact-section contact">
-        <div class="container">
-            <header class="text-center">
-                <h2 class="title" data-animate="fadeInDown">Work Experience</h2>
-            </header>
-            <div>
-                
-                
-                
-                <!-- 1st WORK EXPERIENCE -->
-                 <div data-animate="fadeInUp">
-                    <a href="https://www.mst.edu/" target="_blank" class="navbar-brand scrollTo">
-                        <h3 class="col-lg-6">Missouri University of Science and Technology, Rolla, USA</h3>
-                    </a>
-                    <p align="justify"><b>Position:</b> Research Assistant. </p>
-                    <p align="justify">August 2021 - Present</p>
-                    
-                    <div>
-                        <hr>
-                        <p align="justify"><b>Tenure:</b> Aug 2021- Aug 2022</p>
-                        <strong>Project: Online Safe Adaptive Lifelong Deep Learning (LDL)
-                            System for Tracking Control</strong>
-                        <p>
-                            During my initial year at Missouri University of Science and Technology, I
-                            was actively involved in the development of this innovative system, specifically
-                            designed for multitasking environments and applied in controlling n-link robot
-                            manipulators, mobile robots, and unmanned surface vehicles. The project, supported by the Army Research Office, the Office of Naval Research, and the Intelligent Systems Centre, focused on safety assurance through the implementation
-                            of time-varying barriers to adapt safely to changing conditions and enhance
-                            system reliability.
-                        </p>
+    .hero-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
 
-                        <strong>Responsibilities and Achievements:</strong>
-                            <ul>
-                                <li>Engineered a safe nonlinear control system leveraging lifelong deep learning to facilitate robust operations across various multitasking environments. This method was tested on various systems which are in control affine form, strict-feedback form, etc.</li>
-                                <li>The project emphasized the integration of time-varying barriers to ensure continuous adaptability and safety, tested on Quanser platforms to meet rigorous safety standards.</li>
-                                <li>Demonstrated the system’s capability in practical settings, leading to significant contributions to scholarly journals and international conference proceedings.</li>
-                            </ul>
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
 
-                        <strong>Videos</strong>
-                        <ul>
-                            <li>
-                                <p><em>Leader-follower-arc-shaped-trajectory. <a href="videos/leader-follower-arc-shaped-trajectory_9yUYiUqw.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Circular formation control. <a href="videos/leader-follower-circular-trajectory-trim_YCNR2Qsb.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Formation structure change in multi-environment scenarios. <a href="videos/Formation control Lifelong learning with barrier second trajectory.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Formation control and obstacle avoidance. <a href="videos/obstacle-avoidance-trim_APhoRdYJ.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>UAV tracking in multienvironment and different path using Deep continual optimal tracking. <a href="https://irfan149.github.io/irfanganie/videos/Updated%20video%20with%20and%20without%20LL.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Formation control using Continual deep optimal tracking. <a href="https://irfan149.github.io/irfanganie/videos/vid-20230514-wa0018_Dutitmp8.mp4">Watch Now</a></em></p>
-                            </li>
-                        </ul>
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: none;
+    }
 
-                    </div>
-                    
-                    <div>
-                        <hr>
-                        <p align="justify"><b>Tenure:</b> Aug 2022- Jul 2023</p>
-                        <strong>Project: Deep Continual Optimal Reinforcement Learning (DCORL)
-                            for Tracking Control</strong>
-                        <p>
-                            In this period, I contributed significantly to a project aimed at nonlinear
-                            control systems operating in multitasking environments. The focus was on
-                            safety, achieved through the implementation of time-varying constraints. The
-                            applications of this project extended to various domains including n-link robot
-                            manipulators, mobile robots, unmanned aerial vehicles, and unmanned surface
-                            vehicles.
-                        </p>
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(79,142,247,0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(79,142,247,0.4); }
 
-                        <strong>Responsibilities and Achievements:</strong>
-                                <ul>
-                                    <li>Developed a novel adaptive tracking control scheme utilizing deep continual optimal reinforcement learning, focused on nonlinear control systems. A multilayer SVD-based neural network observer is used for output-feedback control to estimate the states.</li>
-                                    <li>Implemented time-varying constraints to ensure safety and adaptability in multitasking environments, applicable to n-link robot manipulators, mobile robots, unmanned aerial, and surface vehicles.</li>
-                                    <li>Tested the approach on Quanser-based hardware, validating the system’s effectiveness through simulations and practical deployments.</li>
-                                    <li>The project’s outcomes contributed to multiple high-profile publications and presentations at international conferences.</li>
-                                </ul>
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { background: var(--surface2); border-color: rgba(255,255,255,0.15); }
 
-                        <strong>Videos</strong>
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+    }
 
-                        <ul>
-                            <li>
-                                <p><em>BLF-preventing-violation-of-constraints. <a href="videos/blf-preventing-violation-of-constraints-trim_7rKY5cBj_2.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Formation control Lifelong learning with barrier first Trajectory. <a href="videos/Formation control Lifelong learning with barrier first Trajectory.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Tracking in multi environment with different path. <a href="videos/mobile robot tracking using Lifelong learning and barrier.mp4">Watch Now</a></em></p>
-                            </li>
-                        </ul>
-                    </div>
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      display: block;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
 
-                    <div>
-                        <hr>
-                        <p align="justify"><b>Tenure:</b> Aug 2023- Present</p>
-                        <strong>Project: Human Interaction with Robots in Multi-Environment
-                            Scenarios Using Online Deep Continual Learning</strong>
-                        <p>
-                            Currently, I am deeply involved in this cutting-edge project that explores
-                            human-robot interaction within multi-environment scenarios. The project utilizes admittance-based controllers, explainable AI, and deep reinforcement learning in an online framework to enhance human-swarm interaction, aiming to
-                            develop systems that are intuitive and safe for human operators in complex
-                            settings.
-                        </p>
+    .hero-photo-wrap {
+      position: relative;
+    }
 
-                        <strong>Videos</strong>
+    .hero-photo-frame {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--surface2);
+      aspect-ratio: 4/5;
+    }
 
-                        <ul>
-                            <li>
-                                <p><em>Hardware in loop simulation of multiple drones using the proposed control framework. <a href="videos/Hardware in loop simulation of multiple drones.mp4">Watch Now</a></em></p>
-                            </li>
-                            <li>
-                                <p><em>Formation control for leader and followers using deep continual learning optimal tracking based control in multi-environment scenario. <a href="videos/project01.mp4">Watch Now</a></em></p>
-                            </li>
-                        </ul>
+    .hero-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-                    </div>
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--surface2), #1e2432);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+    }
 
-                </div>
+    .photo-placeholder .initials {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
 
-                <!-- 2nd WORK EXPERIENCE -->
-                <div datnda-animate="fadeInUp">
-                    <a href="https://www.iitj.ac.in/" target="_blank" class="navbar-brand scrollTo">
-                        <h3 class="col-lg-6">Indian Institute of Technology Jodhpur, India</h3>
-                    </a>
-                    <p align="justify"><b>Position:</b> Teaching Assistant. </p>
-                    <p align="justify"><b>Tenure:</b> July 2019 - July 2021</p>
-                    <p align="justify">During my tenure at IIT Jodhpur, I was deeply involved in my master’s thesis
-                        project, a DST-funded initiative aimed at developing a <strong>
-                            Nonlinear integral
-                            sliding mode control system for ripple mitigation in microgrids
-                        </strong>
-                        </p>
-                    <p align="justify">
-                        <h5>My key responsibilities in this major project included:</h5>
-                        <ul>
-                            <li><strong>Theoretical Design:</strong> Conceptualizing and developing a nonlinear controller.</li>
-                            <li><strong>Mathematical Proofing:</strong> Providing rigorous mathematical proofs to ensure the stability of the controller.</li>
-                            <li><strong>Hardware Integration:</strong> Designing the necessary hardware and ensuring seamless software-hardware integration using DSpace and Opal RT.</li>
-                        </ul>
+    .photo-placeholder p { color: var(--muted); font-size: 0.8rem; }
 
-                        <strong>Responsibilities:</strong>
-                            <ul>
-                                <li>Designed and mathematically proved the stability of a nonlinear controller for microgrids aimed at reducing power ripples.</li>
-                                <li>Integrated the controller with custom-designed hardware, using DSPACE and Opal RT for seamless software-hardware interaction.</li>
-                                <li>Conducted extensive testing and validation, ensuring the project’s objectives were successfully met and documented.</li>
-                            </ul>
-                    </p>
+    .photo-badge {
+      position: absolute;
+      bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+      background: rgba(10,12,16,0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+    }
 
-                    <p align="justify">
-                        <h5>Alongside my thesis, I also engaged in several side projects:</h5>
-                        <ul>
-                            <li><strong>Real-Time Autonomous Car Development Using Internet of Things
-                                and Image Processing:</strong> Played an instrumental role in the design and implementation of a real-time autonomous car using Image Processing and IoT technologies.</li>
-                            
-                                <strong>Responsibilities:</strong>
-                                <ul>
-                                    <li>Developed algorithms for object detection using YOLO and Canny Edge Detection, integral for the autonomous car’s navigation.</li>
-                                    <li>Implemented IoT connectivity to allow the car to interact with other devices and systems over the internet, enhancing operational efficiency and safety.</li>
-                                    <li>Verified and validated all systems to ensure the car performed reliably under various operational scenarios.</li>
-                                </ul>
+    .photo-badge .name { font-weight: 600; color: #fff; font-size: 0.95rem; }
+    .photo-badge .role { color: var(--muted); font-size: 0.8rem; margin-top: 0.2rem; }
+
+    .social-icons {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .social-icons a {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+    .social-icons a:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 5rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); display: inline-block; }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 600px;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--surface); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; line-height: 1.8; font-size: 0.95rem; }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .interest-chip {
+      padding: 0.6rem 1rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .interest-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    .education-list { list-style: none; }
+    .edu-item {
+      padding: 1.25rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      border-left: 3px solid var(--accent);
+      transition: border-color 0.2s;
+    }
+    .edu-item:hover { border-left-color: var(--accent2); }
+    .edu-degree { font-weight: 600; color: #fff; font-size: 0.95rem; }
+    .edu-inst { color: var(--accent); font-size: 0.88rem; margin: 0.2rem 0; }
+    .edu-year { color: var(--muted); font-size: 0.8rem; font-family: var(--mono); }
+    .edu-thesis { color: var(--muted); font-size: 0.82rem; margin-top: 0.4rem; font-style: italic; }
+
+    /* ─── PROJECTS ─── */
+    #projects { background: var(--bg); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(79,142,247,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+    .project-img {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--surface2);
+    }
+
+    .project-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; display: block; }
+    .project-card:hover .project-img img { transform: scale(1.05); }
+
+    .project-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,12,16,0.8), transparent);
+    }
+
+    .project-tag-pill {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(10,12,16,0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    .project-body { padding: 1.5rem; }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .project-desc { color: var(--muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; }
+
+    .project-paper-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.78rem;
+      color: var(--accent3);
+      font-family: var(--mono);
+    }
+
+    .project-arrow {
+      float: right;
+      color: var(--muted);
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+    .project-card:hover .project-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ─── PROJECT DETAIL MODAL ─── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 2rem 1rem;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      max-width: 860px;
+      width: 100%;
+      overflow: hidden;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+    .modal-overlay.active .modal { transform: translateY(0); }
+
+    .modal-hero {
+      position: relative;
+      aspect-ratio: 21/9;
+      background: var(--surface2);
+      overflow: hidden;
+    }
+
+    .modal-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+    .modal-hero-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      background: linear-gradient(135deg, var(--surface2), #1a2035);
+    }
+
+    .modal-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--surface) 0%, transparent 60%);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 36px; height: 36px;
+      background: rgba(10,12,16,0.8);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .modal-close:hover { background: var(--surface2); }
+
+    .modal-body { padding: 2rem; }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .modal-abstract {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-video {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .video-icon { font-size: 2rem; }
+    .video-info .video-title { font-weight: 600; color: #fff; font-size: 0.9rem; }
+    .video-info .video-hint { color: var(--muted); font-size: 0.8rem; margin-top: 0.2rem; }
+    .video-info code { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
+
+    .modal-papers-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 1.5rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .modal-papers-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .paper-item {
+      padding: 1rem 1.25rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.75rem;
+      transition: border-color 0.2s;
+    }
+    .paper-item:hover { border-color: rgba(79,142,247,0.3); }
+    .paper-item a {
+      text-decoration: none;
+      color: var(--text);
+      display: block;
+    }
+    .paper-title { font-size: 0.9rem; font-weight: 500; color: #fff; margin-bottom: 0.3rem; line-height: 1.4; }
+    .paper-meta { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
+    .paper-venue { color: var(--accent3); }
+
+    .modal-images-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .modal-img-item {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--surface2);
+    }
+
+    .modal-img-item img { width: 100%; height: 100%; object-fit: cover; }
+
+    .modal-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+    }
+    .modal-img-placeholder .img-icon { font-size: 1.8rem; }
+    .modal-img-placeholder .img-path { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); }
+    .modal-img-placeholder .img-label { font-size: 0.75rem; color: var(--muted); }
+
+    /* ─── PUBLICATIONS ─── */
+    #publications { background: var(--surface); }
+
+    .pub-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn {
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .pub-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .pub-entry {
+      display: flex;
+      gap: 1.25rem;
+      padding: 1.25rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.2s;
+      align-items: flex-start;
+    }
+    .pub-entry:hover { border-color: rgba(79,142,247,0.25); }
+
+    .pub-num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      min-width: 28px;
+      text-align: right;
+      padding-top: 0.15rem;
+    }
+
+    .pub-content { flex: 1; }
+    .pub-title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 0.4rem;
+    }
+    .pub-title a { color: inherit; text-decoration: none; }
+    .pub-title a:hover { color: var(--accent); }
+    .pub-authors { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.25rem; }
+    .pub-authors strong { color: var(--text); }
+
+    .pub-venue-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .pub-venue { font-size: 0.78rem; color: var(--accent3); font-style: italic; font-family: var(--mono); }
+    .pub-year {
+      font-size: 0.72rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-family: var(--mono);
+    }
+    .pub-type-badge {
+      font-size: 0.68rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    .badge-journal { background: rgba(71,200,168,0.12); color: var(--accent3); border: 1px solid rgba(71,200,168,0.2); }
+    .badge-conf { background: rgba(79,142,247,0.12); color: var(--accent); border: 1px solid rgba(79,142,247,0.2); }
+    .badge-review { background: rgba(226,176,74,0.12); color: var(--gold); border: 1px solid rgba(226,176,74,0.2); }
+
+    /* ─── AWARDS ─── */
+    #awards { background: var(--bg); }
+
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .award-card {
+      padding: 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .award-card:hover { border-color: rgba(226,176,74,0.3); }
+    .award-icon { font-size: 1.5rem; margin-bottom: 0.75rem; display: block; }
+    .award-title { font-weight: 600; color: #fff; font-size: 0.9rem; margin-bottom: 0.3rem; line-height: 1.3; }
+    .award-org { font-size: 0.8rem; color: var(--muted); }
+    .award-year { font-family: var(--mono); font-size: 0.75rem; color: var(--gold); margin-top: 0.5rem; }
+
+    /* ─── TEACHING ─── */
+    #teaching { background: var(--surface); }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .course-item {
+      padding: 1rem 1.25rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .course-code { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); margin-bottom: 0.25rem; }
+    .course-name { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+    .course-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--bg); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-card {
+      padding: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-item:last-child { border-bottom: none; }
+
+    .contact-icon {
+      width: 40px; height: 40px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-detail .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--mono); }
+    .contact-detail .value { font-size: 0.9rem; color: var(--text); margin-top: 0.2rem; }
+    .contact-detail a { color: var(--accent); text-decoration: none; }
+    .contact-detail a:hover { text-decoration: underline; }
+
+    .profile-links { display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .profile-link-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .profile-link-card:hover { border-color: var(--accent); transform: translateX(4px); }
+    .profile-link-icon { font-size: 1.3rem; }
+    .profile-link-text .link-name { font-weight: 600; color: #fff; font-size: 0.9rem; }
+    .profile-link-text .link-desc { color: var(--muted); font-size: 0.78rem; }
+    .profile-link-arrow { margin-left: auto; color: var(--muted); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+    }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { order: -1; max-width: 320px; margin: 0 auto; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 2rem;
+        gap: 0.25rem;
+        z-index: 99;
+      }
+      .modal-images-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 3rem 1.25rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 1.25rem; }
+      .modal-body { padding: 1.25rem; }
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
     
-                                <br />
+    /* hidden pubs */
+    .pub-entry.hidden { display: none; }
+  </style>
+</head>
+<body>
 
-                            <li>
-                                <strong>Smart Field Monitoring Using Cyber-physical System:</strong> Contributed
-                                to a project focused on enhancing agricultural practices through Smart Field
-                                Monitoring using Cyber-Physical Systems.
-                            </li>
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">Irfan Ahmad Ganie</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="resume.html" target="_blank" class="btn btn-outline" style="padding:0.35rem 1rem;font-size:0.82rem;">CV ↗</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
 
-                                
-                            <strong>Responsibilities:</strong>
-                            <ul>
-                                <li>Led the development of a cyber-physical system for intelligent agricultural monitoring to mitigate food loss and environmental impact.</li>
-                                <li>Utilized Network Simulator 2 and ToxTrac for designing and validating an intelligent surveillance wireless sensor network.</li>
-                                <li>The project significantly advanced the field of smart agriculture through innovative technology applications.</li>
-                            </ul>
-
-                            <br/>
-
-                            <li>
-                                <strong>Algorithm Development and Validation:</strong> Wrote and validated various
-                                control algorithms using MATLAB and Keil Embedded Development Tools for
-                                ARM Cortex-M, incorporating technologies like YOLO, OpenCV, and Network
-                                Simulator 2.
-                            </li>
-                        </ul>
-                    </p>
-                    <p align="justify">
-                        In addition to my project responsibilities, I also taught undergraduate lab courses in Circuits and Systems, providing practical knowledge and hands-on experience to students.
-                    </p>
-                    
-                    <!-- --- -->
-                
-                    <div class="fig-box">
-                        <div class="left-img">
-                            <img src="img/fig-01.jpg">
-                        </div>
-                    
-                        <div class="right-img">
-                            <img src="img/fig-02.jpg" alt="">
-                        </div>
-                    </div>
-                    <!-- -- -->
-                </div>
-            
-                <!-- DONE HERE -->
-
-
-                <!-- DONE TILL HERE -->
-                
-               
-    </section>
-
-    <section id="projects" class="contact-section projects">
-        <div class="container">
-            <header class="text-center">
-                <h2 class="title" data-animate="fadeInDown">Projects</h2>
-            </header>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow glow-1"></div>
+  <div class="hero-glow glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-tag">Assistant Professor · Wilkes University</div>
+      <h1>Irfan Ahmad<br>Ganie</h1>
+      <p class="hero-title-sub">Mechanical &amp; Electrical Engineering</p>
+      <p class="hero-desc">
+        Research at the intersection of adaptive optimal control, safe deep reinforcement learning, 
+        human–robot interaction, and neuromorphic computing. Building intelligent systems 
+        that are safe, adaptive, and cooperative.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Research →</a>
+        <a href="#publications" class="btn btn-outline">Publications</a>
+        <a href="mailto:irfanahmad.ganie@wilkes.edu" class="btn btn-outline">Contact</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">428+</span>
+          <span class="stat-label">Citations</span>
         </div>
-
-        <div class="container">
-            <ul>
-                <li><strong>Masters Projects</strong>
-                    <ul>
-                        <li>Nonlinear Integral Sliding Mode Control for Microgrids</li>
-                        <li>Real-Time Autonomous Car Development</li>
-                        <li>Smart Field Monitoring</li>
-                    </ul>
-                </li>
-                <li><strong>PhD Projects</strong>
-                    <ul>
-                        <li>Online Safe Adaptive Lifelong Deep Learning System for Tracking Control of Nonlinear Systems with Application to Robotics</li>
-                        <li>Deep Continual Optimal Reinforcement Learning for Tracking Control of Nonlinear Systems with Application to Robotics using State Feedback and Output Feedback</li>
-                        <li>Human Interaction with Robots Using Online Deep Continual Learning with Safety Constraints</li>
-                    </ul>
-                </li>
-                <li><strong>ROS2 Projects</strong>
-                    <ul>
-                        <li>Motion Planning with MoveIt
-                            <ul>
-                                <li>Project Statement: Implement motion planning using MoveIt package in ROS for robotic arm manipulation.</li>
-                                <li>Tools: ROS, Python</li>
-                                <li>Concepts: Robot Kinematics, Collision Checking</li>
-                            </ul>
-                        </li>
-                        <li>Mobile Robot Navigation with ROS Navigation Stack
-                            <ul>
-                                <li>Project Statement: Develop a system for mobile robot navigation using ROS Navigation Stack.</li>
-                                <li>Tools: ROS, Python, Gazebo</li>
-                                <li>Concepts: Path Planning, Localization</li>
-                            </ul>
-                        </li>
-                        <li>Path Planning
-                            <ul>
-                                <li>Project Statement: Implement path planning algorithms for a mobile robot.</li>
-                                <li>Tools: ROS, Rviz</li>
-                                <li>Concepts: Path Planning, Algorithms</li>
-                            </ul>
-                        </li>
-                        <li>SLAM Mapping
-                            <ul>
-                                <li>Project Statement: Create a 2D map of an environment using SLAM.</li>
-                                <li>Tools: ROS, Gmapping</li>
-                                <li>Concepts: SLAM, Mapping</li>
-                            </ul>
-                        </li>
-                        <li>Arm Manipulation
-                            <ul>
-                                <li>Project Statement: Control a robotic arm to pick and place objects.</li>
-                                <li>Tools: ROS, MoveIt</li>
-                                <li>Concepts: Manipulation, Kinematics</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <br>
-                    <p><em>6 degree if freedom robot manipulator in ROS2 and RVIZ. <a href="videos/6 degree if freedom robot manipulator in ROS2 and Rviz.mp4">Watch Now</a></em></p>
-                </li>
-            </ul>
-            
+        <div class="stat-item">
+          <span class="stat-num">8</span>
+          <span class="stat-label">h-index</span>
         </div>
-
-    </section>
-
-    <!-- Funding and Awards -->
-
-    <section id="conference" class="contact-section contact">
-        <div class="container">
-            <header class="text-center">
-                <h2 class="title" data-animate="fadeInDown">Funding and Awards</h2>
-            </header>
+        <div class="stat-item">
+          <span class="stat-num">24+</span>
+          <span class="stat-label">Publications</span>
         </div>
-        <div class="container" align="justify" data-animate="fadeInUp" class="contact-section contact">
-            <ul class="responsibities-list">
-                <li>Second Position in Intelligent System Centre Poster Presentation, 2023.</li>
-                <li>IEEE Control System Society Conference Travel Award, 2023.</li>
-                <li>Ph.D. research funding through the Office of Naval Research Grant N00014-21-1-2232 and Army Research Office Cooperative Agreement W911NF-21-2-0260 and W911NF-22-2-0185 for online deep lifelong learning-based control methodologies with applications to robotic systems and human-robot teaming.</li>
-                <li>Fellowship from the Government of India for Master’s Program.</li>
-                <li>Master’s Research Funding through Digital Science and Technology (DST), India.</li>
-            </ul>
+        <div class="stat-item">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Research Areas</span>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Funding and Awards ends here -->
-
-    <!-- Conference -->
-
-    <section id="conference" class="contact-section contact">
-        <div class="container">
-            <header class="text-center">
-                <h2 class="title" data-animate="fadeInDown">CONFERENCES ATTENDED</h2>
-            </header>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame">
+        <!-- Replace with: <img src="img/profile.png" alt="Irfan Ahmad Ganie"> -->
+        <div class="photo-placeholder">
+          <div class="initials">IAG</div>
+          <p>Upload your photo as<br><code style="font-family:monospace;color:#4f8ef7;font-size:0.85em">img/profile.png</code></p>
         </div>
-        <div class="container" align="justify" data-animate="fadeInUp" class="contact-section contact">
-            <ul class="responsibities-list">
-
-                <li>8th IEEE conference on Control technology and applications (CCTA) 2024 Newcastle UK</li>
-
-                <li>7th IEEE Conference on Control Technology and Applications
-                    (CCTA) 2023, Bridgetown, Barbados.</li>
-
-                <li>American Control Conference (ACC 2023), San Diego,
-                    California, USA</li>
-
-                <li>6th IFAC Conference on Intelligent Control and Automation
-                    Sciences ICONS 2022, Cluj-Napoca, Romania.</li>
-
-                <li>Third international conference on smart systems and inventive
-                    technology (ICSSIT 2020), India.</li>
-
-                <li>International Conference on Smart Electronics and Communication
-                    (ICOSEC 2020), India</li>
-                
-            </ul>
+        <div class="photo-badge">
+          <div class="name">Irfan Ahmad Ganie</div>
+          <div class="role">Ph.D. | Asst. Professor, Wilkes University</div>
+          <div class="social-icons">
+            <a href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank" title="LinkedIn">in</a>
+            <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank" title="Google Scholar">GS</a>
+            <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank" title="ResearchGate">RG</a>
+            <a href="https://github.com/irfan149" target="_blank" title="GitHub">GH</a>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- conference ends here -->
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I am an Assistant Professor in the Mechanical &amp; Electrical Engineering Department at 
+          <strong style="color:#fff">Wilkes University</strong>, Wilkes-Barre, PA. I received my Ph.D. in 
+          Electrical Engineering from <strong style="color:#fff">Missouri University of Science and Technology (MS&amp;T)</strong> 
+          in 2025, advised by Prof. Sarangapani Jagannathan.
+        </p>
+        <p>
+          My research centers on designing intelligent, safe, and adaptive control systems for 
+          uncertain nonlinear and cyber-physical systems — spanning adaptive optimal control, 
+          deep continual reinforcement learning, neuromorphic/spiking neural networks, 
+          and human–robot teaming.
+        </p>
+        <p>
+          My work has been funded by the <strong style="color:#fff">Army Research Office (ARO)</strong>, 
+          <strong style="color:#fff">Office of Naval Research (ONR)</strong>, and 
+          <strong style="color:#fff">Air Force Office of Scientific Research (AFOSR)</strong>. 
+          I am currently PI on pending NSF proposals in graph neural control and spiking neural networks.
+        </p>
+        <p>
+          I received my M.Tech. in Cyber-Physical Systems from 
+          <strong style="color:#fff">IIT Jodhpur, India</strong>, where I worked on integral sliding mode 
+          control for microgrid ripple mitigation funded by DST, India.
+        </p>
 
-
-    <!-- _________Publications___________ -->
-
-    <section id="pub" class="contact-section contact">
-        <div class="container">
-            <header class="text-center">
-                <h2 class="title" data-animate="fadeInDown">Publications</h2>
-            </header>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin:1.5rem 0 0.75rem;">Research Interests</h3>
+        <div class="interests-grid">
+          <div class="interest-chip">Adaptive Optimal Control</div>
+          <div class="interest-chip">Deep Reinforcement Learning</div>
+          <div class="interest-chip">Lifelong/Continual Learning</div>
+          <div class="interest-chip">Human–Robot Teaming</div>
+          <div class="interest-chip">Spiking Neural Networks</div>
+          <div class="interest-chip">Graph Neural Networks</div>
+          <div class="interest-chip">Safety-Critical Systems</div>
+          <div class="interest-chip">Nonlinear Control</div>
+          <div class="interest-chip">Multi-Robot Coordination</div>
+          <div class="interest-chip">Cyber-Physical Systems</div>
         </div>
-        <div class="container" align="justify" data-animate="fadeInUp" class="contact-section contact">
-            <table>
+      </div>
 
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad01">1</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PJ-ZmA0AAAAJ&citation_for_view=PJ-ZmA0AAAAJ:2osOgNQ5qMEC" target="_blank">Irfan Ahmad; Karunakar Pothuganti, ”Smart Field Monitoring
-                            using ToxTrac: A Cyber-Physical System Approach in Agriculture”,
-                            in ”2020 International Conference on Smart Electronics and
-                            Communication (ICOSEC)”</a>
+      <div class="fade-in">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:1rem;">Education</h3>
+        <ul class="education-list">
+          <li class="edu-item">
+            <div class="edu-degree">Ph.D. Electrical Engineering</div>
+            <div class="edu-inst">Missouri University of Science &amp; Technology, USA</div>
+            <div class="edu-year">2021 – 2025</div>
+            <div class="edu-thesis">Thesis: Human-Robot Teaming using Safe Lifelong Learning based Optimal Adaptive Control Framework</div>
+          </li>
+          <li class="edu-item">
+            <div class="edu-degree">M.Tech. Cyber-Physical Systems</div>
+            <div class="edu-inst">Indian Institute of Technology (IIT) Jodhpur, India</div>
+            <div class="edu-year">2019 – 2021</div>
+            <div class="edu-thesis">Thesis: Integral Sliding Mode Control for Non-Linear Systems</div>
+          </li>
+          <li class="edu-item">
+            <div class="edu-degree">B.E. Electrical Engineering</div>
+            <div class="edu-inst">University of Jammu, India</div>
+            <div class="edu-year">2014 – 2018</div>
+          </li>
+        </ul>
 
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad02">2</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PJ-ZmA0AAAAJ&citation_for_view=PJ-ZmA0AAAAJ:qjMakFHDy7sC" target="_blank">Irfan Ahmad; Karunakar Pothuganti, ”Design implementation
-                            of real time autonomous car by using image processing IoT”, in”
-                            2020 Third International Conference on Smart Systems and
-                            Inventive Technology (ICSSIT)”.</a>
-
-
-                    </td>
-                </tr>
-
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad03">3</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PJ-ZmA0AAAAJ&citation_for_view=PJ-ZmA0AAAAJ:zYLM7Y9cAGgC" target="_blank">Muhammad Shabir, Jamalud Din, Irfan Ahmad Ganie,
-                            ”Multigranulation roughness based on soft relations” in ”Journal of
-                            Intelligent & Fuzzy Systems”.</a>
-
-                    </td>
-                </tr>
-
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad04">4</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PJ-ZmA0AAAAJ&citation_for_view=PJ-ZmA0AAAAJ:UeHWp8X0CEIC" target="_blank">[4] Elias Aklilu, Irfan Ahmad (2021), ”Predicting Factors of
-                            Vehicular Accidents using Machine Learning Algoritms”, in
-                            ”International Journal of Emerging Trends in Engineering Research”.</a>
-
-
-                    </td>
-                </tr>
-
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad05">5</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PJ-ZmA0AAAAJ&citation_for_view=PJ-ZmA0AAAAJ:Tyk-4Ss8FVUC" target="_blank">Irfan Ganie, Sarangapani Jagannathan, ” Adaptive Control of
-                            Robotic Manipulators using Deep Neural Networks”, in ”6th IFAC
-                            Conference on Intelligent Control and Automation Sciences ICONS
-                            2022”.</a>
-
-
-                    </td>
-                </tr>
-
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad06">6</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=PJ-ZmA0AAAAJ&citation_for_view=PJ-ZmA0AAAAJ:W7OEmFMy1HYC" target="_blank">Irfan Ganie, Sarangapani Jagannathan, ”Continual Optimal
-                            Adaptive Tracking of Uncertain Nonlinear Continuous-time Systems
-                            using Multilayer Neural Networks”, in ” American Control
-                            Conference (ACC 2023). </a>
-
-
-                    </td>
-                </tr>
-
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad07">7</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="#" target="_blank">Irfan Ganie, Sarangapani Jagannathan, ”Lifelong Learning
-                            Control of Nonlinear Systems with Constraints Using Multilayer
-                            Neural Networks with Application to Mobile Robot Tracking” in ”
-                            IEEE CCTA (2023)”.</a>
-
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad08">8</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://onlinelibrary.wiley.com/doi/abs/ 10.1002/rnc.7039" target="_blank">Irfan Ganie, S. Jagannathan. "Lifelong learning-based multilayer neural network control of nonlinear continuous-time strict- feedback systems" in International Journal of Robust and Nonlinear Control.”</a>
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad09">9</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://onlinelibrary.wiley.com/doi/abs/ 10.1002/acs.3678" target="_blank">Irfan Ganie S.Jagannathan. "Lifelong deep learning-based control of robot manipulators" in International Journal of Adaptive Control and Signal Processing.”</a>
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad10">10</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?
-                        user=PJ-ZmA0AAAAJ&hl=en&oi=ao" target="_blank">Irfan Ganie, S.Jagannathan. "Lifelong Learning-based Optimal Trajectory Tracking of Constrained Nonlinear Affine Systems using Deep Neural Networks" in IEEE Transaction on Cybernetics 2024.”</a>
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad11">11</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations?user=PJ-ZmA0AAAAJ&hl=en&oi=ao" target="_blank">Irfan Ganie, S.Jagannathan. "Optimal Trajectory Tracking of Uncertain Nonlinear Continuous-time Strict-Feedback Systems with Dynamic Constraints" in International Journal of Control (2024).”</a>
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad12">12</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations? user=PJ-ZmA0AAAAJ&hl=en&oi=ao" target="_blank">Irfan Ganie, S.Jagannathan, Continual online learning- based optimal tracking control of nonlinear strict- feedback systems:
-                            application to unmanned aerial vehicles in Complex engineering systems (2024)”</a>
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad13">13</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations? user=PJ-ZmA0AAAAJ&hl=en&oi=ao" target="_blank">Irfan Ganie, S.Jagannathan, Online Continual Safe Reinforcement Learning- based Optimal Control of Mobile Robot Formations IEEE CCTA (2024)”</a>
-                    </td>
-                </tr>
-
-                <tr valign="top">
-                    <td align="right" class="bibtexnumber">
-                        [<a name="IrfanAhmad14">14</a>]
-                    </td>
-                    <td class="bibtexitem">
-                        <a href="https://scholar.google.com/citations? user=PJ-ZmA0AAAAJ&hl=en&oi=ao" target="_blank">Safety Assist Lifelong Reinforcement Learning Tracking Control of Nonlinear Strict-Feedback Systems Using Multilayer Neural Networks in Neurocomputing (2024)”</a>
-                    </td>
-                </tr>
-
-            </table>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin:1.5rem 0 0.75rem;">Grant Activity</h3>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          <div class="edu-item" style="border-left-color:var(--gold);">
+            <div class="edu-degree" style="color:var(--gold);">PI — Funded</div>
+            <div class="edu-inst">Summer Mentoring Grant, Wilkes University — $9,559 (2026)</div>
+          </div>
+          <div class="edu-item" style="border-left-color:var(--accent2);">
+            <div class="edu-degree" style="color:var(--accent2);">PI — Pending (NSF DCSD)</div>
+            <div class="edu-inst">Lyapunov-Based Deep Graph Neural Networks for Safe Cooperative Control — $149K</div>
+          </div>
+          <div class="edu-item" style="border-left-color:var(--accent2);">
+            <div class="edu-degree" style="color:var(--accent2);">PI — Pending (NSF CPS)</div>
+            <div class="edu-inst">Energy-Efficient Safety-Critical Adaptive Optimal Control using Spiking Neural Networks — $225K</div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- PROJECTS / RESEARCH -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">Research Areas</div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-desc">Click on any research area to explore publications, results, and multimedia.</p>
+    <div class="projects-grid">
 
-
-    <!-- _____________contact___________ -->
-
-    <!-- <section id="contact" data-animate="bounceIn" class="contact-section contact">
-        <div class="container">
-            <header class="text-center">
-                <h2 class="title">Contact me</h2>
-            </header>
-          
-
+      <!-- PROJECT 1: Spiking Neural Control -->
+      <div class="project-card fade-in" onclick="openModal('snn')">
+        <div class="project-img">
+          <!-- Upload to: img/proj_snn.jpg -->
+          <img src="img/proj_snn.jpg" alt="Adaptive Spiking Neural Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-img-placeholder" style="display:none;background:linear-gradient(135deg,#0d1b2a,#1a1040);">⚡</div>
+          <div class="project-overlay"></div>
+          <div class="project-tag-pill">Neuromorphic</div>
         </div>
+        <div class="project-body">
+          <div class="project-title">Adaptive Spiking Neural Control</div>
+          <p class="project-desc">Energy-efficient safety-critical control using spiking neural networks (SNNs) with online adaptation, Augmented Barrier States, and SVD-regularized learning.</p>
+          <span class="project-paper-count">◆ 2 papers</span>
+          <span class="project-arrow">→</span>
         </div>
-    </section> -->
-    <!-- Map-->
-    <!-- <div id="map"></div> -->
-    <footer class="main-footer" id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-lg-left">
+      </div>
 
-                    <p style="text-align: left;" class="social" data-animate="fadeInUp"><a
-                            href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank"
-                            class="external linkedin wow fadeInUp"><img width="48" height="48"
-                                src="https://img.icons8.com/color/48/linkedin-circled--v1.png"
-                                alt="linkedin-circled--v1" /></a>
-                        <a href="https://scholar.google.com/citations?user=PJ-ZmA0AAAAJ&hl=en" target="_blank"><img
-                                src="https://img.icons8.com/color/48/000000/google-scholar--v3.png" /></a>
+      <!-- PROJECT 2: Human–Robot Interaction -->
+      <div class="project-card fade-in" onclick="openModal('hri')">
+        <div class="project-img">
+          <!-- Upload to: img/proj_hri.jpg -->
+          <img src="img/proj_hri.jpg" alt="Human Robot Interaction" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-img-placeholder" style="display:none;background:linear-gradient(135deg,#0a1a10,#0d2035);">🤝</div>
+          <div class="project-overlay"></div>
+          <div class="project-tag-pill">HRI / HSI</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Human–Robot Interaction</div>
+          <p class="project-desc">Online intent estimation and safe optimal cooperative control for human–robot and human–swarm teaming with formal safety guarantees.</p>
+          <span class="project-paper-count">◆ 4 papers</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </div>
 
-                        <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank"
-                            class="external github wow fadeInUp"><img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/1200px-ResearchGate_icon_SVG.svg.png"
-                                width="48" height="48" /></a>
-                        <br>
-                        <br>
-                        <h3 style="color: #fff;">Email: </h3>
+      <!-- PROJECT 3: Graph Neural Control -->
+      <div class="project-card fade-in" onclick="openModal('gnn')">
+        <div class="project-img">
+          <!-- Upload to: img/proj_gnn.jpg -->
+          <img src="img/proj_gnn.jpg" alt="Adaptive Graph Neural Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-img-placeholder" style="display:none;background:linear-gradient(135deg,#0a1520,#102030);">🕸️</div>
+          <div class="project-overlay"></div>
+          <div class="project-tag-pill">Multi-Agent</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Adaptive Graph Neural Control</div>
+          <p class="project-desc">Non-stationary cooperative control via graph neural networks with Lyapunov-derived update laws, forward-invariant safety constraints, and provable performance bounds.</p>
+          <span class="project-paper-count">◆ Active Research</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </div>
 
-                        
-                        <a href="mailto:ganieirfan27@gmail.com"><p>ganieirfan27@gmail.com</p></a>
-                        <a href="mailto:ganieirfanahmad2@gmail.com"><p>ganieirfanahmad2@gmail.com</p></a>
-                    </p>
+      <!-- PROJECT 4: Cyber-Physical Safety -->
+      <div class="project-card fade-in" onclick="openModal('cps')">
+        <div class="project-img">
+          <!-- Upload to: img/proj_cps.jpg -->
+          <img src="img/proj_cps.jpg" alt="Cyber-Physical Safety Critical Systems" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-img-placeholder" style="display:none;background:linear-gradient(135deg,#1a0a0a,#200d20);">🛡️</div>
+          <div class="project-overlay"></div>
+          <div class="project-tag-pill">Safety-Critical</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Cyber-Physical Safety-Critical Systems</div>
+          <p class="project-desc">Control barrier functions and time-varying barrier Lyapunov methods for safety assurance in reinforcement learning-based control of constrained nonlinear systems.</p>
+          <span class="project-paper-count">◆ 4 papers</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </div>
 
-                </div>
-                <!-- /.6-->
-                <div class="col-md-6 text-center text-lg-right mt-4 mt-lg-0">
-                    <p>© 2023 IRFAN AHMAD GANIE. All rights reserved.</p>
-                </div>
-                <div class="col-12 mt-4">
+      <!-- PROJECT 5: Adaptive Continual Learning -->
+      <div class="project-card fade-in" onclick="openModal('acl')">
+        <div class="project-img">
+          <!-- Upload to: img/proj_acl.jpg -->
+          <img src="img/proj_acl.jpg" alt="Adaptive Continual Learning Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="project-img-placeholder" style="display:none;background:linear-gradient(135deg,#0a1010,#0d2530);">∞</div>
+          <div class="project-overlay"></div>
+          <div class="project-tag-pill">Lifelong Learning</div>
+        </div>
+        <div class="project-body">
+          <div class="project-title">Adaptive Continual Learning Control</div>
+          <p class="project-desc">Lifelong deep reinforcement learning for multi-task tracking control of nonlinear systems — preventing catastrophic forgetting while adapting to new environments.</p>
+          <span class="project-paper-count">◆ 10+ papers</span>
+          <span class="project-arrow">→</span>
+        </div>
+      </div>
 
-                </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="container">
+    <div class="section-label">Scholarly Work</div>
+    <h2 class="section-title">Publications</h2>
+    <p class="section-desc">
+      428+ citations · h-index 8 · i10-index 7 · 
+      <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank" style="color:var(--accent);">Google Scholar ↗</a>
+    </p>
+
+    <div class="pub-filters">
+      <button class="filter-btn active" onclick="filterPubs('all', this)">All</button>
+      <button class="filter-btn" onclick="filterPubs('journal', this)">Journals</button>
+      <button class="filter-btn" onclick="filterPubs('conf', this)">Conferences</button>
+      <button class="filter-btn" onclick="filterPubs('review', this)">Under Review</button>
+    </div>
+
+    <div class="pub-list" id="pubList">
+
+      <!-- Under Review -->
+      <div class="pub-entry fade-in" data-type="review">
+        <div class="pub-num">—</div>
+        <div class="pub-content">
+          <div class="pub-title">Online Learning Driven Human Intent Estimation and Game Theoretic Control for Human Robot Interaction with Safety Guarantees</div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE Trans. Systems, Man &amp; Cybernetics</span>
+            <span class="pub-year">2026</span>
+            <span class="pub-type-badge badge-review">Under Review</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journals -->
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J1</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://ieeexplore.ieee.org/abstract/document/11371318" target="_blank">Safe Optimal Control Framework for Cooperative Manipulation of Objects in Human–Robot Teams</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE Transactions on Cybernetics</span>
+            <span class="pub-year">2026</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J2</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://ieeexplore.ieee.org/abstract/document/11358393" target="_blank">Safety Aware Continual Reinforcement Learning-Based Output Tracking Control of Nonlinear Continuous-Time Systems</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE Trans. Systems, Man &amp; Cybernetics: Systems, vol. 56, no. 3, pp. 1816–1831</span>
+            <span class="pub-year">Mar 2026</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J3</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.sciencedirect.com/science/article/abs/pii/S0893608025006732" target="_blank">Online Lifelong Optimal Tracking Control of Uncertain Nonlinear Continuous-Time Strict-Feedback Systems Using Deep Neural Networks</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Neural Networks, vol. 191, 107793</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J4</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1002/acs.4020" target="_blank">Safe Optimal Control of Quadrotor Formations Using Multilayer Neural Networks and Continual Learning</a></div>
+          <div class="pub-authors">E. Soleimani, <strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Int. J. Adaptive Control and Signal Processing, vol. 39, no. 8, pp. 1744–1766</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J5</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1109/TCYB.2024.3405354" target="_blank">Lifelong Learning-Based Optimal Trajectory Tracking of Constrained Nonlinear Affine Systems Using Deep Neural Networks</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE Transactions on Cybernetics, vol. 54, no. 12, pp. 7133–7146</span>
+            <span class="pub-year">Dec 2024</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J6</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1080/00207179.2024.2370323" target="_blank">Optimal Trajectory Tracking of Uncertain Nonlinear Continuous-Time Strict-Feedback Systems with Dynamic Constraints</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">International Journal of Control, vol. 98, no. 4, pp. 845–859</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J7</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1016/j.neucom.2024.128139" target="_blank">Lifelong Reinforcement Learning Tracking Control of Nonlinear Strict-Feedback Systems Using Multilayer Neural Networks with Constraints</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Neurocomputing, vol. 600, p. 128139</span>
+            <span class="pub-year">2024</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J8</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.20517/ces.2023.35" target="_blank">Continual Online Learning-Based Optimal Tracking Control of Nonlinear Strict-Feedback Systems: Application to UAVs</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Complex Engineering Systems, vol. 4, no. 1</span>
+            <span class="pub-year">2024</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J9</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1002/acs.3678" target="_blank">Lifelong Deep Learning-Based Control of Robot Manipulators</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Int. J. Adaptive Control and Signal Processing, vol. 37, no. 12, pp. 3169–3192</span>
+            <span class="pub-year">2023</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J10</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1002/rnc.7039" target="_blank">Lifelong Learning-Based Multilayer Neural Network Control of Nonlinear Continuous-Time Strict-Feedback Systems</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Int. Journal of Robust and Nonlinear Control, vol. 34, no. 2, pp. 1397–1416</span>
+            <span class="pub-year">2023</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J11</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.3233/JIFS-201910" target="_blank">Multi-Granulation Roughness Based on Soft Relations</a></div>
+          <div class="pub-authors">M. Shabir, J. Din, <strong>I. Ganie</strong></div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Journal of Intelligent and Fuzzy Systems, vol. 40, no. 6</span>
+            <span class="pub-year">2021</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="journal">
+        <div class="pub-num">J12</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.30534/ijeter/2020/46892020" target="_blank">Predicting Factors of Vehicular Accidents Using Machine Learning Algorithms</a></div>
+          <div class="pub-authors">A. E. Kurika, <strong>I. Ganie</strong>, Y. Kadir et al.</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">Int. Journal of Emerging Trends in Engineering Research, vol. 8, no. 9</span>
+            <span class="pub-year">2020</span>
+            <span class="pub-type-badge badge-journal">Journal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conferences -->
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C1</div>
+        <div class="pub-content">
+          <div class="pub-title">Safety-Critical Adaptive Spiking Multilayer Neural Network Control of Nonlinear Systems</div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">American Control Conference (ACC 2026), New Orleans, USA</span>
+            <span class="pub-year">2026</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C2</div>
+        <div class="pub-content">
+          <div class="pub-title">Energy-Efficient Intent Estimation and Distributed Optimal Control for Human–Multi-Robot Collaboration</div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">American Control Conference (ACC 2026), New Orleans, USA</span>
+            <span class="pub-year">2026</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C3</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://ieeexplore.ieee.org/abstract/document/11312132" target="_blank">Optimal Control in Human–Robotic Agent Teams for Cooperative Manipulation</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE CDC 2025, Rio de Janeiro, Brazil, pp. 3308–3313</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C4</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://www.sciencedirect.com/science/article/pii/S2405896325026783" target="_blank">Finite-Horizon Optimal Adaptive Tracking of Uncertain Linear Discrete-Time Systems Using Q-Learning</a></div>
+          <div class="pub-authors">M. Geiger, <strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IFAC-PapersOnLine, J3C 2025, Padova, Italy, vol. 59, issue 26, pp. 7–12</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C5</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1109/IJCNN64981.2025.11229184" target="_blank">Online Continual Reinforcement Learning-Based Optimal Output Tracking Control of Nonlinear Systems Using a Multilayer Observer</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IJCNN 2025, Rome, Italy, pp. 1–6</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C6</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.23919/ACC63710.2025.11107829" target="_blank">Online Learning-Driven Human Intent Estimation and Control for Human–Robot Interaction</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">ACC 2025, Denver, CO, USA, pp. 5160–5165</span>
+            <span class="pub-year">2025</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C7</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1109/CCTA60707.2024.10666606" target="_blank">Online Continual Safe Reinforcement Learning-Based Optimal Control of Mobile Robot Formations</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE CCTA 2024, Newcastle, UK, pp. 519–524</span>
+            <span class="pub-year">2024</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C8</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.23919/ACC55779.2023.10156466" target="_blank">Continual Optimal Adaptive Tracking of Uncertain Nonlinear Continuous-Time Systems Using Multilayer Neural Networks</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">ACC 2023, San Diego, CA, pp. 3395–3400</span>
+            <span class="pub-year">2023</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C9</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1109/CCTA54093.2023.10252103" target="_blank">Lifelong Learning Control of Nonlinear Systems with Constraints Using Multilayer Neural Networks with Application to Mobile Robot Tracking</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE CCTA 2023, Bridgetown, Barbados, pp. 727–732</span>
+            <span class="pub-year">2023</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C10</div>
+        <div class="pub-content">
+          <div class="pub-title"><a href="https://doi.org/10.1016/j.ifacol.2022.07.623" target="_blank">Adaptive Control of Robotic Manipulators Using Deep Neural Networks</a></div>
+          <div class="pub-authors"><strong>I. Ganie</strong>, S. Jagannathan</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IFAC ICONS 2022, vol. 55, no. 15, pp. 148–153</span>
+            <span class="pub-year">2022</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C11</div>
+        <div class="pub-content">
+          <div class="pub-title">Smart Field Monitoring Using ToxTrac: A Cyber-Physical System Approach in Agriculture</div>
+          <div class="pub-authors"><strong>I. Ahmad</strong>, K. Pothuganti</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">IEEE ICOSEC 2020</span>
+            <span class="pub-year">2020</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-entry fade-in" data-type="conf">
+        <div class="pub-num">C12</div>
+        <div class="pub-content">
+          <div class="pub-title">Design and Implementation of Real-Time Autonomous Car Using Image Processing and IoT</div>
+          <div class="pub-authors"><strong>I. Ahmad</strong>, K. Pothuganti</div>
+          <div class="pub-venue-line">
+            <span class="pub-venue">ICSSIT 2020, pp. 107–113</span>
+            <span class="pub-year">2020</span>
+            <span class="pub-type-badge badge-conf">Conference</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TEACHING -->
+<section id="teaching">
+  <div class="container">
+    <div class="section-label">Education</div>
+    <h2 class="section-title">Teaching</h2>
+    <p class="section-desc">Courses taught at Wilkes University and Missouri S&amp;T.</p>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:1rem;">Wilkes University, Wilkes-Barre, PA · 2025–Present</h3>
+    <div class="courses-grid fade-in" style="margin-bottom:2rem;">
+      <div class="course-item"><div class="course-code">EE-314 / S'26</div><div class="course-name">Control Systems</div></div>
+      <div class="course-item"><div class="course-code">EE-314-L / S'26</div><div class="course-name">Control Systems Lab</div></div>
+      <div class="course-item"><div class="course-code">EGR-214 / S'26</div><div class="course-name">Linear Systems</div></div>
+      <div class="course-item"><div class="course-code">EGR-214-L / S'26</div><div class="course-name">Linear Systems Lab</div></div>
+      <div class="course-item"><div class="course-code">EE-498 / S'26</div><div class="course-name">AI-Based Control for Robotic Systems</div></div>
+      <div class="course-item"><div class="course-code">EE-241 / S'26</div><div class="course-name">Digital Design (+ Honors Section)</div></div>
+      <div class="course-item"><div class="course-code">EE-241-L / S'26</div><div class="course-name">Digital Design Laboratory</div></div>
+      <div class="course-item"><div class="course-code">EE-252 / F'25</div><div class="course-name">Electronics II</div></div>
+      <div class="course-item"><div class="course-code">EE-252-L / F'25</div><div class="course-name">Electronics II Laboratory</div></div>
+      <div class="course-item"><div class="course-code">EE-283 / F'25</div><div class="course-name">Electrical Engineering Laboratory</div></div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:1rem;">Missouri S&amp;T, Rolla, MO · Spring 2025</h3>
+    <div class="courses-grid fade-in">
+      <div class="course-item"><div class="course-code">MECH/AERO 6410 / EE 6310</div><div class="course-name">Optimal Control and Estimation</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="container">
+    <div class="section-label">Recognition</div>
+    <h2 class="section-title">Honors &amp; Awards</h2>
+    <div class="awards-grid">
+      <div class="award-card fade-in">
+        <span class="award-icon">🏆</span>
+        <div class="award-title">Dean's Scholar Award</div>
+        <div class="award-org">College of Engineering, Missouri S&amp;T — One of six Ph.D. students recognized for outstanding scholarly contributions</div>
+        <div class="award-year">2025</div>
+      </div>
+      <div class="award-card fade-in">
+        <span class="award-icon">🎤</span>
+        <div class="award-title">Invited Speaker — tecBRIDGE Innovation Conference</div>
+        <div class="award-org">"From Commands to Cooperation: Designing Intelligent Human–Robot Teams with AI" — Scranton, PA</div>
+        <div class="award-year">2025</div>
+      </div>
+      <div class="award-card fade-in">
+        <span class="award-icon">🥈</span>
+        <div class="award-title">ISC Poster Presentation Award Winner</div>
+        <div class="award-org">Intelligent Systems Center, Missouri S&amp;T College of Engineering</div>
+        <div class="award-year">2023</div>
+      </div>
+      <div class="award-card fade-in">
+        <span class="award-icon">✈️</span>
+        <div class="award-title">IEEE CSS Conference Travel Award</div>
+        <div class="award-org">IEEE Control Systems Society</div>
+        <div class="award-year">2023</div>
+      </div>
+      <div class="award-card fade-in">
+        <span class="award-icon">🔬</span>
+        <div class="award-title">Ph.D. Research Funding</div>
+        <div class="award-org">Army Research Office (ARO), Office of Naval Research (ONR), Air Force Office of Scientific Research (AFOSR)</div>
+        <div class="award-year">2021–2025</div>
+      </div>
+      <div class="award-card fade-in">
+        <span class="award-icon">🎓</span>
+        <div class="award-title">Government of India Fellowship</div>
+        <div class="award-org">Master's Program Fellowship, Government of India</div>
+        <div class="award-year">2019–2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-card fade-in">
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div class="contact-detail">
+            <div class="label">Email</div>
+            <div class="value"><a href="mailto:irfanahmad.ganie@wilkes.edu">irfanahmad.ganie@wilkes.edu</a></div>
+            <div class="value" style="margin-top:0.2rem;"><a href="mailto:ganieirfan27@gmail.com">ganieirfan27@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div class="contact-detail">
+            <div class="label">Phone</div>
+            <div class="value">+1-518-698-2006</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🏛️</div>
+          <div class="contact-detail">
+            <div class="label">Institution</div>
+            <div class="value">Mechanical &amp; Electrical Engineering<br>Wilkes University<br>Wilkes-Barre, PA, USA</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <div class="profile-links">
+          <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank" class="profile-link-card">
+            <span class="profile-link-icon">🎓</span>
+            <div class="profile-link-text">
+              <div class="link-name">Google Scholar</div>
+              <div class="link-desc">428+ citations · h-index 8</div>
             </div>
-    </footer>
-    <!-- JavaScript files-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="vendor/jquery.cookie/jquery.cookie.js">
-    </script>
-    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
-    <script src="vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="vendor/jquery.counterup/jquery.counterup.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js">
-    </script>
-    <script src="js/front.js"></script>
-</body>
+            <span class="profile-link-arrow">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank" class="profile-link-card">
+            <span class="profile-link-icon">💼</span>
+            <div class="profile-link-text">
+              <div class="link-name">LinkedIn</div>
+              <div class="link-desc">Professional profile</div>
+            </div>
+            <span class="profile-link-arrow">→</span>
+          </a>
+          <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank" class="profile-link-card">
+            <span class="profile-link-icon">🔬</span>
+            <div class="profile-link-text">
+              <div class="link-name">ResearchGate</div>
+              <div class="link-desc">Research profile &amp; preprints</div>
+            </div>
+            <span class="profile-link-arrow">→</span>
+          </a>
+          <a href="https://github.com/irfan149" target="_blank" class="profile-link-card">
+            <span class="profile-link-icon">⚙️</span>
+            <div class="profile-link-text">
+              <div class="link-name">GitHub</div>
+              <div class="link-desc">Code &amp; project demos</div>
+            </div>
+            <span class="profile-link-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<footer>
+  <p>© 2026 Irfan Ahmad Ganie · Assistant Professor, Wilkes University · Wilkes-Barre, PA</p>
+</footer>
+
+<!-- ─── PROJECT MODALS ─── -->
+
+<!-- SNN Modal -->
+<div class="modal-overlay" id="modal-snn">
+  <div class="modal">
+    <div class="modal-hero">
+      <img src="img/proj_snn.jpg" alt="Spiking Neural Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="modal-hero-placeholder" style="display:none;">⚡</div>
+      <div class="modal-hero-overlay"></div>
+      <button class="modal-close" onclick="closeModal('snn')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-label" style="margin-bottom:0.5rem;">Neuromorphic Computing</div>
+      <div class="modal-title">Adaptive Spiking Neural Control</div>
+      <p class="modal-abstract">
+        This research develops safety-critical control frameworks using spiking neural networks (SNNs) — 
+        biologically inspired, event-driven architectures that achieve up to 80% energy savings over 
+        conventional ANNs while maintaining formal safety guarantees. The framework embeds safety constraints 
+        directly within closed-loop dynamics via Augmented Barrier States (ABS), and uses SVD-regularized 
+        online weight update laws to overcome the instability caused by spike discontinuities. 
+        A second thrust addresses human–multi-robot collaboration with SNN-based intent observers 
+        enabling real-time trajectory estimation through sparse spike processing, combined with 
+        cooperative game-theoretic optimal control achieving 60% energy reduction in operation.
+      </p>
+
+      <div class="modal-video">
+        <div class="video-icon">🎬</div>
+        <div class="video-info">
+          <div class="video-title">Project Demo Video</div>
+          <div class="video-hint">Upload your video as: <code>videos/snn_demo.mp4</code></div>
+        </div>
+      </div>
+
+      <div class="modal-papers-title">Publications</div>
+
+      <div class="paper-item">
+        <div class="paper-title">Safety-Critical Adaptive Spiking Multilayer Neural Network Control of Nonlinear Systems</div>
+        <div class="paper-meta"><span class="paper-venue">ACC 2026</span> · New Orleans, USA · Accepted</div>
+      </div>
+      <div class="paper-item">
+        <div class="paper-title">Energy-Efficient Intent Estimation and Distributed Optimal Control for Human–Multi-Robot Collaboration</div>
+        <div class="paper-meta"><span class="paper-venue">ACC 2026</span> · New Orleans, USA · Accepted</div>
+      </div>
+
+      <div class="modal-papers-title">Result Images</div>
+      <div class="modal-images-grid">
+        <div class="modal-img-item">
+          <img src="img/snn_result1.jpg" alt="SNN Result 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;">
+            <div class="img-icon">📊</div>
+            <div class="img-path">img/snn_result1.jpg</div>
+            <div class="img-label">Upload result figure 1</div>
+          </div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/snn_result2.jpg" alt="SNN Result 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;">
+            <div class="img-icon">📊</div>
+            <div class="img-path">img/snn_result2.jpg</div>
+            <div class="img-label">Upload result figure 2</div>
+          </div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/snn_result3.jpg" alt="SNN Result 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;">
+            <div class="img-icon">📊</div>
+            <div class="img-path">img/snn_result3.jpg</div>
+            <div class="img-label">Upload result figure 3</div>
+          </div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/snn_result4.jpg" alt="SNN Result 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;">
+            <div class="img-icon">📊</div>
+            <div class="img-path">img/snn_result4.jpg</div>
+            <div class="img-label">Upload result figure 4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HRI Modal -->
+<div class="modal-overlay" id="modal-hri">
+  <div class="modal">
+    <div class="modal-hero">
+      <img src="img/proj_hri.jpg" alt="Human Robot Interaction" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="modal-hero-placeholder" style="display:none;">🤝</div>
+      <div class="modal-hero-overlay"></div>
+      <button class="modal-close" onclick="closeModal('hri')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-label" style="margin-bottom:0.5rem;">Human–Robot Teaming</div>
+      <div class="modal-title">Human–Robot Interaction</div>
+      <p class="modal-abstract">
+        This research develops online learning frameworks for safe, adaptive, and cooperative 
+        human–robot teaming. Using admittance-based controllers, online intent estimation, 
+        and deep reinforcement learning, these systems enable robots to interpret human intent 
+        in real time and coordinate cooperative manipulation tasks with formal safety guarantees. 
+        Work spans single-robot HRI with force-based interaction to human-swarm coordination 
+        in complex multi-environment scenarios.
+      </p>
+
+      <div class="modal-video">
+        <div class="video-icon">🎬</div>
+        <div class="video-info">
+          <div class="video-title">HRI Demo Video</div>
+          <div class="video-hint">Upload as: <code>videos/hri_demo.mp4</code></div>
+        </div>
+      </div>
+
+      <div class="modal-papers-title">Publications</div>
+
+      <div class="paper-item">
+        <a href="#" target="_blank">
+          <div class="paper-title">Energy-Efficient Intent Estimation and Distributed Optimal Control for Human–Multi-Robot Collaboration</div>
+          <div class="paper-meta"><span class="paper-venue">ACC 2026</span> · New Orleans · Accepted</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://ieeexplore.ieee.org/abstract/document/11371318" target="_blank">
+          <div class="paper-title">Safe Optimal Control Framework for Cooperative Manipulation of Objects in Human–Robot Teams</div>
+          <div class="paper-meta"><span class="paper-venue">IEEE Transactions on Cybernetics</span> · 2026</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://ieeexplore.ieee.org/abstract/document/11312132" target="_blank">
+          <div class="paper-title">Optimal Control in Human–Robotic Agent Teams for Cooperative Manipulation</div>
+          <div class="paper-meta"><span class="paper-venue">IEEE CDC 2025</span> · Rio de Janeiro · pp. 3308–3313</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.23919/ACC63710.2025.11107829" target="_blank">
+          <div class="paper-title">Online Learning-Driven Human Intent Estimation and Control for Human–Robot Interaction</div>
+          <div class="paper-meta"><span class="paper-venue">ACC 2025</span> · Denver, CO · pp. 5160–5165</div>
+        </a>
+      </div>
+
+      <div class="modal-papers-title">Result Images</div>
+      <div class="modal-images-grid">
+        <div class="modal-img-item">
+          <img src="img/hri_result1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/hri_result1.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/hri_result2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/hri_result2.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/hri_result3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/hri_result3.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/hri_result4.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/hri_result4.jpg</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GNN Modal -->
+<div class="modal-overlay" id="modal-gnn">
+  <div class="modal">
+    <div class="modal-hero">
+      <img src="img/proj_gnn.jpg" alt="Graph Neural Control" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="modal-hero-placeholder" style="display:none;">🕸️</div>
+      <div class="modal-hero-overlay"></div>
+      <button class="modal-close" onclick="closeModal('gnn')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-label" style="margin-bottom:0.5rem;">Multi-Agent Systems</div>
+      <div class="modal-title">Adaptive Graph Neural Control</div>
+      <p class="modal-abstract">
+        This research creates new foundations connecting non-stationary reinforcement learning, 
+        Lyapunov-based adaptive optimal control, and graph neural network function approximation. 
+        By sharing messages along the network, each subsystem can detect whether a change originated 
+        locally or arrived from a distant neighbor and adapts its own learning rate accordingly — 
+        producing the first performance bound in cooperative control that provably improves as the 
+        network stabilizes. Lyapunov-derived update laws explicitly suppress both temporal and 
+        spatial approximation error growth pathways, keeping all weight errors bounded within a 
+        computable shrinking set. Continuous neighbor monitoring enables preemptive adaptation 
+        before disturbances arrive locally, with provably lower cumulative error than any reactive 
+        strategy. Forward invariance of pairwise safety constraints is certified throughout 
+        adaptation, with required clearances computed from actor weight error bounds.
+      </p>
+
+      <div class="modal-video">
+        <div class="video-icon">🎬</div>
+        <div class="video-info">
+          <div class="video-title">Graph Neural Control Demo</div>
+          <div class="video-hint">Upload as: <code>videos/gnn_demo.mp4</code></div>
+        </div>
+      </div>
+
+      <div class="modal-papers-title">Active Research — NSF Proposal Pending</div>
+      <div class="paper-item">
+        <div class="paper-title">RUI: Lyapunov-Based Deep Graph Neural Networks for Safe Cooperative Optimal Control of Non-Stationary Interconnected Systems</div>
+        <div class="paper-meta"><span class="paper-venue">NSF DCSD Proposal (Pending)</span> · $149K · Wilkes University 2027–2029</div>
+      </div>
+
+      <div class="modal-papers-title">Result Images</div>
+      <div class="modal-images-grid">
+        <div class="modal-img-item">
+          <img src="img/gnn_result1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/gnn_result1.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/gnn_result2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/gnn_result2.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/gnn_result3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/gnn_result3.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/gnn_result4.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/gnn_result4.jpg</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CPS Modal -->
+<div class="modal-overlay" id="modal-cps">
+  <div class="modal">
+    <div class="modal-hero">
+      <img src="img/proj_cps.jpg" alt="CPS Safety" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="modal-hero-placeholder" style="display:none;">🛡️</div>
+      <div class="modal-hero-overlay"></div>
+      <button class="modal-close" onclick="closeModal('cps')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-label" style="margin-bottom:0.5rem;">Safety-Critical Control</div>
+      <div class="modal-title">Cyber-Physical Safety-Critical Systems</div>
+      <p class="modal-abstract">
+        This research addresses safety assurance in reinforcement learning-based control of 
+        constrained nonlinear systems using Control Barrier Functions (CBFs) and Time-Varying 
+        Barrier Lyapunov Functions (TVBLF). The developed frameworks embed safety constraints 
+        directly into the optimal control synthesis, ensuring forward invariance of safe sets 
+        throughout online adaptation. Applications span mobile robot formation control, 
+        UAV tracking, and output feedback control of strict-feedback systems under state constraints.
+      </p>
+
+      <div class="modal-video">
+        <div class="video-icon">🎬</div>
+        <div class="video-info">
+          <div class="video-title">Safety Control Demo</div>
+          <div class="video-hint">Upload as: <code>videos/cps_demo.mp4</code></div>
+        </div>
+      </div>
+
+      <div class="modal-papers-title">Publications</div>
+
+      <div class="paper-item">
+        <a href="https://ieeexplore.ieee.org/abstract/document/11358393" target="_blank">
+          <div class="paper-title">Safety Aware Continual Reinforcement Learning-Based Output Tracking Control of Nonlinear Continuous-Time Systems</div>
+          <div class="paper-meta"><span class="paper-venue">IEEE Trans. Systems, Man &amp; Cybernetics: Systems, vol. 56, no. 3, pp. 1816–1831</span> · Mar 2026</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1109/TCYB.2024.3405354" target="_blank">
+          <div class="paper-title">Lifelong Learning-Based Optimal Trajectory Tracking of Constrained Nonlinear Affine Systems Using Deep Neural Networks</div>
+          <div class="paper-meta"><span class="paper-venue">IEEE Transactions on Cybernetics, vol. 54, no. 12, pp. 7133–7146</span> · 2024</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1016/j.neucom.2024.128139" target="_blank">
+          <div class="paper-title">Lifelong Reinforcement Learning Tracking Control of Nonlinear Strict-Feedback Systems Using Multilayer Neural Networks with Constraints</div>
+          <div class="paper-meta"><span class="paper-venue">Neurocomputing, vol. 600</span> · 2024</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1080/00207179.2024.2370323" target="_blank">
+          <div class="paper-title">Optimal Trajectory Tracking of Uncertain Nonlinear Continuous-Time Strict-Feedback Systems with Dynamic Constraints</div>
+          <div class="paper-meta"><span class="paper-venue">International Journal of Control, vol. 98, no. 4</span> · 2025</div>
+        </a>
+      </div>
+
+      <div class="modal-papers-title">Result Images</div>
+      <div class="modal-images-grid">
+        <div class="modal-img-item">
+          <img src="img/cps_result1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/cps_result1.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/cps_result2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/cps_result2.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/cps_result3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/cps_result3.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/cps_result4.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/cps_result4.jpg</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACL Modal -->
+<div class="modal-overlay" id="modal-acl">
+  <div class="modal">
+    <div class="modal-hero">
+      <img src="img/proj_acl.jpg" alt="Adaptive Continual Learning" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="modal-hero-placeholder" style="display:none;">∞</div>
+      <div class="modal-hero-overlay"></div>
+      <button class="modal-close" onclick="closeModal('acl')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="section-label" style="margin-bottom:0.5rem;">Lifelong Learning</div>
+      <div class="modal-title">Adaptive Continual Learning Control</div>
+      <p class="modal-abstract">
+        This research develops lifelong/continual deep reinforcement learning frameworks for 
+        multi-task tracking control of uncertain nonlinear systems. By incorporating online 
+        Bellman-error-driven weight update laws into multilayer neural networks, the methods 
+        prevent catastrophic forgetting while adapting to new environments and tasks. 
+        Applications span n-link robot manipulators, mobile robots, UAVs, and unmanned 
+        surface vehicles. The work covers both state-feedback and output-feedback (using 
+        SVD-based multilayer neural network observers) settings, and includes both 
+        strict-feedback and control-affine system classes.
+      </p>
+
+      <div class="modal-video">
+        <div class="video-icon">🎬</div>
+        <div class="video-info">
+          <div class="video-title">Continual Learning Demo</div>
+          <div class="video-hint">Upload as: <code>videos/acl_demo.mp4</code></div>
+        </div>
+      </div>
+
+      <div class="modal-papers-title">Publications</div>
+
+      <div class="paper-item">
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/S0893608025006732" target="_blank">
+          <div class="paper-title">Online Lifelong Optimal Tracking Control of Uncertain Nonlinear Continuous-Time Strict-Feedback Systems Using Deep Neural Networks</div>
+          <div class="paper-meta"><span class="paper-venue">Neural Networks, vol. 191</span> · 2025</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1002/acs.4020" target="_blank">
+          <div class="paper-title">Safe Optimal Control of Quadrotor Formations Using Multilayer Neural Networks and Continual Learning</div>
+          <div class="paper-meta"><span class="paper-venue">Int. J. Adaptive Control and Signal Processing, vol. 39, no. 8</span> · 2025</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1109/IJCNN64981.2025.11229184" target="_blank">
+          <div class="paper-title">Online Continual Reinforcement Learning-Based Optimal Output Tracking Control of Nonlinear Systems Using a Multilayer Observer</div>
+          <div class="paper-meta"><span class="paper-venue">IJCNN 2025</span> · Rome, Italy · pp. 1–6</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1109/CCTA60707.2024.10666606" target="_blank">
+          <div class="paper-title">Online Continual Safe Reinforcement Learning-Based Optimal Control of Mobile Robot Formations</div>
+          <div class="paper-meta"><span class="paper-venue">IEEE CCTA 2024</span> · Newcastle, UK · pp. 519–524</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.20517/ces.2023.35" target="_blank">
+          <div class="paper-title">Continual Online Learning-Based Optimal Tracking Control of Nonlinear Strict-Feedback Systems: Application to UAVs</div>
+          <div class="paper-meta"><span class="paper-venue">Complex Engineering Systems, vol. 4</span> · 2024</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://www.sciencedirect.com/science/article/pii/S2405896325026783" target="_blank">
+          <div class="paper-title">Finite-Horizon Optimal Adaptive Tracking of Uncertain Linear Discrete-Time Systems Using Q-Learning</div>
+          <div class="paper-meta"><span class="paper-venue">IFAC J3C 2025</span> · Padova, Italy · pp. 7–12</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.23919/ACC55779.2023.10156466" target="_blank">
+          <div class="paper-title">Continual Optimal Adaptive Tracking of Uncertain Nonlinear Continuous-Time Systems Using Multilayer Neural Networks</div>
+          <div class="paper-meta"><span class="paper-venue">ACC 2023</span> · San Diego, CA · pp. 3395–3400</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1109/CCTA54093.2023.10252103" target="_blank">
+          <div class="paper-title">Lifelong Learning Control of Nonlinear Systems with Constraints Using Multilayer Neural Networks</div>
+          <div class="paper-meta"><span class="paper-venue">IEEE CCTA 2023</span> · Bridgetown, Barbados · pp. 727–732</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1002/acs.3678" target="_blank">
+          <div class="paper-title">Lifelong Deep Learning-Based Control of Robot Manipulators</div>
+          <div class="paper-meta"><span class="paper-venue">Int. J. Adaptive Control and Signal Processing, vol. 37, no. 12</span> · 2023</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1002/rnc.7039" target="_blank">
+          <div class="paper-title">Lifelong Learning-Based Multilayer Neural Network Control of Nonlinear Continuous-Time Strict-Feedback Systems</div>
+          <div class="paper-meta"><span class="paper-venue">Int. J. Robust and Nonlinear Control, vol. 34, no. 2</span> · 2023</div>
+        </a>
+      </div>
+      <div class="paper-item">
+        <a href="https://doi.org/10.1016/j.ifacol.2022.07.623" target="_blank">
+          <div class="paper-title">Adaptive Control of Robotic Manipulators Using Deep Neural Networks</div>
+          <div class="paper-meta"><span class="paper-venue">IFAC ICONS 2022</span> · vol. 55, no. 15, pp. 148–153</div>
+        </a>
+      </div>
+
+      <div class="modal-papers-title">Result Images</div>
+      <div class="modal-images-grid">
+        <div class="modal-img-item">
+          <img src="img/acl_result1.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/acl_result1.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/acl_result2.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/acl_result2.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/acl_result3.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/acl_result3.jpg</div></div>
+        </div>
+        <div class="modal-img-item">
+          <img src="img/acl_result4.jpg" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-img-placeholder" style="display:none;"><div class="img-icon">📊</div><div class="img-path">img/acl_result4.jpg</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Modal ──
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => {
+        m.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  // ── Pub filter ──
+  function filterPubs(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pub-entry').forEach(entry => {
+      if (type === 'all' || entry.dataset.type === type) {
+        entry.classList.remove('hidden');
+      } else {
+        entry.classList.add('hidden');
+      }
+    });
+  }
+
+  // ── Nav ──
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+
+  // ── Scroll fade-in ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
