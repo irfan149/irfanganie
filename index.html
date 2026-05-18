@@ -939,178 +939,862 @@ function buildAnim(id){
    SNN  –  Adaptive Spiking Neural Control
 ═══════════════════════════════════════ */
 function bSNN(){
-  document.getElementById('snn-anim-container').innerHTML=`
-<style>
-#sw{background:#0d0f16;font-family:sans-serif;color:#dde0e8}
-#sh{background:#13151f;border-bottom:1px solid #22253a;padding:7px 12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-#sh b{font-size:11px;flex:1}
-.sm{background:#1a1d2b;border:1px solid #22253a;border-radius:6px;padding:3px 8px;text-align:center;min-width:60px}
-.smv{font-size:12px;font-weight:500}.sml{font-size:8px;color:#5a6070;margin-top:1px}
-#sg{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid #22253a}
-#sbot{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #22253a}
-.sc{border-right:1px solid #22253a;position:relative}.sc:last-child{border-right:none}
-.scl{position:absolute;top:4px;left:5px;font-size:8px;color:#5a6070;z-index:2;pointer-events:none;line-height:1.35}
-#sctrl{display:flex;align-items:center;gap:7px;padding:5px 10px;background:#13151f;border-bottom:1px solid #22253a;flex-wrap:wrap}
-#sctrl label{font-size:10px;color:#5a6070;display:flex;align-items:center;gap:3px}
-#sctrl input[type=range]{width:60px;accent-color:#378ADD}
-#sctrl button{font-size:10px;padding:2px 8px;background:#1a1d2b;border:1px solid #22253a;color:#dde0e8;border-radius:4px;cursor:pointer}
-#sph{padding:4px 10px;font-size:9px;color:#5a6070;background:#13151f;line-height:1.5;min-height:26px}
-.spt{color:#EF9F27;font-weight:500}
+  const cnt=document.getElementById('snn-anim-container');
+  cnt.innerHTML=`<style>
+#snw{background:#07090e;font-family:sans-serif;color:#dde0e8;user-select:none}
+/* header */
+#snh{background:#0d0f18;border-bottom:1px solid #1e2235;padding:8px 14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#snh b{font-size:11px;flex:1;color:#c8cce0}
+.sk{background:#12151f;border:1px solid #1e2235;border-radius:7px;padding:4px 9px;text-align:center;min-width:64px}
+.skv{font-size:13px;font-weight:600}.skl{font-size:8px;color:#4a5370;margin-top:1px}
+/* tab bar */
+#stabs{display:flex;gap:4px;padding:7px 10px;background:#0a0c14;border-bottom:1px solid #1e2235;flex-wrap:wrap}
+.stab{padding:4px 12px;border-radius:20px;font-size:10px;font-weight:500;cursor:pointer;border:1px solid #1e2235;color:#5a6480;background:transparent;transition:all .2s;letter-spacing:.03em}
+.stab.on{background:rgba(79,142,247,.18);color:#7aadff;border-color:rgba(79,142,247,.4)}
+/* main canvas area */
+#snmain{position:relative}
+#sndesc{padding:7px 14px;font-size:9px;color:#5a6480;background:#0a0c14;border-top:1px solid #1e2235;line-height:1.6;min-height:30px}
+.sdhigh{color:#EF9F27;font-weight:600}
+/* controls */
+#snctrl{display:flex;align-items:center;gap:8px;padding:5px 10px;background:#0d0f18;border-top:1px solid #1e2235;flex-wrap:wrap}
+#snctrl label{font-size:10px;color:#4a5370;display:flex;align-items:center;gap:3px}
+#snctrl input[type=range]{width:58px;accent-color:#4f8ef7}
+#snctrl button{font-size:10px;padding:2px 9px;background:#12151f;border:1px solid #1e2235;color:#c8cce0;border-radius:5px;cursor:pointer;transition:background .2s}
+#snctrl button:hover{background:#1a1e30}
 </style>
-<div id="sw">
-<div id="sh">
-  <b>Adaptive SNN closed-loop control</b>
-  <div class="sm"><div class="smv" id="se">0.000</div><div class="sml">error e(t)</div></div>
-  <div class="sm"><div class="smv" id="suu">0.00</div><div class="sml">control u</div></div>
-  <div class="sm"><div class="smv" id="ssr">0 Hz</div><div class="sml">spike rate</div></div>
-  <div class="sm"><div class="smv" style="color:#1D9E75" id="ssf">SAFE</div><div class="sml">ABS</div></div>
+<div id="snw">
+<div id="snh">
+  <b>Adaptive Spiking Neural Network Control System — Full Pipeline</b>
+  <div class="sk"><div class="skv" id="sne">0.000</div><div class="skl">error e(t)</div></div>
+  <div class="sk"><div class="skv" id="snu">0.00</div><div class="skl">u*(t)</div></div>
+  <div class="sk"><div class="skv" id="snr">0 Hz</div><div class="skl">spike rate</div></div>
+  <div class="sk"><div class="skv" id="snE">0.00</div><div class="skl">energy (J)</div></div>
+  <div class="sk"><div class="skv" style="color:#1D9E75" id="snS">SAFE</div><div class="skl">ABS</div></div>
+  <div class="sk"><div class="skv" id="snW">0.000</div><div class="skl">‖W̃‖</div></div>
 </div>
-<div id="sg">
-  <div class="sc"><div class="scl">① Robot arm<br>+ error e(t)</div><canvas id="s1" width="170" height="190"></canvas></div>
-  <div class="sc"><div class="scl">② LIF V(t)<br>+ spike train</div><canvas id="s2" width="170" height="190"></canvas></div>
-  <div class="sc"><div class="scl">③ SNN layers<br>forward pass</div><canvas id="s3" width="170" height="190"></canvas></div>
-  <div class="sc"><div class="scl">④ Closed-loop<br>block diagram</div><canvas id="s4" width="170" height="190"></canvas></div>
+<div id="stabs">
+  <button class="stab on" onclick="snTab(0,this)">① LIF Neuron</button>
+  <button class="stab"    onclick="snTab(1,this)">② Rate Encoder</button>
+  <button class="stab"    onclick="snTab(2,this)">③ SNN Layers + Synapses</button>
+  <button class="stab"    onclick="snTab(3,this)">④ Spike Filtering + Decoder</button>
+  <button class="stab"    onclick="snTab(4,this)">⑤ Closed-Loop Control</button>
+  <button class="stab"    onclick="snTab(5,this)">⑥ Online Weight Adaptation</button>
 </div>
-<div id="sbot">
-  <div class="sc" style="border-right:1px solid #22253a"><div class="scl">⑤ Tracking x_d vs x(t)</div><canvas id="s5" width="340" height="120"></canvas></div>
-  <div class="sc"><div class="scl">⑥ Weight error ‖W̃‖ → UUB</div><canvas id="s6" width="340" height="120"></canvas></div>
+<div id="snmain">
+  <canvas id="snC" width="680" height="340" style="display:block;background:#07090e"></canvas>
 </div>
-<div id="sctrl">
-  <label>Reference<input type="range" id="sref" min="1" max="8" value="4"></label>
-  <label>Uncertainty<input type="range" id="sunc" min="0" max="9" value="3"></label>
-  <label>Learn rate<input type="range" id="slr" min="1" max="9" value="5"></label>
-  <button onclick="sReset()">Reset</button>
+<div id="sndesc">Loading…</div>
+<div id="snctrl">
+  <label>Reference<input type="range" id="snRef" min="1" max="8" value="4"></label>
+  <label>Uncertainty<input type="range" id="snUnc" min="0" max="9" value="2"></label>
+  <label>Learn rate<input type="range" id="snLr" min="1" max="9" value="5"></label>
+  <label>Threshold V_th<input type="range" id="snVth" min="3" max="9" value="6"></label>
+  <button onclick="snReset()">Reset</button>
+  <button onclick="snPause()">Pause / Play</button>
 </div>
-<div id="sph">Initializing…</div>
 </div>`;
 
-  const SPH=[
-    ['Step 1','Robot measures x(t). Error e(t)=x_d−x computed. Error magnitude drives the LIF spike rate encoder.'],
-    ['Step 2','Rate encoder: larger |e| → higher spike frequency. LIF membrane V(t) charges → fires at V_th → resets.'],
-    ['Step 3','Spikes propagate through SNN layers. SVD regularizes weight gradients. Output decoded to control u(t).'],
-    ['Step 4','Augmented Barrier States (ABS) embed safety. u_safe applied to plant f(x,u). Feedback closes loop.'],
-    ['Step 5','ΔW=−α·e·σ(V) online every step. Lyapunov proves UUB. 80% energy savings vs conventional ANN.']
-  ];
+  /* ── colors ── */
+  const C=document.getElementById('snC').getContext('2d');
+  const W=680,H=340;
+  const GOLD='#EF9F27',BLU='#4f8ef7',GRN='#1D9E75',RED='#f05252',PUR='#9B8FEA',CYA='#4BB8D4',ORG='#D85A30';
+  const BG='#07090e',S1='#0d0f18',S2='#12151f',S3='#1a1e2c',BD='#1e2235',BD2='#2a2e45';
 
-  let st=0,arm=.15,des=.5,lV=0,lH=[],wH=[],tH=[];
-  const NP=[[42,4],[92,4],[128,4],[158,3]];
-  const np=NP.map(([x,n])=>Array.from({length:n},(_,i)=>({x,y:26+i*(148/(n-1||1)),v:0,f:false})));
-  window.sReset=()=>{st=0;arm=.15;lV=0;lH=[];wH=[];tH=[];};
-  const cx=[1,2,3,4,5,6].map(i=>document.getElementById('s'+i).getContext('2d'));
-
-  function sStep(){
-    const ref=+document.getElementById('sref').value;
-    const unc=+document.getElementById('sunc').value;
-    const lr=+document.getElementById('slr').value*.004+.004;
-    document.getElementById('sph').innerHTML='<span class="spt">'+SPH[Math.floor(st/75)%5][0]+'</span> — '+SPH[Math.floor(st/75)%5][1];
-    des=Math.PI*(.2+ref*.075);
-    const noise=(Math.random()-.5)*unc*.01, e=des-arm, u=Math.min(3,e*1.8+noise);
-    arm=Math.max(.05,Math.min(Math.PI-.05,arm+u*.04));
-    lV=lV*(1-.12)+Math.abs(e)*.55+noise;
-    let fired=false;
-    if(lV>=.65){lV=0;fired=true;}
-    lH.push({v:Math.min(lV,.65),f:fired});
-    if(lH.length>290)lH.shift();
-    np.forEach(l=>l.forEach(n=>{n.v=n.v*.75+Math.abs(e)*(.25+Math.random()*.2);n.f=n.v>.55+Math.random()*.2;if(n.f)n.v=0;}));
-    const wE=Math.max(.015,.55*(1-lr*.4*st*.001)+(Math.random()-.5)*unc*.015);
-    wH.push(wE); tH.push({d:des,a:arm});
-    if(wH.length>290)wH.shift(); if(tH.length>290)tH.shift();
-    const safe=Math.abs(e)<.7;
-    document.getElementById('se').textContent=Math.abs(e).toFixed(3);
-    document.getElementById('suu').textContent=u.toFixed(2);
-    document.getElementById('ssr').textContent=Math.round(Math.abs(e)*140)+' Hz';
-    document.getElementById('ssf').textContent=safe?'SAFE':'CLIP';
-    document.getElementById('ssf').style.color=safe?GR:RD;
-    st++;
-    /* Panel 1 – arm */
-    const C=cx[0]; C.fillStyle='#0d0f16'; C.fillRect(0,0,170,190);
-    const ox=85,oy=162,L1=60,L2=40;
-    const a1x=ox+Math.cos(arm-Math.PI/2)*L1, a1y=oy-Math.sin(arm-Math.PI/2)*L1;
-    const a2x=a1x+Math.cos(arm-Math.PI/2+.4)*L2, a2y=a1y-Math.sin(arm-Math.PI/2+.4)*L2;
-    C.strokeStyle=GR; C.lineWidth=.7; C.setLineDash([3,3]);
-    C.beginPath(); C.moveTo(ox,oy); C.lineTo(ox+Math.cos(des-Math.PI/2)*L1,oy-Math.sin(des-Math.PI/2)*L1); C.stroke(); C.setLineDash([]);
-    C.strokeStyle=BL; C.lineWidth=4; C.lineCap='round'; C.beginPath(); C.moveTo(ox,oy); C.lineTo(a1x,a1y); C.stroke();
-    C.strokeStyle=AM; C.lineWidth=3; C.beginPath(); C.moveTo(a1x,a1y); C.lineTo(a2x,a2y); C.stroke();
-    C.fillStyle=BL; C.beginPath(); C.arc(ox,oy,5,0,Math.PI*2); C.fill();
-    C.fillStyle=RD; C.beginPath(); C.arc(a2x,a2y,4,0,Math.PI*2); C.fill();
-    C.fillStyle='#1a1d2b'; C.fillRect(8,172,154,10);
-    C.fillStyle=Math.abs(e)<.2?GR:Math.abs(e)<.5?AM:RD;
-    C.fillRect(8,172,Math.min(Math.abs(e)*160,154),10);
-    C.fillStyle='#5a6070'; C.font='7px sans-serif'; C.fillText('error e(t)',10,185);
-    /* Panel 2 – LIF */
-    const C2=cx[1]; C2.fillStyle='#0d0f16'; C2.fillRect(0,0,170,190);
-    const ty=172-(.65*162);
-    C2.strokeStyle=RD; C2.lineWidth=.6; C2.setLineDash([3,3]);
-    C2.beginPath(); C2.moveTo(8,ty); C2.lineTo(162,ty); C2.stroke(); C2.setLineDash([]);
-    C2.fillStyle=RD; C2.font='7px sans-serif'; C2.fillText('V_th',148,ty-2);
-    C2.strokeStyle=AM; C2.lineWidth=1.5; C2.beginPath();
-    lH.forEach((h,i)=>{const x=8+i*154/290,y=172-h.v*162; i===0?C2.moveTo(x,y):C2.lineTo(x,y);}); C2.stroke();
-    C2.strokeStyle=BL; C2.lineWidth=1.5;
-    lH.forEach((h,i)=>{if(h.f){const x=8+i*154/290; C2.beginPath(); C2.moveTo(x,172); C2.lineTo(x,10); C2.stroke();}});
-    C2.fillStyle=AM; C2.font='8px sans-serif'; C2.fillText('V(t)',8,20); C2.fillStyle=BL; C2.fillText('S_t spikes',8,31);
-    /* Panel 3 – SNN layers */
-    const C3=cx[2]; C3.fillStyle='#0d0f16'; C3.fillRect(0,0,170,190);
-    const wf=((st%50)/50)*3, lns=['in','L1','L2','out'];
-    np.forEach((layer,li)=>{
-      C3.fillStyle='#13162088'; C3.fillRect(layer[0].x-13,14,27,166);
-      C3.strokeStyle='#22253a'; C3.lineWidth=.3; C3.strokeRect(layer[0].x-13,14,27,166);
-      C3.fillStyle='#3a3d50'; C3.font='7px sans-serif'; C3.textAlign='center'; C3.fillText(lns[li],layer[0].x,184); C3.textAlign='left';
-      if(li<np.length-1){
-        layer.forEach(a=>np[li+1].forEach(b=>{C3.strokeStyle=PU;C3.lineWidth=.25;C3.globalAlpha=.1;C3.beginPath();C3.moveTo(a.x+6,a.y);C3.lineTo(np[li+1][0].x-6,b.y);C3.stroke();C3.globalAlpha=1;}));
-        if(Math.abs(wf-li)<.7){const t=(wf-li+.7)/1.4;layer.forEach(a=>{const bx=a.x+6+(np[li+1][0].x-6-a.x-6)*t;C3.fillStyle=AM;C3.globalAlpha=.7;C3.beginPath();C3.arc(bx,a.y,3,0,Math.PI*2);C3.fill();C3.globalAlpha=1;});}
-      }
-      layer.forEach(n=>{
-        if(n.f){C3.strokeStyle=AM;C3.lineWidth=1.5;C3.globalAlpha=.35;C3.beginPath();C3.arc(n.x,n.y,10,0,Math.PI*2);C3.stroke();C3.globalAlpha=1;}
-        C3.fillStyle=n.f?AM:(li===np.length-1?GR:PU); C3.globalAlpha=.2+(n.v||0)*.8; C3.beginPath(); C3.arc(n.x,n.y,6,0,Math.PI*2); C3.fill(); C3.globalAlpha=1;
-        C3.strokeStyle=n.f?AM:(li===np.length-1?GR:PU); C3.lineWidth=.7; C3.beginPath(); C3.arc(n.x,n.y,6,0,Math.PI*2); C3.stroke();
+  /* ── state ── */
+  let tick=0,panel=0,paused=false;
+  let arm=0.15,des=0.5;
+  let lifV=0,lifH=[];        // LIF history
+  let spikeRate=0;
+  let layers=[[52,4],[130,5],[210,5],[290,4],[368,3],[440,2]]; // [x, n_neurons]
+  let neurons=layers.map(([x,n])=>Array.from({length:n},(_,i)=>({
+    x,y:40+i*(240/(n-1||1)),v:0,fired:false,refrac:0,
+    color:PUR,lastFire:0
+  })));
+  // synaptic traces
+  let synapses=[];
+  layers.forEach((l,li)=>{
+    if(li>=layers.length-1)return;
+    neurons[li].forEach((a,ai)=>{
+      neurons[li+1].forEach((b,bi)=>{
+        synapses.push({li,ai,bi,w:0.3+Math.random()*0.55,trace:0,potent:0});
       });
     });
-    /* Panel 4 – block diagram */
-    const C4=cx[3],BW=100,BH=18,BX=35;
-    C4.fillStyle='#0d0f16'; C4.fillRect(0,0,170,190);
-    const blks=[{y:14,lbl:'Error e(t)',col:BL},{y:42,lbl:'SNN actor',col:PU},{y:70,lbl:'ABS filter',col:GR},{y:98,lbl:'Plant f(x,u)',col:AM},{y:130,lbl:'State y(t)',col:'#6b7280'}];
-    const aB4=Math.floor(st/20)%blks.length;
-    blks.forEach((b,bi)=>{
-      const isA=bi===aB4;
-      C4.fillStyle=isA?b.col+'22':'#13151f'; C4.fillRect(BX,b.y,BW,BH);
-      C4.strokeStyle=isA?b.col:'#22253a'; C4.lineWidth=isA?1.1:.4; C4.strokeRect(BX,b.y,BW,BH);
-      C4.fillStyle=b.col; C4.font='8px sans-serif'; C4.textAlign='center'; C4.fillText(b.lbl,BX+BW/2,b.y+12); C4.textAlign='left';
-      if(bi<blks.length-1){
-        const ay=b.y+BH,ay2=blks[bi+1].y;
-        C4.strokeStyle=isA?b.col:'#2a2d3e'; C4.lineWidth=isA?.9:.3; C4.beginPath(); C4.moveTo(BX+BW/2,ay); C4.lineTo(BX+BW/2,ay2); C4.stroke();
-        if(isA){const t=(st%18)/18,dy=ay+(ay2-ay)*t; C4.fillStyle=AM; C4.globalAlpha=.9; C4.beginPath(); C4.arc(BX+BW/2,dy,2.5,0,Math.PI*2); C4.fill(); C4.globalAlpha=1;}
+  });
+  // filter state (leaky integrator after output)
+  let filterState=0;
+  // weight error history
+  let wErrH=[], trackH=[], spkH=[];
+  // spike packets in flight
+  let pkts=[];
+  // output spike train (decoded)
+  let outSpikes=[];
+  // energy accumulator
+  let energyAcc=0;
+  // Bellman error / weight update
+  let bellErr=0, lastU=0;
+
+  const DESCS=[
+    `<span class="sdhigh">① LIF Neuron Physics</span> — Each spiking neuron integrates input current: <b>τ·dV/dt = −V + R·I(t)</b>. When V≥V_th the neuron fires (spike), resets to V_rest=0, enters refractory period τ_ref. This binary firing is the fundamental computation unit of the SNN. Tune V_th slider to see threshold effects on firing rate.`,
+    `<span class="sdhigh">② Rate Encoding</span> — The tracking error |e(t)| is <b>rate-encoded</b>: larger error → denser spike train (higher Hz). Population of input neurons fires at different phases to carry the error signal in temporal patterns, not analog values. This preserves gradient-free event-driven computation.`,
+    `<span class="sdhigh">③ SNN Layers + Synapses</span> — 6 fully-connected LIF layers. Each synapse carries weight <b>W_ji</b>. When pre-neuron j fires, post-neuron i receives current <b>I_i += W_ji · δ(t−t_j)</b>. STDP-like eligibility traces <b>ē_ji</b> accumulate at each synapse for gradient-free credit assignment. Color = weight magnitude.`,
+    `<span class="sdhigh">④ Spike Filtering + Decoding</span> — Raw output spikes are filtered by a <b>leaky integrator decoder</b>: <b>τ_d·dU/dt = −U + Σ W_out·S_k(t)</b>. This converts the discrete spike train into a smooth analog control signal u(t). <b>SVD regularization</b> stabilizes weight updates against the non-differentiable spike discontinuity.`,
+    `<span class="sdhigh">⑤ Closed-Loop Control</span> — Full closed-loop: plant output y(t) → error e(t) → rate encoder → SNN actor → filter → control u(t) → plant. <b>Augmented Barrier States (ABS)</b> augment the state vector to embed safety constraints h(x)≥0 directly into the SNN controller without modifying the network architecture.`,
+    `<span class="sdhigh">⑥ Online Weight Adaptation</span> — <b>ΔW = −α · δ_BE · ē</b> where δ_BE is the Bellman error approximation and ē is the synaptic eligibility trace. SVD regularization keeps ‖W‖ bounded. <b>Lyapunov analysis proves UUB</b> of all weight errors ‖W̃‖ and tracking error e(t) simultaneously. 80% energy savings vs. ANN.`
+  ];
+
+  function snTab(i,btn){
+    panel=i; tick=0;
+    document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('sndesc').innerHTML=DESCS[i];
+  }
+  window.snReset=()=>{tick=0;arm=0.15;lifV=0;lifH=[];wErrH=[];trackH=[];spkH=[];pkts=[];outSpikes=[];filterState=0;energyAcc=0;bellErr=0;lastU=0;neurons.forEach(layer=>layer.forEach(n=>{n.v=0;n.fired=false;n.refrac=0;}));};
+  window.snPause=()=>{paused=!paused;};
+
+  document.getElementById('sndesc').innerHTML=DESCS[0];
+
+  /* ── utility drawing ── */
+  function clr(){C.fillStyle=BG;C.fillRect(0,0,W,H);}
+  function label(txt,x,y,col='#5a6480',sz=9){C.fillStyle=col;C.font=sz+'px sans-serif';C.fillText(txt,x,y);}
+  function labelC(txt,x,y,col='#5a6480',sz=9){C.fillStyle=col;C.font=sz+'px sans-serif';C.textAlign='center';C.fillText(txt,x,y);C.textAlign='left';}
+  function rect(x,y,w,h,fill,stroke,lw=0.7){C.fillStyle=fill;C.fillRect(x,y,w,h);if(stroke){C.strokeStyle=stroke;C.lineWidth=lw;C.strokeRect(x,y,w,h);}}
+  function line(x1,y1,x2,y2,col,lw=1){C.strokeStyle=col;C.lineWidth=lw;C.beginPath();C.moveTo(x1,y1);C.lineTo(x2,y2);C.stroke();}
+  function circle(x,y,r,fill,stroke,lw=0.8){C.fillStyle=fill;C.beginPath();C.arc(x,y,r,0,Math.PI*2);C.fill();if(stroke){C.strokeStyle=stroke;C.lineWidth=lw;C.beginPath();C.arc(x,y,r,0,Math.PI*2);C.stroke();}}
+  function arrow(x1,y1,x2,y2,col,lw=1){
+    line(x1,y1,x2,y2,col,lw);
+    const a=Math.atan2(y2-y1,x2-x1),s=6;
+    C.fillStyle=col;C.beginPath();C.moveTo(x2,y2);C.lineTo(x2-s*Math.cos(a-0.4),y2-s*Math.sin(a-0.4));C.lineTo(x2-s*Math.cos(a+0.4),y2-s*Math.sin(a+0.4));C.closePath();C.fill();
+  }
+  function glowCircle(x,y,r,col,alpha=0.35){
+    const g=C.createRadialGradient(x,y,0,x,y,r*3);
+    g.addColorStop(0,col+(Math.round(alpha*255).toString(16).padStart(2,'0')));
+    g.addColorStop(1,'transparent');
+    C.fillStyle=g;C.beginPath();C.arc(x,y,r*3,0,Math.PI*2);C.fill();
+  }
+
+  /* ── PANEL 0: LIF neuron physics ── */
+  function drawLIF(){
+    clr();
+    const ref=+document.getElementById('snRef').value;
+    const unc=+document.getElementById('snUnc').value;
+    const vth=+document.getElementById('snVth').value*0.1;
+
+    // LIF simulation
+    const I=Math.abs(des-arm)*4+(Math.random()-0.5)*unc*0.3;
+    const tau=0.18;
+    lifV=lifV*(1-tau)+I*tau+(Math.random()-0.5)*0.015*unc;
+    let fired=false;
+    if(lifV>=vth){lifV=0;fired=true;spikeRate=Math.min(200,spikeRate+30);}
+    else spikeRate=Math.max(0,spikeRate-1.5);
+    lifH.push({v:Math.min(lifV,vth+0.05),f:fired,I});
+    if(lifH.length>480)lifH.shift();
+
+    // --- Neuron circuit diagram (left half) ---
+    const nx=155,ny=170;
+
+    // capacitor symbol
+    rect(nx-50,ny-30,46,60,S2,BD);
+    line(nx-26,ny-20,nx-26,ny+20,BD2,2);
+    line(nx-18,ny-20,nx-18,ny+20,BD2,2);
+    labelC('C_m',nx-27,ny+35,'#5a6480',8);
+
+    // resistor
+    rect(nx+20,ny-28,40,56,S2,BD);
+    // zigzag
+    const rzx=nx+40, rzy1=ny-20, rzy2=ny+20, rzn=6;
+    C.strokeStyle=BD2;C.lineWidth=1.5;C.beginPath();C.moveTo(rzx,rzy1);
+    for(let i=0;i<rzn;i++){const yy=rzy1+(rzy2-rzy1)*i/(rzn-1);C.lineTo(rzx+(i%2===0?5:-5),yy);}
+    C.lineTo(rzx,rzy2);C.stroke();
+    labelC('R_m',nx+40,ny+35,'#5a6480',8);
+
+    // comparator / threshold
+    rect(nx+90,ny-22,60,44,S2,BD);
+    labelC('θ = V_th',nx+120,ny+4,'#9B8FEA',9);
+    labelC('Comparator',nx+120,ny-10,'#5a6480',8);
+
+    // input current arrow
+    arrow(20,ny,nx-52,ny,GOLD,1.8);
+    label('I(t)  input current',22,ny-8,GOLD,9);
+    label('(from rate encoder)',22,ny+18,'#4a5370',8);
+
+    // voltage node
+    circle(nx-4,ny,7,'#1e2235',BLU,1.2);
+    label('V_m',nx+2,ny-11,BLU,9);
+
+    // arrows connecting components
+    line(nx-4,ny-7,nx-4,ny-30,BD2,0.7);line(nx-4,ny+7,nx-4,ny+30,BD2,0.7);
+    line(nx-50,ny,nx-4,ny,BD2,0.7);
+    line(nx-4,ny,nx+20,ny,BD2,0.7);
+    line(nx-4,ny,nx+90,ny,BD2,0.7);
+
+    // spike output
+    arrow(nx+150,ny,nx+210,ny,GRN,1.8);
+    label('spike S(t)',nx+155,ny-8,GRN,9);
+
+    // reset arrow
+    C.strokeStyle=RED;C.lineWidth=1;C.setLineDash([3,3]);
+    C.beginPath();C.moveTo(nx+120,ny+22);C.lineTo(nx+120,ny+60);C.lineTo(nx-4,ny+60);C.lineTo(nx-4,ny+7);C.stroke();C.setLineDash([]);
+    label('reset to V_rest=0',nx+30,ny+74,RED,8);
+
+    // refractory block
+    rect(nx+220,ny-15,80,30,S2,BD);
+    labelC('τ_ref',nx+260,ny-3,'#D85A30',9);
+    labelC('Refractory',nx+260,ny+10,'#4a5370',8);
+    arrow(nx+210,ny,nx+220,ny,ORG,1);
+
+    // --- Membrane voltage trace (right half) ---
+    const tx=370,ty=25,tw=290,th=180;
+    rect(tx,ty,tw,th,S1,BD,0.5);
+    label('Membrane Voltage V_m(t)',tx+4,ty+12,'#8899bb',8);
+
+    // threshold line
+    const vthY=ty+th*(1-vth/0.8);
+    C.strokeStyle=RED;C.lineWidth=0.8;C.setLineDash([3,3]);
+    C.beginPath();C.moveTo(tx,vthY);C.lineTo(tx+tw,vthY);C.stroke();C.setLineDash([]);
+    label('V_th',tx+tw-22,vthY-3,RED,8);
+
+    // resting line
+    const vrY=ty+th*0.92;
+    line(tx,vrY,tx+tw,vrY,'#2a2e45',0.5);
+    label('V_rest',tx+tw-28,vrY+9,'#2a2e45',7);
+
+    // voltage curve
+    C.strokeStyle=BLU;C.lineWidth=1.6;C.beginPath();
+    const visH=lifH.slice(-480);
+    visH.forEach((h,i)=>{
+      const x=tx+i*(tw/480),y=ty+th*(1-Math.min(h.v,0.8)/0.8*0.88);
+      i===0?C.moveTo(x,y):C.lineTo(x,y);
+    });
+    C.stroke();
+
+    // spike markers
+    C.strokeStyle=GRN;C.lineWidth=1.5;
+    visH.forEach((h,i)=>{
+      if(h.f){
+        const x=tx+i*(tw/480);
+        C.beginPath();C.moveTo(x,ty+th*0.05);C.lineTo(x,ty+th);C.stroke();
+        C.fillStyle=GRN+'44';C.beginPath();C.arc(x,ty+th*0.05,3,0,Math.PI*2);C.fill();
       }
     });
-    const ft=(st%28)/28;
-    C4.strokeStyle=GR; C4.lineWidth=.65; C4.setLineDash([3,3]);
-    C4.beginPath(); C4.moveTo(BX-2,blks[4].y+BH/2); C4.lineTo(BX-11,blks[4].y+BH/2); C4.lineTo(BX-11,blks[0].y+BH/2); C4.lineTo(BX,blks[0].y+BH/2); C4.stroke(); C4.setLineDash([]);
-    C4.fillStyle=GR; C4.globalAlpha=.8; C4.beginPath(); C4.arc(BX-11,blks[4].y+BH/2+(blks[0].y-blks[4].y)*ft,2,0,Math.PI*2); C4.fill();
-    C4.strokeStyle=AM; C4.lineWidth=.55; C4.setLineDash([2,3]);
-    C4.beginPath(); C4.moveTo(BX+BW+2,blks[4].y+BH/2); C4.lineTo(BX+BW+11,blks[4].y+BH/2); C4.lineTo(BX+BW+11,blks[1].y+BH/2); C4.lineTo(BX+BW,blks[1].y+BH/2); C4.stroke(); C4.setLineDash([]);
-    C4.fillStyle=AM; C4.beginPath(); C4.arc(BX+BW+11,blks[4].y+BH/2+(blks[1].y-blks[4].y)*ft,2,0,Math.PI*2); C4.fill(); C4.globalAlpha=1;
-    /* Panel 5 – tracking */
-    const C5=cx[4],pH=98;
-    C5.fillStyle='#0d0f16'; C5.fillRect(0,0,340,120);
-    C5.fillStyle='#13151f'; C5.fillRect(6,14,328,pH); C5.strokeStyle='#22253a'; C5.lineWidth=.3; C5.strokeRect(6,14,328,pH);
-    if(tH.length>2){
-      C5.strokeStyle=GR; C5.lineWidth=1.5; C5.setLineDash([3,3]); C5.beginPath(); tH.forEach((h,i)=>{const x=6+i*328/290,y=14+pH*(1-h.d/Math.PI*.88); i===0?C5.moveTo(x,y):C5.lineTo(x,y);}); C5.stroke(); C5.setLineDash([]);
-      C5.strokeStyle=BL; C5.lineWidth=1.8; C5.beginPath(); tH.forEach((h,i)=>{const x=6+i*328/290,y=14+pH*(1-h.a/Math.PI*.88); i===0?C5.moveTo(x,y):C5.lineTo(x,y);}); C5.stroke();
-    }
-    C5.fillStyle=GR; C5.font='8px sans-serif'; C5.fillText('desired x_d',8,115); C5.fillStyle=BL; C5.fillText('actual x(t)',80,115);
-    /* Panel 6 – weight */
-    const C6=cx[5];
-    C6.fillStyle='#0d0f16'; C6.fillRect(0,0,340,120);
-    C6.fillStyle='#13151f'; C6.fillRect(6,14,328,pH); C6.strokeStyle='#22253a'; C6.lineWidth=.3; C6.strokeRect(6,14,328,pH);
-    const ub=14+pH*.88;
-    C6.strokeStyle=GR; C6.lineWidth=.7; C6.setLineDash([4,3]); C6.beginPath(); C6.moveTo(6,ub); C6.lineTo(334,ub); C6.stroke(); C6.setLineDash([]);
-    C6.fillStyle=GR; C6.font='7px sans-serif'; C6.fillText('UUB',320,ub-2);
-    if(wH.length>2){C6.strokeStyle=AM; C6.lineWidth=1.6; C6.beginPath(); wH.forEach((v,i)=>{const x=6+i*328/290,y=14+pH*(1-Math.min(v,1)*.85); i===0?C6.moveTo(x,y):C6.lineTo(x,y);}); C6.stroke();}
-    C6.fillStyle=AM; C6.font='8px sans-serif'; C6.fillText('‖W̃‖ weight error → UUB',8,115);
-  }
-  function sLoop(){sStep(); aR['snn']=requestAnimationFrame(sLoop);}
-  sLoop();
-}
 
+    // current trace below
+    const ctx2=ty+th+10,cth=65;
+    rect(tx,ctx2,tw,cth,S1,BD,0.5);
+    label('Synaptic current I(t)',tx+4,ctx2+12,'#8899bb',8);
+    C.strokeStyle=GOLD;C.lineWidth=1.2;C.beginPath();
+    visH.forEach((h,i)=>{const x=tx+i*(tw/480),y=ctx2+cth*(1-Math.min(h.I,0.8)/0.8*0.85);i===0?C.moveTo(x,y):C.lineTo(x,y);});
+    C.stroke();
+    label('I(t)',tx+tw-18,ctx2+cth-5,GOLD,8);
+
+    // equation
+    rect(tx,ctx2+cth+8,tw,28,S2,BD2,0.5);
+    labelC('τ · dV/dt = −V + R·I(t)   fire if V ≥ V_th',tx+tw/2,ctx2+cth+19,'#c8cce0',9);
+    labelC('then  V ← 0  (reset)  +  τ_ref block',tx+tw/2,ctx2+cth+30,'#5a6480',8);
+
+    // live stats
+    label('V_m = '+lifV.toFixed(3),tx+4,ty+th-5,'#4a5370',8);
+    label('Rate = '+Math.round(spikeRate)+' Hz',tx+80,ty+th-5,'#4a5370',8);
+  }
+
+  /* ── PANEL 1: Rate encoding ── */
+  function drawEncoder(){
+    clr();
+    const unc=+document.getElementById('snUnc').value;
+    const e=Math.abs(des-arm);
+
+    // top: error signal
+    const ex=20,ey=22,ew=295,eh=70;
+    rect(ex,ey,ew,eh,S1,BD,0.5);
+    label('Tracking error signal  |e(t)| = |x_d − x(t)|',ex+4,ey+12,'#8899bb',8);
+    C.strokeStyle=BLU;C.lineWidth=1.5;C.beginPath();
+    trackH.slice(-300).forEach((v,i)=>{const x=ex+i*(ew/300),y=ey+eh*(1-Math.min(v,Math.PI)/Math.PI*0.85);i===0?C.moveTo(x,y):C.lineTo(x,y);});
+    C.stroke();
+
+    // arrow down
+    arrow(165,ey+eh+2,165,ey+eh+22,GOLD,1.5);
+    labelC('rate encoding',165,ey+eh+34,'#8899bb',8);
+
+    // neuron population (3 neurons, different thresholds)
+    const py=ey+eh+45;
+    const popN=4;
+    const popCols=[BLU,PUR,GRN,CYA];
+    const thresholds=[0.25,0.4,0.55,0.7];
+
+    for(let ni=0;ni<popN;ni++){
+      const nx2=20+ni*75,nw=65,nh=52;
+      rect(nx2,py,nw,nh,S2,BD,0.5);
+      // draw mini LIF trace
+      const localV=e*3*(1-thresholds[ni]*0.5)+(Math.random()-0.5)*unc*0.05;
+      const fired2=localV>thresholds[ni];
+      circle(nx2+12,py+18,5,fired2?popCols[ni]:S3,popCols[ni],1);
+      C.strokeStyle=popCols[ni];C.lineWidth=1;
+      // mini trace
+      C.beginPath();C.moveTo(nx2+22,py+28);
+      for(let j=0;j<40;j++){
+        const v2=Math.min(e*3*(1-thresholds[ni]*0.5)+Math.sin(tick*0.1+ni+j)*0.1,thresholds[ni]+0.05);
+        const x=nx2+22+j,y=py+nh-8-v2*(nh*0.5);
+        j===0?C.moveTo(x,y):C.lineTo(x,y);
+      }C.stroke();
+      labelC('θ='+(thresholds[ni].toFixed(2)),nx2+nw/2,py+nh-3,popCols[ni],7);
+      if(fired2){glowCircle(nx2+12,py+18,8,popCols[ni],0.5);}
+    }
+
+    // arrows to spike trains
+    for(let ni=0;ni<popN;ni++){
+      arrow(20+ni*75+32,py+52,20+ni*75+32,py+72,popCols[ni],1);
+    }
+
+    // spike trains
+    const sty=py+80, sth=100;
+    rect(20,sty,295,sth,S1,BD,0.5);
+    label('Output spike trains — population code',24,sty+11,'#8899bb',8);
+    for(let ni=0;ni<popN;ni++){
+      const ly=sty+18+ni*20;
+      label('N'+(ni+1),22,ly+5,popCols[ni],8);
+      for(let t2=0;t2<280;t2++){
+        const rate2=e*140*(1-thresholds[ni]*0.5);
+        if(Math.random()<rate2/1000){
+          C.strokeStyle=popCols[ni];C.lineWidth=1.2;
+          C.beginPath();C.moveTo(38+t2,ly);C.lineTo(38+t2,ly+14);C.stroke();
+        }
+      }
+    }
+    label('Higher |e| → denser spikes (higher rate)',24,sty+sth-6,'#4a5370',8);
+
+    // right: frequency vs error chart
+    const cx3=340,cy3=22,cw3=320,ch3=280;
+    rect(cx3,cy3,cw3,ch3,S1,BD,0.5);
+    label('Firing rate f(Hz) vs tracking error |e|',cx3+4,cy3+12,'#8899bb',8);
+    // axes
+    line(cx3+30,cy3+20,cx3+30,cy3+ch3-20,BD2,0.7);
+    line(cx3+30,cy3+ch3-20,cx3+cw3-10,cy3+ch3-20,BD2,0.7);
+    label('f(Hz)',cx3+4,cy3+30,'#4a5370',8);
+    label('|e(t)|',cx3+cw3-25,cy3+ch3-12,'#4a5370',8);
+    // grid
+    for(let i=1;i<=4;i++){
+      const gy=cy3+ch3-20-(i*(ch3-40)/4);
+      line(cx3+30,gy,cx3+cw3-10,gy,'#1a1e2c',0.5);
+      label(''+(i*50),cx3+4,gy+4,'#2a2e45',7);
+    }
+    // rate curve (linear + saturation)
+    C.strokeStyle=GOLD;C.lineWidth=2;C.beginPath();
+    for(let i=0;i<260;i++){
+      const ev=i/260*Math.PI, rate3=Math.min(200,ev*140);
+      const x=cx3+30+i, y=cy3+ch3-20-rate3*(ch3-40)/200;
+      i===0?C.moveTo(x,y):C.lineTo(x,y);
+    }C.stroke();
+    // current point
+    const curE=e,curR=Math.min(200,curE*140);
+    const cpx=cx3+30+curE/Math.PI*260,cpy=cy3+ch3-20-curR*(ch3-40)/200;
+    glowCircle(cpx,cpy,4,RED,0.6);
+    circle(cpx,cpy,5,RED,RED);
+    line(cpx,cpy,cpx,cy3+ch3-20,RED+'88',0.7);
+    line(cx3+30,cpy,cpx,cpy,RED+'88',0.7);
+    labelC('f='+Math.round(curR)+' Hz',cpx,cpy-10,RED,8);
+    label('f = min(f_max, k·|e(t)|)',cx3+cw3/2,cy3+ch3-5,'#4a5370',8);
+  }
+
+  /* ── PANEL 2: SNN layers + synapses ── */
+  function drawSNNLayers(){
+    clr();
+    const unc=+document.getElementById('snUnc').value;
+    const e=Math.abs(des-arm);
+    const wavePhase=((tick%80)/80)*5;
+
+    // update neurons
+    neurons.forEach((layer,li)=>{
+      layer.forEach(n=>{
+        if(n.refrac>0){n.refrac--;n.fired=false;return;}
+        const inp=li===0?e*0.6+(Math.random()-0.5)*0.05:(neurons[li-1].reduce((s,prev)=>s+(prev.fired?0.3:prev.v*0.04),0));
+        n.v=Math.min(0.9,n.v*0.78+inp*0.22+(Math.random()-0.5)*unc*0.01);
+        n.fired=n.v>0.55+Math.random()*0.12;
+        if(n.fired){n.v=0;n.refrac=4;n.lastFire=tick;energyAcc+=0.002;}
+      });
+    });
+
+    // update synaptic traces
+    synapses.forEach(s=>{
+      const pre=neurons[s.li][s.ai];
+      s.trace=s.trace*0.88+(pre.fired?0.9:0);
+      s.potent=Math.max(0,s.potent*0.96-0.001+(pre.fired&&neurons[s.li+1][s.bi].fired?0.08:0));
+    });
+
+    // spike packets
+    if(tick%6===0&&neurons[0].some(n=>n.fired)){
+      const n=neurons[0].find(n=>n.fired)||neurons[0][0];
+      pkts.push({x:n.x+10,y:n.y,tx:neurons[1][0].x-10,ty:neurons[1][0].y,li:0,age:0,col:BLU});
+    }
+    pkts=pkts.filter(p=>{p.age++;const t=p.age/18;p.x+=(p.tx-p.x)*0.2;p.y+=(p.ty-p.y)*0.2;return p.age<22;});
+
+    const LX=30;
+
+    // draw synapses first (behind neurons)
+    neurons.forEach((layer,li)=>{
+      if(li>=neurons.length-1)return;
+      layer.forEach((a,ai)=>{
+        neurons[li+1].forEach((b,bi)=>{
+          const syn=synapses.find(s=>s.li===li&&s.ai===ai&&s.bi===bi);
+          if(!syn)return;
+          const alpha=0.05+syn.w*0.25;
+          const hue=syn.w>0.6?GRN:syn.w>0.35?BLU:PUR;
+          C.strokeStyle=hue+(Math.round(alpha*255).toString(16).padStart(2,'0'));
+          C.lineWidth=0.4+syn.w*1.2;
+          C.beginPath();C.moveTo(a.x+LX,a.y);C.lineTo(b.x-LX,b.y);C.stroke();
+          // show active synapse
+          if(a.fired&&syn.trace>0.3){
+            const t=(tick%18)/18;
+            const px=a.x+LX+(b.x-LX-a.x-LX)*t;
+            const py=a.y+(b.y-a.y)*t;
+            C.fillStyle=GOLD;C.globalAlpha=syn.trace;
+            C.beginPath();C.arc(px,py,3,0,Math.PI*2);C.fill();C.globalAlpha=1;
+            glowCircle(px,py,3,GOLD,0.4);
+          }
+        });
+      });
+    });
+
+    // draw neurons
+    const layerNames=['Input\nencoder','Layer 1\nLIF','Layer 2\nLIF','Layer 3\nLIF','Layer 4\nLIF','Output\nLIF'];
+    neurons.forEach((layer,li)=>{
+      // background lane
+      const minY=layer[0].y-18, maxY=layer[layer.length-1].y+18;
+      rect(layer[0].x-18,minY,36,maxY-minY,S2,BD,0.4);
+      labelC(layerNames[li],layer[0].x,minY-8,'#3a3e55',8);
+
+      layer.forEach(n=>{
+        const age=tick-n.lastFire;
+        const glow=Math.max(0,1-age/12);
+        if(glow>0)glowCircle(n.x,n.y,12,n.fired?GOLD:(li===neurons.length-1?GRN:BLU),glow*0.7);
+        const fill=n.fired?GOLD:(li===neurons.length-1?GRN:n.v>0.4?BLU:S3);
+        const stroke=li===neurons.length-1?GRN:BLU;
+        circle(n.x,n.y,9,fill,stroke,1.2);
+        // membrane voltage bar inside
+        const barH=Math.min(n.v,0.9)/0.9*14;
+        C.fillStyle=BLU+'44';C.fillRect(n.x-4,n.y+4-barH,8,barH);
+        if(n.refrac>0){
+          C.strokeStyle=RED;C.lineWidth=1.5;C.beginPath();C.arc(n.x,n.y,11,0,Math.PI*2);C.stroke();
+        }
+      });
+    });
+
+    // synapse weight legend
+    const lx=28,ly=295;
+    label('Synapse weight strength:',lx,ly,'#5a6480',8);
+    [[PUR,'low'],[BLU,'med'],[GRN,'high']].forEach(([col,txt],i)=>{
+      line(lx+110+i*55,ly-3,lx+135+i*55,ly-3,col,1.5+i);
+      label(txt,lx+140+i*55,ly,col,8);
+    });
+    label('● = spike traveling  glow = recent fire  red ring = refractory',lx,ly+12,'#4a5370',8);
+
+    // right: weight heatmap panel
+    const hx=540,hy=15,hw=125,hh=310;
+    rect(hx,hy,hw,hh,S1,BD,0.5);
+    labelC('Weight Matrix W_ji',hx+hw/2,hy+11,'#8899bb',8);
+    labelC('(Layer 1→2)',hx+hw/2,hy+21,'#5a6480',7);
+    const syn12=synapses.filter(s=>s.li===1);
+    if(syn12.length>0){
+      const nPre=neurons[1].length,nPost=neurons[2].length;
+      const cw2=Math.min((hw-10)/nPost,18), ch2=Math.min((hh-30)/nPre,18);
+      const ox=hx+5+(hw-10-nPost*cw2)/2, oy=hy+28;
+      syn12.forEach(s=>{
+        const hue=s.w>0.6?GRN:s.w>0.4?BLU:PUR;
+        const alpha=0.2+s.w*0.75;
+        rect(ox+s.bi*cw2,oy+s.ai*ch2,cw2-1,ch2-1,hue+(Math.round(alpha*255).toString(16).padStart(2,'0')),null);
+        if(s.trace>0.4){C.strokeStyle=GOLD;C.lineWidth=1;C.strokeRect(ox+s.bi*cw2,oy+s.ai*ch2,cw2-1,ch2-1);}
+      });
+      labelC('pre',hx+6,hy+hh-5,'#5a6480',7);
+      labelC('post',hx+hw-6,hy+hh-5,'#5a6480',7);
+    }
+    // eligibility traces
+    labelC('Eligibility trace ē_ji',hx+hw/2,hy+hh/2+8,'#5a6480',8);
+    const meanTrace=synapses.reduce((s,x)=>s+x.trace,0)/synapses.length;
+    rect(hx+10,hy+hh/2+15,hw-20,10,S2,BD2,0.4);
+    rect(hx+10,hy+hh/2+15,(hw-20)*Math.min(meanTrace,1),10,GOLD,null);
+    labelC('avg ē = '+meanTrace.toFixed(2),hx+hw/2,hy+hh/2+36,'#4a5370',8);
+  }
+
+  /* ── PANEL 3: Spike filtering + decoding ── */
+  function drawFilter(){
+    clr();
+    const e=Math.abs(des-arm);
+    const unc=+document.getElementById('snUnc').value;
+
+    // generate output spikes
+    if(Math.random()<e*0.4+0.05)outSpikes.push({t:tick,age:0});
+    outSpikes=outSpikes.filter(s=>{s.age++;return s.age<200;});
+
+    // filter
+    const raw=outSpikes.filter(s=>tick-s.t<3).length>0?0.8:0;
+    const td=0.15;
+    filterState=filterState*(1-td)+raw*td;
+
+    // left: raw spike train
+    const rx=20,ry=22,rw=290,rh=80;
+    rect(rx,ry,rw,rh,S1,BD,0.5);
+    label('Raw SNN output spikes S_out(t)',rx+4,ry+12,'#8899bb',8);
+    C.strokeStyle=GRN;C.lineWidth=1.5;
+    outSpikes.filter(s=>s.age<rw).forEach(s=>{
+      const x=rx+rw-s.age;
+      C.beginPath();C.moveTo(x,ry+18);C.lineTo(x,ry+rh-8);C.stroke();
+      glowCircle(x,ry+20,2,GRN,0.5);
+    });
+    label('Discrete binary events — not analog',rx+4,ry+rh-6,'#4a5370',8);
+
+    // arrow + filter block
+    arrow(165,ry+rh+2,165,ry+rh+28,GOLD,1.5);
+    rect(95,ry+rh+28,140,38,S2,BD);
+    labelC('Leaky Integrator Decoder',165,ry+rh+43,'#c8cce0',9);
+    labelC('τ_d·dU/dt = −U + Σ W_out·S_k(t)',165,ry+rh+56,'#8899bb',8);
+    arrow(165,ry+rh+66,165,ry+rh+82,GRN,1.5);
+
+    // filtered signal
+    const fx=20,fy=ry+rh+90,fw=290,fh=80;
+    rect(fx,fy,fw,fh,S1,BD,0.5);
+    label('Filtered control signal u(t)',fx+4,fy+12,'#8899bb',8);
+    spkH.push(filterState); if(spkH.length>fw)spkH.shift();
+    C.strokeStyle=BLU;C.lineWidth=2;C.beginPath();
+    spkH.forEach((v,i)=>{const x=fx+i,y=fy+fh*(1-v*0.8); i===0?C.moveTo(x,y):C.lineTo(x,y);});C.stroke();
+    label('Smooth analog signal for plant input',fx+4,fy+fh-6,'#4a5370',8);
+
+    // right: SVD regularization diagram
+    const sx=340,sy=22,sw=320,sh=290;
+    rect(sx,sy,sw,sh,S1,BD,0.5);
+    label('SVD Regularization of Weight Updates',sx+4,sy+12,'#8899bb',8);
+    labelC('W = U·Σ·V^T  →  clip σ_i to [σ_min, σ_max]',sx+sw/2,sy+28,'#c8cce0',9);
+
+    // draw SVD decomposition schematic
+    const mx=sx+20,my=sy+45,ms=70;
+    // W matrix
+    rect(mx,my,ms,ms,S2,BD2);
+    labelC('W',mx+ms/2,my+ms/2+4,BLU,14);
+    label('(output weight)',mx,my+ms+12,'#4a5370',8);
+
+    label('=',mx+ms+8,my+ms/2+5,'#8899bb',14);
+
+    // U
+    const ux=mx+ms+24;
+    rect(ux,my,ms*0.7,ms,S2,BD2);
+    labelC('U',ux+ms*0.35,my+ms/2+4,GRN,14);
+
+    label('·',ux+ms*0.7+4,my+ms/2+5,'#8899bb',14);
+
+    // Sigma
+    const sigx=ux+ms*0.7+14;
+    rect(sigx,my,ms*0.7,ms,S2,BD2);
+    labelC('Σ',sigx+ms*0.35,my+ms/2+4,GOLD,14);
+    // draw singular values
+    for(let i=0;i<4;i++){
+      const sv=0.8-i*0.18;
+      const barW=Math.max(4,(ms*0.7-8)*sv);
+      C.fillStyle=GOLD+Math.round(sv*220).toString(16).padStart(2,'0');
+      C.fillRect(sigx+4,my+8+i*16,barW,12);
+    }
+    label('clip to\n[σ_min,σ_max]',sigx,my+ms+14,'#EF9F27',8);
+
+    label('·',sigx+ms*0.7+4,my+ms/2+5,'#8899bb',14);
+
+    const vtx=sigx+ms*0.7+14;
+    rect(vtx,my,ms*0.7,ms,S2,BD2);
+    labelC('V^T',vtx+ms*0.35,my+ms/2+4,PUR,14);
+
+    // why SVD?
+    rect(sx+10,sy+sh-90,sw-20,80,S2,BD2,0.5);
+    labelC('Why SVD regularization?',sx+sw/2,sy+sh-78,'#c8cce0',9);
+    labelC('Spikes are discontinuous → gradient ∂S/∂V = 0 or ∞',sx+sw/2,sy+sh-64,'#8899bb',8);
+    labelC('SVD clips large singular values → bounded ‖ΔW‖',sx+sw/2,sy+sh-51,'#8899bb',8);
+    labelC('Ensures Lyapunov V̇ ≤ −γ·‖e‖² + ε  (UUB)',sx+sw/2,sy+sh-37,'#1D9E75',9);
+    labelC('Weight error ‖W̃‖ stays in computable shrinking set',sx+sw/2,sy+sh-23,'#8899bb',8);
+
+    // energy comparison bar
+    rect(sx+10,sy+sh-8,sw-20,6,S2,'#2a2e45',0.4);
+    const ennANN=0.85, ennSNN=Math.min(0.85,energyAcc*10);
+    rect(sx+10,sy+sh-8,(sw-20)*ennANN,6,'#f05252',null);
+    rect(sx+10,sy+sh-8,(sw-20)*ennSNN,6,GRN,null);
+    label('ANN',sx+10,sy+sh+5,RED,8); label('SNN (80% less)',sx+sw-70,sy+sh+5,GRN,8);
+  }
+
+  /* ── PANEL 4: Closed-loop control ── */
+  function drawClosedLoop(){
+    clr();
+    const e=Math.abs(des-arm);
+    const ref=+document.getElementById('snRef').value;
+    const unc=+document.getElementById('snUnc').value;
+    const u=Math.min(2.5,e*1.8+(Math.random()-0.5)*unc*0.02);
+    arm=Math.max(0.05,Math.min(Math.PI-0.05,arm+u*0.04));
+    trackH.push(e);if(trackH.length>400)trackH.shift();
+
+    // === LEFT: Robot arm ===
+    const ox=100,oy=190,L1=65,L2=45;
+    const a1x=ox+Math.cos(arm-Math.PI/2)*L1, a1y=oy-Math.sin(arm-Math.PI/2)*L1;
+    const a2x=a1x+Math.cos(arm-Math.PI/2+0.4)*L2, a2y=a1y-Math.sin(arm-Math.PI/2+0.4)*L2;
+
+    // desired arm (ghost)
+    C.strokeStyle=GRN+'55';C.lineWidth=1;C.setLineDash([3,3]);
+    const d1x=ox+Math.cos(des-Math.PI/2)*L1, d1y=oy-Math.sin(des-Math.PI/2)*L1;
+    C.beginPath();C.moveTo(ox,oy);C.lineTo(d1x,d1y);C.stroke();C.setLineDash([]);
+
+    // arm
+    C.strokeStyle=BLU;C.lineWidth=5;C.lineCap='round';C.beginPath();C.moveTo(ox,oy);C.lineTo(a1x,a1y);C.stroke();
+    C.strokeStyle=GOLD;C.lineWidth=4;C.beginPath();C.moveTo(a1x,a1y);C.lineTo(a2x,a2y);C.stroke();
+    circle(ox,oy,8,BLU,BLU);
+    glowCircle(ox,oy,8,BLU,0.3);
+    circle(a2x,a2y,5,RED,RED);
+
+    // ABS safety region (arc)
+    C.strokeStyle=GRN;C.lineWidth=1;C.setLineDash([4,4]);C.globalAlpha=0.5;
+    C.beginPath();C.arc(ox,oy,L1+L2+10,Math.PI*1.1,Math.PI*1.9);C.stroke();
+    C.beginPath();C.arc(ox,oy,L1-10,Math.PI*1.1,Math.PI*1.9);C.stroke();
+    C.setLineDash([]);C.globalAlpha=1;
+    label('Safe region h(x)≥0',20,oy+50,GRN,8);
+    label('(ABS-enforced)',20,oy+62,'#4a5370',8);
+
+    // === MIDDLE: Block diagram ===
+    const bx=215,by=40,bw=95,bh=22;
+    const blocks=[
+      {y:40, lbl:'x_d(t) Reference', col:'#6b7280'},
+      {y:80, lbl:'Error  e=x_d−x',  col:RED},
+      {y:120,lbl:'Rate Encoder',     col:GOLD},
+      {y:160,lbl:'SNN Actor layers', col:PUR},
+      {y:200,lbl:'SVD Filter/Decode',col:BLU},
+      {y:240,lbl:'ABS safety check', col:GRN},
+      {y:280,lbl:'Plant  f(x,u)',    col:ORG},
+    ];
+    const activeBlock=Math.floor(tick/20)%blocks.length;
+    blocks.forEach((b,bi)=>{
+      const isA=bi===activeBlock;
+      rect(bx,b.y,bw,bh,isA?b.col+'22':S2,isA?b.col:BD,isA?1.2:0.5);
+      labelC(b.lbl,bx+bw/2,b.y+14,isA?b.col:'#5a6480',8);
+      if(bi<blocks.length-1){
+        const ay=b.y+bh, ay2=blocks[bi+1].y;
+        C.strokeStyle=isA?b.col:BD;C.lineWidth=isA?1:0.5;
+        C.beginPath();C.moveTo(bx+bw/2,ay);C.lineTo(bx+bw/2,ay2);C.stroke();
+        if(isA){
+          const t=(tick%20)/20, dy=ay+(ay2-ay)*t;
+          glowCircle(bx+bw/2,dy,3,b.col,0.8);
+          circle(bx+bw/2,dy,2.5,b.col,b.col);
+        }
+      }
+    });
+    // feedback arrow
+    C.strokeStyle=GRN;C.lineWidth=1;C.setLineDash([2,3]);
+    C.beginPath();C.moveTo(bx-2,blocks[6].y+bh/2);C.lineTo(bx-14,blocks[6].y+bh/2);C.lineTo(bx-14,blocks[0].y+bh/2);C.lineTo(bx,blocks[0].y+bh/2);C.stroke();C.setLineDash([]);
+    const fbt=(tick%28)/28;
+    circle(bx-14,blocks[6].y+bh/2+(blocks[0].y-blocks[6].y)*fbt,2.5,GRN,null);
+
+    // weight update arrow
+    C.strokeStyle=GOLD;C.lineWidth=0.8;C.setLineDash([2,3]);
+    C.beginPath();C.moveTo(bx+bw+2,blocks[6].y+bh/2);C.lineTo(bx+bw+12,blocks[6].y+bh/2);C.lineTo(bx+bw+12,blocks[3].y+bh/2);C.lineTo(bx+bw,blocks[3].y+bh/2);C.stroke();C.setLineDash([]);
+    circle(bx+bw+12,blocks[6].y+bh/2+(blocks[3].y-blocks[6].y)*fbt,2,GOLD,null);
+    label('ΔW',bx+bw+4,blocks[3].y-5,GOLD,8);
+
+    // ABS detail box (right)
+    const ax2=370,ay3=30,aw=290,ah=290;
+    rect(ax2,ay3,aw,ah,S1,BD,0.5);
+    label('Augmented Barrier States (ABS)',ax2+6,ay3+13,'#8899bb',8);
+    // h(x) barrier visualization
+    const hcx=ax2+20,hcy=ay3+30,hcw=250,hch=80;
+    rect(hcx,hcy,hcw,hch,S2,BD2,0.4);
+    label('Barrier function h(x,t)',hcx+4,hcy+12,'#8899bb',7);
+    const boundary=hcy+hch*0.6;
+    line(hcx,boundary,hcx+hcw,boundary,GRN,0.8);
+    label('h(x)=0',hcx+hcw-30,boundary-3,GRN,7);
+    C.fillStyle=GRN+'15';C.fillRect(hcx,hcy,hcw,boundary-hcy);
+    C.fillStyle=RED+'15';C.fillRect(hcx,boundary,hcw,hcy+hch-boundary);
+    // trajectory
+    C.strokeStyle=BLU;C.lineWidth=1.5;C.beginPath();
+    for(let i=0;i<hcw;i++){
+      const hv=0.3+Math.sin(i*0.04+tick*0.03)*0.2+(e>0.3?-0.15:0.1);
+      const y=boundary-hv*(hch*0.5);
+      i===0?C.moveTo(hcx+i,y):C.lineTo(hcx+i,y);
+    }C.stroke();
+    label('x(t)',hcx+hcw-14,boundary-30,BLU,7);
+    label('safe',hcx+4,hcy+20,GRN,7);
+    label('unsafe',hcx+4,hcy+hch-8,RED,7);
+
+    // ABS equation
+    rect(ax2+10,ay3+120,aw-20,30,S2,BD2,0.4);
+    labelC('ẋ = f(x,u)  →  ẋ_aug = f_aug(x_aug, u_snn)',ax2+aw/2,ay3+134,'#c8cce0',8);
+    labelC('where x_aug = [x ; h(x)] embeds barrier in state',ax2+aw/2,ay3+146,'#8899bb',7);
+
+    rect(ax2+10,ay3+155,aw-20,28,S2,BD2,0.4);
+    labelC('KKT condition on J*(x):',ax2+aw/2,ay3+167,'#c8cce0',8);
+    labelC('u_safe = argmin ‖u − u*_snn‖  s.t.  ḣ + γh ≥ 0',ax2+aw/2,ay3+179,'#1D9E75',8);
+
+    // energy comparison
+    rect(ax2+10,ay3+190,aw-20,24,S2,BD2,0.4);
+    labelC('Energy  E_SNN = '+energyAcc.toFixed(3)+' J   (80% less than ANN)',ax2+aw/2,ay3+205,GRN,9);
+
+    // tracking performance box
+    rect(ax2+10,ay3+220,aw-20,60,S2,BD2,0.4);
+    label('Tracking performance',ax2+16,ay3+232,'#8899bb',7);
+    C.strokeStyle=GRN;C.lineWidth=1;C.setLineDash([3,3]);C.beginPath();C.moveTo(ax2+10,ay3+265);C.lineTo(ax2+aw-10,ay3+265);C.stroke();C.setLineDash([]);
+    C.strokeStyle=BLU;C.lineWidth=1.4;C.beginPath();
+    trackH.slice(-250).forEach((v,i)=>{const x=ax2+10+i*(aw-20)/250,y=ay3+230+30*(1-Math.min(v/Math.PI,1)*0.9);i===0?C.moveTo(x,y):C.lineTo(x,y);});C.stroke();
+    label('e(t)',ax2+aw-20,ay3+275,'#4a5370',7);
+  }
+
+  /* ── PANEL 5: Online weight adaptation ── */
+  function drawAdaptation(){
+    clr();
+    const unc=+document.getElementById('snUnc').value;
+    const lr=+document.getElementById('snLr').value*0.003+0.004;
+    const e=Math.abs(des-arm);
+
+    // Bellman error update
+    const Vnow=filterState*1.2, Vnext=filterState*1.1+e*0.05;
+    const reward=Math.exp(-e*3);
+    bellErr=reward+0.95*Vnext-Vnow+(Math.random()-0.5)*unc*0.03;
+    const wErr=Math.max(0.012,0.6*(1-lr*1.2*tick*0.0008)+(Math.random()-0.5)*unc*0.012);
+    wErrH.push(wErr); if(wErrH.length>400)wErrH.shift();
+
+    // === TOP ROW: 3 info boxes ===
+    // Bellman error
+    const b1x=15,b1y=15,b1w=200,b1h=100;
+    rect(b1x,b1y,b1w,b1h,S1,BD,0.5);
+    label('Bellman Error  δ(t)',b1x+6,b1y+13,'#8899bb',8);
+    const bellSign=bellErr>=0?GRN:RED;
+    labelC((bellErr>=0?'+':'')+bellErr.toFixed(3),b1x+b1w/2,b1y+48,bellSign,18);
+    labelC('δ = r + γ·V_next − V',b1x+b1w/2,b1y+66,'#8899bb',8);
+    labelC('r=e^{−3|e|}  V≈W_c^T·σ',b1x+b1w/2,b1y+78,'#5a6480',7);
+    // bar
+    rect(b1x+10,b1y+82,b1w-20,10,S2,BD2,0.3);
+    const bellNorm=(bellErr+1)/2;
+    rect(b1x+10+Math.min(b1w/2-10,(b1w-20)/2*Math.max(0,-bellNorm)),b1y+82,(b1w-20)/2*Math.min(Math.abs(bellErr),1),10,bellSign,null);
+    line(b1x+(b1w)/2,b1y+82,b1x+(b1w)/2,b1y+92,BD2,0.7);
+
+    // weight update rule
+    const b2x=225,b2y=15,b2w=220,b2h=100;
+    rect(b2x,b2y,b2w,b2h,S1,BD,0.5);
+    label('Weight Update Law',b2x+6,b2y+13,'#8899bb',8);
+    rect(b2x+8,b2y+20,b2w-16,30,S2,BD2,0.4);
+    labelC('ΔW = −α · δ_BE · ē_syn',b2x+b2w/2,b2y+31,'#c8cce0',9);
+    labelC('+ SVD clip + L₂ reg',b2x+b2w/2,b2y+44,'#5a6480',8);
+    label('α = learning rate:',b2x+8,b2y+62,'#5a6480',8);
+    rect(b2x+8,b2y+67,b2w-16,10,S2,BD2,0.3);
+    rect(b2x+8,b2y+67,(b2w-16)*lr/0.031,10,BLU,null);
+    labelC('lr='+lr.toFixed(4),b2x+b2w/2,b2y+80,'#4a5370',8);
+    labelC('ē = synaptic eligibility trace',b2x+b2w/2,b2y+93,'#4a5370',8);
+
+    // Lyapunov stability
+    const b3x=460,b3y=15,b3w=205,b3h=100;
+    rect(b3x,b3y,b3w,b3h,S1,BD,0.5);
+    label('Lyapunov Stability Proof',b3x+6,b3y+13,'#8899bb',8);
+    rect(b3x+6,b3y+20,b3w-12,24,S2,BD2,0.4);
+    labelC('V_L = ‖ẽ‖² + Σ ‖W̃_i‖²',b3x+b3w/2,b3y+30,'#c8cce0',9);
+    labelC('(Lyapunov candidate)',b3x+b3w/2,b3y+40,'#5a6480',7);
+    rect(b3x+6,b3y+48,b3w-12,24,S2,BD2,0.4);
+    labelC('V̇_L ≤ −γ·‖ẽ‖² + ε_b',b3x+b3w/2,b3y+59,wErr<0.08?GRN:GOLD,9);
+    labelC('(negative definite + bounded)',b3x+b3w/2,b3y+69,'#5a6480',7);
+    rect(b3x+6,b3y+76,b3w-12,18,wErr<0.08?GRN+'22':GOLD+'22',null);
+    labelC(wErr<0.08?'✓ UUB Proven — ‖W̃‖ bounded':'Converging to UUB set...',b3x+b3w/2,b3y+87,wErr<0.08?GRN:GOLD,8);
+
+    // === MAIN: weight error convergence ===
+    const wx=15,wy=125,ww=640,wh=90;
+    rect(wx,wy,ww,wh,S1,BD,0.5);
+    label('Weight error ‖W̃(t)‖ convergence across all SNN layers',wx+6,wy+12,'#8899bb',8);
+
+    // UUB bound
+    const uubY=wy+wh*0.85;
+    C.strokeStyle=GRN;C.lineWidth=0.8;C.setLineDash([5,4]);C.beginPath();C.moveTo(wx,uubY);C.lineTo(wx+ww,uubY);C.stroke();C.setLineDash([]);
+    label('UUB bound ε',wx+ww-52,uubY-3,GRN,8);
+
+    // per-layer weight errors (simulated)
+    const lCols=[BLU,PUR,GRN,CYA,GOLD];
+    for(let li=0;li<5;li++){
+      C.strokeStyle=lCols[li]; C.lineWidth=1.2; C.beginPath();
+      wErrH.forEach((v,i)=>{
+        const noise=(Math.sin(i*0.1+li*1.3)*0.03);
+        const layerW=Math.max(0.01,v*(0.8+li*0.08)+noise);
+        const x=wx+i*(ww/400), y=wy+wh*(1-Math.min(layerW,0.9)*0.9);
+        i===0?C.moveTo(x,y):C.lineTo(x,y);
+      }); C.stroke();
+      label('L'+(li+1),wx+ww-24+li*0,wy+20+li*10,lCols[li],7);
+    }
+    // current value
+    label('Current ‖W̃‖ = '+wErr.toFixed(4),wx+4,wy+wh-5,'#4a5370',8);
+
+    // === BOTTOM: 3 small panels ===
+    // Spike raster for last 200 steps
+    const rx=15,ry2=225,rw=195,rh=100;
+    rect(rx,ry2,rw,rh,S1,BD,0.5);
+    label('Spike raster (last 200 ticks)',rx+4,ry2+12,'#8899bb',7);
+    for(let li=0;li<6;li++){
+      const ly=ry2+18+li*13;
+      C.fillStyle=lCols[li%5];
+      neurons[li].forEach((n,ni)=>{
+        if(tick-n.lastFire<200){
+          const age=tick-n.lastFire;
+          C.fillRect(rx+4+age,ly,2,9);
+        }
+      });
+      label('L'+(li+1),rx+rw-16,ly+8,lCols[li%5],7);
+    }
+
+    // energy efficiency
+    const ex2=220,ey2=225,ew=195,eh=100;
+    rect(ex2,ey2,ew,eh,S1,BD,0.5);
+    label('Energy Efficiency',ex2+4,ey2+12,'#8899bb',7);
+    const annE=0.85, snnE=Math.min(annE,energyAcc*8+0.1);
+    rect(ex2+10,ey2+24,ew-20,18,RED+'44','#c05040',0.5);
+    rect(ex2+10,ey2+24,ew-20,18,null,'#c05040',0.5);
+    labelC('ANN: '+Math.round(annE*100)+'% energy',ex2+ew/2,ey2+36,RED,8);
+    rect(ex2+10,ey2+48,ew-20,18,GRN+'44',GRN,0.5);
+    rect(ex2+10,ey2+48,(ew-20)*snnE/annE,18,GRN+'44',null);
+    labelC('SNN: ~20% energy (80% savings)',ex2+ew/2,ey2+60,GRN,8);
+    rect(ex2+10,ey2+72,ew-20,24,S2,BD2,0.4);
+    labelC('Event-driven: only active neurons',ex2+ew/2,ey2+82,'#8899bb',8);
+    labelC('consume power (sparse firing)',ex2+ew/2,ey2+92,'#5a6480',7);
+
+    // convergence guarantee
+    const gx=425,gy2=225,gw=230,gh=100;
+    rect(gx,gy2,gw,gh,S1,BD,0.5);
+    label('Convergence Guarantee (Theorem)',gx+4,gy2+12,'#8899bb',7);
+    rect(gx+6,gy2+18,gw-12,70,S2,BD2,0.4);
+    labelC('∃ finite T s.t. ∀t>T:',gx+gw/2,gy2+32,'#c8cce0',8);
+    labelC('‖e(t)‖ ≤ ε_e  and  ‖W̃(t)‖ ≤ ε_W',gx+gw/2,gy2+47,GRN,9);
+    labelC('provided α, τ satisfy design conditions',gx+gw/2,gy2+60,'#8899bb',8);
+    labelC('(Lyapunov: choose α < α_max(σ_max(W)))',gx+gw/2,gy2+72,'#5a6480',7);
+    rect(gx+6,gy2+90,gw-12,10,wErr<0.08?GRN+'44':GOLD+'44',null);
+    labelC(wErr<0.08?'✓ All weights within UUB':('Converging… ‖W̃‖='+wErr.toFixed(3)),gx+gw/2,gy2+98,wErr<0.08?GRN:GOLD,8);
+  }
+
+  /* ── MASTER STEP ── */
+  function snStep(){
+    if(paused)return;
+    const ref=+document.getElementById('snRef').value;
+    const unc=+document.getElementById('snUnc').value;
+    des=Math.PI*(0.2+ref*0.075);
+
+    // arm simulation (panels 4,5 move the arm; others just track)
+    if(panel===4||panel===5){
+      const e2=des-arm, u2=Math.min(3,e2*1.8+(Math.random()-0.5)*unc*0.02);
+      arm=Math.max(0.05,Math.min(Math.PI-0.05,arm+u2*0.04));
+      trackH.push(Math.abs(e2)); if(trackH.length>400)trackH.shift();
+    }
+
+    const e=Math.abs(des-arm);
+    const wE=Math.max(0.012,0.6*(1-+document.getElementById('snLr').value*0.003*tick*0.0008)+(Math.random()-0.5)*unc*0.012);
+    const safe=e<0.7;
+    document.getElementById('sne').textContent=e.toFixed(3);
+    document.getElementById('snu').textContent=Math.min(2.5,e*1.8).toFixed(2);
+    document.getElementById('snr').textContent=Math.round(e*140)+' Hz';
+    document.getElementById('snE').textContent=energyAcc.toFixed(2);
+    document.getElementById('snS').textContent=safe?'SAFE':'CLIP';
+    document.getElementById('snS').style.color=safe?GRN:RED;
+    document.getElementById('snW').textContent=wE.toFixed(3);
+    tick++;
+
+    if(panel===0)drawLIF();
+    else if(panel===1)drawEncoder();
+    else if(panel===2)drawSNNLayers();
+    else if(panel===3)drawFilter();
+    else if(panel===4)drawClosedLoop();
+    else if(panel===5)drawAdaptation();
+  }
+
+  function snLoop(){snStep(); aR['snn']=requestAnimationFrame(snLoop);}
+  snLoop();
+}
 /* ═══════════════════════════════════════
    HRI  –  Human–Robot Interaction
 ═══════════════════════════════════════ */
