@@ -57,14 +57,14 @@ h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.2vw,3.6rem);font-
 .photo-badge .pname{font-weight:600;color:#fff;font-size:.95rem}
 .photo-badge .prole{color:rgba(180,200,255,.75);font-size:.8rem;margin-top:.2rem}
 .soc-icons{display:flex;gap:.7rem;margin-top:.75rem}
-.soc-icons a{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--mut);text-decoration:none;font-size:.74rem;font-weight:600;transition:all .2s}
-.soc-icons a:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.soc-icons a{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:.74rem;font-weight:700;transition:all .2s;letter-spacing:.01em}
+.soc-icons a:hover{opacity:.85;transform:translateY(-2px)}
 
 /* SECTIONS */
 section{padding:5rem 2rem;position:relative;z-index:1}
 .container{max-width:1200px;margin:0 auto}
-.sec-label{font-family:var(--mono);font-size:.74rem;color:var(--acc);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
-.sec-label::before{content:'';width:24px;height:1px;background:var(--acc);display:inline-block}
+.sec-label{font-family:var(--mono);font-size:.7rem;color:#1d5fc4;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.6rem;display:inline-flex;align-items:center;gap:.5rem;font-weight:600}
+.sec-label::before{content:'';width:0;height:0;display:none}
 .sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--sec-heading,#1a1f2e);margin-bottom:1rem;line-height:1.2}
 .sec-desc{color:var(--mut);max-width:620px;margin-bottom:3rem}
 
@@ -94,7 +94,7 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 /* PROJECTS */
 #projects{background:#ffffff}
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem}
-.proj-card{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s;display:block;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.proj-card{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .3s;display:block;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .proj-card:hover{transform:translateY(-6px);border-color:rgba(29,95,196,.4);box-shadow:0 16px 40px rgba(0,0,0,.14)}
 .proj-img{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surf2)}
 .proj-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block}
@@ -120,7 +120,7 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .modal-ov2{position:absolute;inset:0;background:linear-gradient(to top,#fff 0%,transparent 55%)}
 .modal-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.15);border-radius:50%;cursor:pointer;color:var(--txt);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .modal-close:hover{background:var(--surf2)}
-.modal-body{padding:2rem}
+.modal-body{padding:2rem;background:#fff}
 .modal-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:#1a1f2e;margin-bottom:1rem;line-height:1.2}
 .modal-abs{color:#455070;font-size:.91rem;line-height:1.82;margin-bottom:1.5rem}
 .anim-wrap{border-radius:12px;overflow:hidden;margin-bottom:1.5rem;border:1px solid rgba(0,0,0,.12);background:#07090e}
@@ -134,7 +134,7 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .papers-title::after{content:'';flex:1;height:1px;background:var(--bd)}
 .paper-item{padding:.95rem 1.2rem;background:#f8fafc;border:1px solid rgba(0,0,0,.09);border-radius:10px;margin-bottom:.7rem;transition:border-color .2s}
 .paper-item:hover{border-color:rgba(79,142,247,.3)}
-.paper-item a{text-decoration:none;color:var(--txt);display:block}
+.paper-item a{text-decoration:none;color:#1a1f2e;display:block}
 .pt{font-size:.89rem;font-weight:500;color:#1a1f2e;margin-bottom:.3rem;line-height:1.4}
 .pm{font-size:.77rem;color:var(--mut);font-family:var(--mono)}
 .pv{color:var(--acc3)}
@@ -171,7 +171,7 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .pub-entry.hidden{display:none}
 
 /* STUDENTS */
-#students{background:#ffffff}
+#students{background:#f7f9fc}
 .student-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
 .student-card{padding:1.4rem;background:var(--surf);border:1px solid var(--bd);border-radius:12px;transition:all .2s;text-align:center}
 .student-card:hover{border-color:rgba(79,142,247,.3)}
@@ -262,41 +262,41 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
 /* STUDENT HORIZONTAL CARDS */
-.students-horiz{display:flex;flex-direction:column;gap:1.5rem}
-.student-hcard{display:flex;gap:2rem;padding:2rem;background:#fff;border:1px solid rgba(0,0,0,.1);box-shadow:0 2px 12px rgba(0,0,0,.05);border-radius:16px;align-items:flex-start;transition:all .2s}
-.student-hcard:hover{border-color:rgba(79,142,247,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.student-photo-wrap{position:relative;width:130px;min-height:150px;border-radius:14px;overflow:hidden;background:var(--surf2);border:1px solid var(--bd2);flex-shrink:0}
-.student-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;min-height:150px}
-.student-ph-fallback{width:100%;min-height:150px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--acc);background:linear-gradient(135deg,var(--surf2),var(--surf3))}
-.student-photo-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(7,9,14,.88);font-size:.6rem;color:var(--acc);font-family:var(--mono);text-align:center;padding:3px;line-height:1.3}
+.students-horiz{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.student-hcard{display:flex;gap:1.5rem;padding:1.4rem 1.6rem;background:#fff;border:1px solid rgba(0,0,0,.09);box-shadow:0 1px 6px rgba(0,0,0,.06);border-radius:12px;align-items:center;transition:all .2s}
+.student-hcard:hover{border-color:rgba(29,95,196,.3);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.student-photo-wrap{position:relative;width:80px;min-height:90px;border-radius:50%;overflow:hidden;background:#dde5f0;border:2px solid rgba(29,95,196,.2);flex-shrink:0}
+.student-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;min-height:90px}
+.student-ph-fallback{width:100%;min-height:90px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#1d5fc4;background:linear-gradient(135deg,#dde5f4,#c8d5ea)}
+.student-photo-hint{display:none}
 .student-info{flex:1}
-.student-name-lg{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#1a1f2e;margin-bottom:.4rem}
-.student-badge{display:inline-block;background:rgba(79,142,247,.12);color:var(--acc);border:1px solid rgba(79,142,247,.25);font-size:.75rem;font-family:var(--mono);padding:.25rem .75rem;border-radius:20px;margin-bottom:.6rem;letter-spacing:.04em}
-.student-dept{font-size:.84rem;color:var(--mut);margin-bottom:.5rem}
-.student-status{font-size:.8rem;color:var(--acc3);margin-bottom:.75rem}
-.student-desc{color:#455070;font-size:.87rem;line-height:1.75}
-@media(max-width:700px){.student-hcard{flex-direction:column}.student-photo-wrap{width:100%;min-height:180px}}
+.student-name-lg{font-family:'Playfair Display',serif;font-size:1.08rem;font-weight:700;color:#1a1f2e;margin-bottom:.25rem}
+.student-badge{display:inline-block;background:#eef3fc;color:#1d5fc4;border:1px solid rgba(29,95,196,.2);font-size:.7rem;font-family:var(--mono);padding:.18rem .6rem;border-radius:20px;margin-bottom:.4rem;letter-spacing:.03em}
+.student-dept{font-size:.78rem;color:#556080;margin-bottom:.35rem}
+.student-status{font-size:.74rem;color:#0e8c6a;margin-bottom:.4rem;font-weight:500}
+.student-desc{color:#6070a0;font-size:.82rem;line-height:1.65}
+@media(max-width:700px){.student-hcard{flex-direction:column;text-align:center}.student-photo-wrap{width:80px;min-height:80px;margin:0 auto}.students-horiz{grid-template-columns:1fr}}
 
 /* NEWS TICKER */
 .news-ticker-wrap{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);z-index:90;width:198px}
 @media(max-width:1150px){.news-ticker-wrap{display:none}}
 .news-ticker-box{background:rgba(25,38,65,.97);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25)}
-.news-ticker-hdr{padding:.6rem 1rem;background:rgba(79,142,247,.1);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.5rem}
+.news-ticker-hdr{padding:.6rem 1rem;background:rgba(29,95,196,.25);border-bottom:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:.5rem}
 .news-ticker-hdr .nh-icon{font-size:.85rem}
-.news-ticker-hdr .nh-txt{font-family:var(--mono);font-size:.7rem;color:var(--acc);letter-spacing:.08em;text-transform:uppercase;font-weight:500;flex:1}
+.news-ticker-hdr .nh-txt{font-family:var(--mono);font-size:.7rem;color:#a8ccff;letter-spacing:.08em;text-transform:uppercase;font-weight:600;flex:1}
 .news-ticker-hdr .nh-dot{width:7px;height:7px;background:var(--acc3);border-radius:50%;animation:pulse 2s infinite}
 .news-scroll-outer{height:280px;overflow:hidden;position:relative}
 .news-scroll-inner{display:flex;flex-direction:column;animation:newsScroll 30s linear infinite}
 .news-scroll-inner:hover{animation-play-state:paused}
 @keyframes newsScroll{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
-.news-item{padding:.8rem 1rem;border-bottom:1px solid var(--bd);flex-shrink:0}
-.news-date{font-family:var(--mono);font-size:.63rem;color:var(--acc);margin-bottom:.28rem;letter-spacing:.04em}
-.news-text{font-size:.73rem;color:var(--txt);line-height:1.55}
-.news-text strong{color:#fff}
+.news-item{padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.news-date{font-family:var(--mono);font-size:.63rem;color:#7aadff;margin-bottom:.28rem;letter-spacing:.04em}
+.news-text{font-size:.73rem;color:rgba(220,232,255,.9);line-height:1.55}
+.news-text strong{color:#fff;font-weight:600}
 .news-tag{display:inline-block;font-size:.59rem;padding:.1rem .42rem;border-radius:10px;margin-top:.28rem;font-family:var(--mono);letter-spacing:.03em}
-.ntg{background:rgba(71,200,168,.12);color:var(--acc3);border:1px solid rgba(71,200,168,.2)}
-.ntb{background:rgba(79,142,247,.12);color:var(--acc);border:1px solid rgba(79,142,247,.2)}
-.ntgold{background:rgba(226,176,74,.12);color:var(--gold);border:1px solid rgba(226,176,74,.2)}
+.ntg{background:rgba(14,140,106,.25);color:#4ef0c0;border:1px solid rgba(71,200,168,.35)}
+.ntb{background:rgba(79,142,247,.25);color:#a8ccff;border:1px solid rgba(79,142,247,.35)}
+.ntgold{background:rgba(200,150,20,.3);color:#fcd34d;border:1px solid rgba(226,176,74,.4)}
 </style>
 </head>
 <body>
@@ -305,7 +305,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 <div class="news-ticker-wrap">
   <div class="news-ticker-box">
     <div class="news-ticker-hdr">
-      <span class="nh-icon">📢</span>
+      <span class="nh-icon" style="font-size:.9rem">📢</span>
       <span class="nh-txt">Recent News</span>
       <span class="nh-dot"></span>
     </div>
@@ -433,10 +433,10 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
           <div class="pname">Irfan Ahmad Ganie</div>
           <div class="prole">Ph.D. | Asst. Professor, Wilkes University</div>
           <div class="soc-icons">
-            <a href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank">in</a>
-            <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank">GS</a>
-            <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank">RG</a>
-            <a href="https://github.com/irfan149" target="_blank">GH</a>
+            <a href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank" style="background:#0077b5;color:#fff;border:none" title="LinkedIn">in</a>
+            <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank" style="background:#4285f4;color:#fff;border:none" title="Google Scholar">GS</a>
+            <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank" style="background:#00ccbb;color:#fff;border:none" title="ResearchGate">RG</a>
+            <a href="https://github.com/irfan149" target="_blank" style="background:#24292e;color:#fff;border:none" title="GitHub">GH</a>
           </div>
         </div>
       </div>
@@ -521,7 +521,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
     </div>
     <div class="proj-card fade-in" onclick="openModal('gnn')">
       <div class="proj-img"><img src="img/proj_gnn.jpg" alt="GNN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1520,#102030)">🕸️</div><div class="proj-ov"></div><div class="proj-tag">Multi-Agent</div></div>
-      <div class="proj-body"><div class="proj-title">Adaptive Graph Neural Control</div><p class="proj-desc">Non-stationary cooperative control via GNNs with Lyapunov-derived update laws, forward-invariant pairwise safety, provably improving performance bounds.</p><span class="proj-cnt">◆ Active Research</span><span class="proj-arr">→</span></div>
+      <div class="proj-body"><div class="proj-title">Adaptive Graph Neural Control</div><p class="proj-desc">Non-stationary cooperative control via GNNs with Lyapunov-derived update laws, forward-invariant pairwise safety, provably improving performance bounds.</p><span class="proj-cnt">◆ 2 NSF proposals · Active</span><span class="proj-arr">→</span></div>
     </div>
     <div class="proj-card fade-in" onclick="openModal('cps')">
       <div class="proj-img"><img src="img/proj_cps.jpg" alt="CPS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#1a0a0a,#200d20)">🛡️</div><div class="proj-ov"></div><div class="proj-tag">Safety-Critical</div></div>
@@ -581,8 +581,8 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 <section id="students">
 <div class="container">
   <div class="sec-label">Research Team</div>
-  <h2 class="sec-title">Current Research Students</h2>
-  <p class="sec-desc">Undergraduate students currently conducting research under my supervision at Wilkes University.</p>
+  <h2 class="sec-title">Research Students</h2>
+  <p class="sec-desc" style="margin-bottom:1.5rem">Undergraduate students currently working under my supervision.</p>
   <div class="students-horiz">
 
     <div class="student-hcard fade-in">
@@ -624,7 +624,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 <div class="container">
   <div class="sec-label">Education</div>
   <h2 class="sec-title">Teaching</h2>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#fff;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
   <div class="course-grid fade-in" style="margin-bottom:2rem">
     <div class="course-item"><div class="course-code">EE-314 / S'26</div><div class="course-name">Control Systems</div></div>
     <div class="course-item"><div class="course-code">EE-314-L / S'26</div><div class="course-name">Control Systems Lab</div></div>
@@ -637,7 +637,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
     <div class="course-item"><div class="course-code">EE-252-L / F'25</div><div class="course-name">Electronics II Laboratory</div></div>
     <div class="course-item"><div class="course-code">EE-283 / F'25</div><div class="course-name">Electrical Engineering Lab</div></div>
   </div>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#fff;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO · Spring 2025</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO · Spring 2025</h3>
   <div class="course-grid fade-in">
     <div class="course-item"><div class="course-code">MECH/AERO 6410 / EE 6310</div><div class="course-name">Optimal Control and Estimation</div></div>
   </div>
