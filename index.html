@@ -10,53 +10,54 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#07090e;--surf:#0d1019;--surf2:#131720;--surf3:#181e2c;
-  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.13);
-  --acc:#4f8ef7;--acc2:#7c6af7;--acc3:#47c8a8;--gold:#e2b04a;--red:#f05252;
-  --txt:#e8eaf0;--mut:#8891a8;
+  --bg:#f4f6f9;--surf:#ffffff;--surf2:#f0f2f6;--surf3:#e8ecf2;
+  --bd:rgba(0,0,0,.09);--bd2:rgba(0,0,0,.14);
+  --acc:#1d5fc4;--acc2:#5548c8;--acc3:#0e8c6a;--gold:#b07d10;--red:#d63031;
+  --txt:#1a1f2e;--mut:#556080;
   --body:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+  --hero-bg:#1a2540;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:var(--body);font-size:16px;line-height:1.7;overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(7,9,14,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);box-shadow:0 1px 8px rgba(0,0,0,.06)}
 .nav-brand{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--txt);text-decoration:none;letter-spacing:.02em}
 .nav-links{display:flex;gap:.2rem;list-style:none}
 .nav-links a{color:var(--mut);text-decoration:none;font-size:.84rem;font-weight:500;padding:.4rem .85rem;border-radius:6px;transition:all .2s}
-.nav-links a:hover{color:var(--txt);background:var(--surf2)}
+.nav-links a:hover{color:var(--acc);background:#eef3fc}
 .hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px}
 .hamburger span{width:22px;height:2px;background:var(--mut);display:block}
 
 /* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden}
+#hero{min-height:100vh;display:flex;align-items:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;background:linear-gradient(135deg,#1a2540 0%,#1f3060 50%,#162038 100%)}
 .glow{position:absolute;width:700px;height:700px;border-radius:50%;filter:blur(130px);pointer-events:none}
-.g1{top:-150px;right:-150px;background:radial-gradient(circle,rgba(79,142,247,.13),transparent 70%)}
-.g2{bottom:-150px;left:-150px;background:radial-gradient(circle,rgba(124,106,247,.1),transparent 70%)}
+.g1{top:-150px;right:-150px;background:radial-gradient(circle,rgba(100,160,255,.18),transparent 70%)}
+.g2{bottom:-150px;left:-150px;background:radial-gradient(circle,rgba(140,120,255,.14),transparent 70%)}
 .hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 400px;gap:2.5rem;align-items:center;position:relative;z-index:1}
-.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.74rem;color:var(--acc);background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.22);padding:.35rem .85rem;border-radius:20px;margin-bottom:1.5rem;letter-spacing:.05em}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.74rem;color:#a8c8ff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:.35rem .85rem;border-radius:20px;margin-bottom:1.5rem;letter-spacing:.05em}
 .hero-tag::before{content:'●';font-size:.5rem;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.2vw,3.6rem);font-weight:700;line-height:1.1;margin-bottom:.5rem;color:#fff;white-space:nowrap}
-.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.22rem);font-weight:400;color:var(--mut);margin-bottom:1.5rem}
-.hero-desc{color:var(--mut);font-size:.97rem;line-height:1.82;max-width:560px;margin-bottom:2rem}
+.hero-sub{font-family:'Playfair Display',serif;font-size:clamp(1rem,2vw,1.22rem);font-weight:400;color:rgba(200,215,255,.85);margin-bottom:1.5rem}
+.hero-desc{color:rgba(190,210,255,.78);font-size:.97rem;line-height:1.82;max-width:560px;margin-bottom:2rem}
 .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.5rem}
 .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:8px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
 .btn-p{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 4px 22px rgba(79,142,247,.35)}
 .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(79,142,247,.45)}
-.btn-o{background:transparent;color:var(--txt);border:1px solid var(--bd2)}
-.btn-o:hover{background:var(--surf2)}
+.btn-o{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-o:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.55)}
 .hero-stats{display:flex;gap:2rem}
 .stat-n{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:#fff;display:block}
-.stat-l{font-size:.7rem;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+.stat-l{font-size:.7rem;color:rgba(180,200,255,.7);letter-spacing:.08em;text-transform:uppercase}
 .photo-frame{position:relative;border-radius:20px;overflow:hidden;background:var(--surf2);aspect-ratio:3/4;border:1px solid var(--bd)}
 .photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.photo-badge{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;background:rgba(7,9,14,.92);backdrop-filter:blur(12px);border:1px solid var(--bd2);border-radius:12px;padding:1rem 1.2rem}
+.photo-badge{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem;background:rgba(20,30,55,.9);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:1rem 1.2rem}
 .photo-badge .pname{font-weight:600;color:#fff;font-size:.95rem}
-.photo-badge .prole{color:var(--mut);font-size:.8rem;margin-top:.2rem}
+.photo-badge .prole{color:rgba(180,200,255,.75);font-size:.8rem;margin-top:.2rem}
 .soc-icons{display:flex;gap:.7rem;margin-top:.75rem}
-.soc-icons a{width:32px;height:32px;border-radius:8px;background:var(--surf2);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;color:var(--mut);text-decoration:none;font-size:.74rem;font-weight:600;transition:all .2s}
+.soc-icons a{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:var(--mut);text-decoration:none;font-size:.74rem;font-weight:600;transition:all .2s}
 .soc-icons a:hover{background:var(--acc);border-color:var(--acc);color:#fff}
 
 /* SECTIONS */
@@ -64,37 +65,37 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .container{max-width:1200px;margin:0 auto}
 .sec-label{font-family:var(--mono);font-size:.74rem;color:var(--acc);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;display:flex;align-items:center;gap:.75rem}
 .sec-label::before{content:'';width:24px;height:1px;background:var(--acc);display:inline-block}
-.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:#fff;margin-bottom:1rem;line-height:1.2}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;color:var(--sec-heading,#1a1f2e);margin-bottom:1rem;line-height:1.2}
 .sec-desc{color:var(--mut);max-width:620px;margin-bottom:3rem}
 
 /* ABOUT */
-#about{background:var(--surf)}
+#about{background:#f0f4fb}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-.about-text p{color:var(--mut);margin-bottom:1.2rem;line-height:1.82;font-size:.95rem}
+.about-text p{color:#455070;margin-bottom:1.2rem;line-height:1.82;font-size:.95rem}
 .about-text a{color:var(--acc);text-decoration:none}
 .about-text a:hover{text-decoration:underline}
 .chips{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.5rem}
-.chip{padding:.55rem 1rem;background:var(--surf2);border:1px solid var(--bd);border-radius:8px;font-size:.82rem;color:var(--mut);transition:all .2s}
+.chip{padding:.55rem 1rem;background:#fff;border:1px solid var(--bd);border-radius:8px;font-size:.82rem;color:#556080;transition:all .2s}
 .chip:hover{border-color:var(--acc);color:var(--acc)}
 .edu-list{list-style:none;display:flex;flex-direction:column;gap:.85rem}
-.edu-item{padding:1.2rem;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;border-left:3px solid var(--acc)}
-.edu-deg{font-weight:600;color:#fff;font-size:.94rem}
-.edu-inst{font-size:.87rem;margin:.2rem 0}
+.edu-item{padding:1.2rem;background:#f8fafc;border:1px solid rgba(0,0,0,.09);border-radius:12px;border-left:3px solid var(--acc)}
+.edu-deg{font-weight:600;color:#1a1f2e;font-size:.94rem}
+.edu-inst{font-size:.87rem;margin:.2rem 0;color:#455070}
 .edu-inst a{color:var(--acc);text-decoration:none}
 .edu-inst a:hover{text-decoration:underline}
 .edu-yr{color:var(--mut);font-size:.78rem;font-family:var(--mono)}
 .edu-adv{color:var(--mut);font-size:.8rem;margin-top:.3rem}
 .edu-adv a{color:var(--acc3);text-decoration:none}
 .edu-thesis{color:var(--mut);font-size:.8rem;margin-top:.3rem;font-style:italic}
-.grant-item{padding:1rem 1.2rem;background:var(--surf2);border:1px solid var(--bd);border-radius:10px;border-left:3px solid var(--acc2)}
+.grant-item{padding:1rem 1.2rem;background:#f8fafc;border:1px solid rgba(0,0,0,.09);border-radius:10px;border-left:3px solid var(--acc2)}
 .grant-status{font-weight:600;font-size:.82rem;margin-bottom:.2rem}
 .grant-desc{color:var(--mut);font-size:.82rem}
 
 /* PROJECTS */
-#projects{background:var(--bg)}
+#projects{background:#ffffff}
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem}
-.proj-card{background:var(--surf);border:1px solid var(--bd);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s;display:block}
-.proj-card:hover{transform:translateY(-6px);border-color:rgba(79,142,247,.4);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.proj-card{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s;display:block;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.proj-card:hover{transform:translateY(-6px);border-color:rgba(29,95,196,.4);box-shadow:0 16px 40px rgba(0,0,0,.14)}
 .proj-img{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--surf2)}
 .proj-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block}
 .proj-card:hover .proj-img img{transform:scale(1.06)}
@@ -102,7 +103,7 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .proj-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,9,14,.85),transparent)}
 .proj-tag{position:absolute;top:1rem;right:1rem;background:rgba(7,9,14,.85);backdrop-filter:blur(8px);border:1px solid var(--bd2);border-radius:20px;padding:.3rem .8rem;font-size:.7rem;font-family:var(--mono);color:var(--acc)}
 .proj-body{padding:1.5rem}
-.proj-title{font-family:'Playfair Display',serif;font-size:1.13rem;font-weight:600;color:#fff;margin-bottom:.6rem;line-height:1.3}
+.proj-title{font-family:'Playfair Display',serif;font-size:1.13rem;font-weight:600;color:#1a1f2e;margin-bottom:.6rem;line-height:1.3}
 .proj-desc{color:var(--mut);font-size:.87rem;line-height:1.6;margin-bottom:1rem}
 .proj-cnt{display:inline-flex;align-items:center;gap:.4rem;font-size:.77rem;color:var(--acc3);font-family:var(--mono)}
 .proj-arr{float:right;color:var(--mut);font-size:1.2rem;transition:transform .2s}
@@ -111,34 +112,34 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 /* MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.88);backdrop-filter:blur(10px);z-index:200;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal-ov.active{opacity:1;pointer-events:all}
-.modal{background:var(--surf);border:1px solid var(--bd2);border-radius:20px;max-width:920px;width:100%;overflow:hidden;transform:translateY(24px);transition:transform .3s}
+.modal{background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:20px;max-width:920px;width:100%;overflow:hidden;transform:translateY(24px);transition:transform .3s}
 .modal-ov.active .modal{transform:translateY(0)}
 .modal-hero{position:relative;aspect-ratio:21/9;background:var(--surf2);overflow:hidden}
 .modal-hero img{width:100%;height:100%;object-fit:cover}
-.modal-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,var(--surf2),#1a2035)}
-.modal-ov2{position:absolute;inset:0;background:linear-gradient(to top,var(--surf) 0%,transparent 55%)}
-.modal-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;background:rgba(7,9,14,.85);border:1px solid var(--bd2);border-radius:50%;cursor:pointer;color:var(--txt);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,#dde5f4,#c8d5ea)}
+.modal-ov2{position:absolute;inset:0;background:linear-gradient(to top,#fff 0%,transparent 55%)}
+.modal-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.15);border-radius:50%;cursor:pointer;color:var(--txt);font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .2s}
 .modal-close:hover{background:var(--surf2)}
 .modal-body{padding:2rem}
-.modal-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:#fff;margin-bottom:1rem;line-height:1.2}
-.modal-abs{color:var(--mut);font-size:.91rem;line-height:1.82;margin-bottom:1.5rem}
-.anim-wrap{border-radius:12px;overflow:hidden;margin-bottom:1.5rem;border:1px solid var(--bd);background:#0d0f16}
-.anim-lbl{font-family:var(--mono);font-size:.71rem;color:var(--acc);background:rgba(79,142,247,.08);border-bottom:1px solid var(--bd);padding:.5rem 1rem;letter-spacing:.06em}
-.modal-vid{background:var(--surf2);border:1px solid var(--bd);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:#1a1f2e;margin-bottom:1rem;line-height:1.2}
+.modal-abs{color:#455070;font-size:.91rem;line-height:1.82;margin-bottom:1.5rem}
+.anim-wrap{border-radius:12px;overflow:hidden;margin-bottom:1.5rem;border:1px solid rgba(0,0,0,.12);background:#07090e}
+.anim-lbl{font-family:var(--mono);font-size:.71rem;color:#1d5fc4;background:rgba(29,95,196,.07);border-bottom:1px solid rgba(0,0,0,.1);padding:.5rem 1rem;letter-spacing:.06em}
+.modal-vid{background:#f4f7fc;border:1px solid rgba(0,0,0,.1);border-radius:12px;padding:1.2rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
 .modal-vid .vi{font-size:2rem}
-.modal-vid .vt{font-weight:600;color:#fff;font-size:.9rem}
+.modal-vid .vt{font-weight:600;color:#1a1f2e;font-size:.9rem}
 .modal-vid .vh{color:var(--mut);font-size:.8rem;margin-top:.2rem}
 .modal-vid code{font-family:var(--mono);font-size:.77rem;color:var(--acc)}
-.papers-title{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:600;color:#fff;margin:1.5rem 0 1rem;display:flex;align-items:center;gap:.75rem}
+.papers-title{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:600;color:#1a1f2e;margin:1.5rem 0 1rem;display:flex;align-items:center;gap:.75rem}
 .papers-title::after{content:'';flex:1;height:1px;background:var(--bd)}
-.paper-item{padding:.95rem 1.2rem;background:var(--surf2);border:1px solid var(--bd);border-radius:10px;margin-bottom:.7rem;transition:border-color .2s}
+.paper-item{padding:.95rem 1.2rem;background:#f8fafc;border:1px solid rgba(0,0,0,.09);border-radius:10px;margin-bottom:.7rem;transition:border-color .2s}
 .paper-item:hover{border-color:rgba(79,142,247,.3)}
 .paper-item a{text-decoration:none;color:var(--txt);display:block}
-.pt{font-size:.89rem;font-weight:500;color:#fff;margin-bottom:.3rem;line-height:1.4}
+.pt{font-size:.89rem;font-weight:500;color:#1a1f2e;margin-bottom:.3rem;line-height:1.4}
 .pm{font-size:.77rem;color:var(--mut);font-family:var(--mono)}
 .pv{color:var(--acc3)}
 .img-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1.5rem}
-.img-item{border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:var(--surf2)}
+.img-item{border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#e8ecf2}
 .img-item img{width:100%;height:100%;object-fit:cover}
 .img-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;padding:1rem;text-align:center}
 .img-ph .ii{font-size:1.8rem}
@@ -146,23 +147,23 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .img-ph .il{font-size:.74rem;color:var(--mut)}
 
 /* PUBLICATIONS */
-#publications{background:var(--surf)}
+#publications{background:#f0f4fb}
 .pub-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
 .filt{padding:.44rem 1rem;border-radius:20px;font-size:.81rem;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:transparent;color:var(--mut);transition:all .2s}
 .filt.on,.filt:hover{background:var(--acc);border-color:var(--acc);color:#fff}
 .pub-list{display:flex;flex-direction:column;gap:.72rem}
-.pub-entry{display:flex;gap:1.2rem;padding:1.2rem;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;transition:all .2s;align-items:flex-start}
+.pub-entry{display:flex;gap:1.2rem;padding:1.2rem;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:12px;transition:all .2s;align-items:flex-start}
 .pub-entry:hover{border-color:rgba(79,142,247,.25)}
 .pub-n{font-family:var(--mono);font-size:.74rem;color:var(--mut);min-width:28px;text-align:right;padding-top:.12rem}
 .pub-c{flex:1}
-.pub-t{font-size:.91rem;font-weight:500;color:var(--txt);line-height:1.4;margin-bottom:.38rem}
+.pub-t{font-size:.91rem;font-weight:500;color:#1a1f2e;line-height:1.4;margin-bottom:.38rem}
 .pub-t a{color:inherit;text-decoration:none}
 .pub-t a:hover{color:var(--acc)}
 .pub-a{font-size:.79rem;color:var(--mut);margin-bottom:.24rem}
-.pub-a strong{color:var(--txt)}
+.pub-a strong{color:#1a1f2e}
 .pub-vl{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
 .pub-v{font-size:.77rem;color:var(--acc3);font-style:italic;font-family:var(--mono)}
-.pub-y{font-size:.71rem;color:var(--mut);background:var(--surf);border:1px solid var(--bd);padding:.14rem .5rem;border-radius:4px;font-family:var(--mono)}
+.pub-y{font-size:.71rem;color:#556080;background:#f0f2f6;border:1px solid rgba(0,0,0,.1);padding:.14rem .5rem;border-radius:4px;font-family:var(--mono)}
 .badge{font-size:.67rem;padding:.14rem .6rem;border-radius:20px;font-family:var(--mono);font-weight:500;letter-spacing:.05em}
 .bj{background:rgba(71,200,168,.12);color:var(--acc3);border:1px solid rgba(71,200,168,.2)}
 .bc{background:rgba(79,142,247,.12);color:var(--acc);border:1px solid rgba(79,142,247,.2)}
@@ -170,7 +171,7 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .pub-entry.hidden{display:none}
 
 /* STUDENTS */
-#students{background:var(--bg)}
+#students{background:#ffffff}
 .student-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
 .student-card{padding:1.4rem;background:var(--surf);border:1px solid var(--bd);border-radius:12px;transition:all .2s;text-align:center}
 .student-card:hover{border-color:rgba(79,142,247,.3)}
@@ -179,66 +180,66 @@ section{padding:5rem 2rem;position:relative;z-index:1}
 .student-role{font-size:.78rem;color:var(--mut)}
 
 /* TEACHING */
-#teaching{background:var(--surf)}
+#teaching{background:#f0f4fb}
 .course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem}
-.course-item{padding:1rem 1.2rem;background:var(--surf2);border:1px solid var(--bd);border-radius:10px}
+.course-item{padding:1rem 1.2rem;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px}
 .course-code{font-family:var(--mono);font-size:.74rem;color:var(--acc);margin-bottom:.24rem}
-.course-name{font-size:.87rem;color:var(--txt);font-weight:500}
+.course-name{font-size:.87rem;color:#1a1f2e;font-weight:500}
 
 /* AWARDS */
-#awards{background:var(--bg)}
+#awards{background:#ffffff}
 .award-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1rem}
-.award-card{padding:1.4rem;background:var(--surf);border:1px solid var(--bd);border-radius:12px;transition:all .2s}
+.award-card{padding:1.4rem;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:12px;transition:all .2s}
 .award-card:hover{border-color:rgba(226,176,74,.35)}
 .aw-icon{font-size:1.5rem;margin-bottom:.72rem;display:block}
-.aw-title{font-weight:600;color:#fff;font-size:.9rem;margin-bottom:.28rem;line-height:1.3}
+.aw-title{font-weight:600;color:#1a1f2e;font-size:.9rem;margin-bottom:.28rem;line-height:1.3}
 .aw-title a{color:inherit;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.2)}
 .aw-title a:hover{color:var(--acc)}
-.aw-org{font-size:.79rem;color:var(--mut)}
+.aw-org{font-size:.79rem;color:#556080}
 .aw-yr{font-family:var(--mono);font-size:.74rem;color:var(--gold);margin-top:.48rem}
-.summer-grant{margin-top:1rem;background:var(--surf2);border:1px solid var(--bd2);border-radius:14px;overflow:hidden}
-.sg-header{padding:1.4rem;border-bottom:1px solid var(--bd)}
-.sg-title{font-weight:600;color:var(--gold);font-size:1rem;margin-bottom:.3rem}
-.sg-desc{color:var(--mut);font-size:.87rem;line-height:1.75}
-.sg-desc strong{color:#fff}
+.summer-grant{margin-top:1rem;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:14px;overflow:hidden}
+.sg-header{padding:1.4rem;border-bottom:1px solid rgba(0,0,0,.1)}
+.sg-title{font-weight:600;color:#9a6e00;font-size:1rem;margin-bottom:.3rem}
+.sg-desc{color:#455070;font-size:.87rem;line-height:1.75}
+.sg-desc strong{color:#1a1f2e}
 .sg-imgs{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;padding:1rem}
-.sg-img-item{border-radius:8px;overflow:hidden;aspect-ratio:4/3;background:var(--surf3)}
+.sg-img-item{border-radius:8px;overflow:hidden;aspect-ratio:4/3;background:#dde5f0}
 .sg-img-item img{width:100%;height:100%;object-fit:cover}
 .sg-img-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;padding:.75rem;text-align:center}
 .sg-img-ph span{font-family:var(--mono);font-size:.66rem;color:var(--acc)}
-.sg-img-ph p{font-size:.7rem;color:var(--mut)}
+.sg-img-ph p{font-size:.7rem;color:#556080}
 
 /* PROFESSIONAL */
-#professional{background:var(--surf)}
+#professional{background:#f0f4fb}
 .prof-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-.prof-section h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;margin-bottom:1rem}
-.prof-item{padding:.9rem 1.1rem;background:var(--surf2);border:1px solid var(--bd);border-radius:10px;margin-bottom:.65rem;border-left:2px solid var(--acc3)}
-.prof-item .pi-title{font-size:.87rem;font-weight:500;color:#fff;margin-bottom:.2rem}
+.prof-section h3{font-family:'Playfair Display',serif;font-size:1.1rem;color:#1a1f2e;margin-bottom:1rem}
+.prof-item{padding:.9rem 1.1rem;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;margin-bottom:.65rem;border-left:2px solid var(--acc3)}
+.prof-item .pi-title{font-size:.87rem;font-weight:500;color:#1a1f2e;margin-bottom:.2rem}
 .prof-item .pi-sub{font-size:.78rem;color:var(--mut)}
 .reviewer-list{list-style:none}
-.reviewer-list li{padding:.7rem 1rem;background:var(--surf2);border:1px solid var(--bd);border-radius:8px;margin-bottom:.5rem;font-size:.82rem;color:var(--mut);border-left:2px solid var(--acc)}
-.reviewer-list li span{color:#fff;font-size:.84rem;display:block;margin-bottom:.1rem}
+.reviewer-list li{padding:.7rem 1rem;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:8px;margin-bottom:.5rem;font-size:.82rem;color:#455070;border-left:2px solid var(--acc)}
+.reviewer-list li span{color:#1a1f2e;font-size:.84rem;display:block;margin-bottom:.1rem}
 
 /* CONTACT */
-#contact{background:var(--bg)}
+#contact{background:#1a2540}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-.contact-card{padding:2rem;background:var(--surf);border:1px solid var(--bd);border-radius:16px}
-.ci{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--bd)}
+.contact-card{padding:2rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:16px}
+.ci{display:flex;align-items:flex-start;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.1)}
 .ci:last-child{border-bottom:none}
-.ci-icon{width:40px;height:40px;background:var(--surf2);border:1px solid var(--bd);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.ci-lbl{font-size:.74rem;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;font-family:var(--mono)}
-.ci-val{font-size:.89rem;color:var(--txt);margin-top:.2rem}
-.ci-val a{color:var(--acc);text-decoration:none}
+.ci-icon{width:40px;height:40px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.ci-lbl{font-size:.74rem;color:rgba(180,200,255,.7);text-transform:uppercase;letter-spacing:.05em;font-family:var(--mono)}
+.ci-val{font-size:.89rem;color:#e0eaff;margin-top:.2rem}
+.ci-val a{color:#7aadff;text-decoration:none}
 .profile-links{display:flex;flex-direction:column;gap:.75rem}
-.pl-card{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--surf2);border:1px solid var(--bd);border-radius:12px;text-decoration:none;transition:all .2s}
-.pl-card:hover{border-color:var(--acc);transform:translateX(4px)}
+.pl-card{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;text-decoration:none;transition:all .2s}
+.pl-card:hover{border-color:rgba(120,170,255,.6);transform:translateX(4px);background:rgba(255,255,255,.13)}
 .pl-icon{font-size:1.3rem}
 .pl-name{font-weight:600;color:#fff;font-size:.89rem}
-.pl-desc{color:var(--mut);font-size:.77rem}
-.pl-arr{margin-left:auto;color:var(--mut)}
+.pl-desc{color:rgba(180,200,255,.7);font-size:.77rem}
+.pl-arr{margin-left:auto;color:rgba(180,200,255,.5)}
 
-footer{background:var(--surf);border-top:1px solid var(--bd);padding:2rem;text-align:center}
-footer p{color:var(--mut);font-size:.84rem}
+footer{background:#1a2540;border-top:1px solid rgba(255,255,255,.1);padding:2rem;text-align:center}
+footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 
 /* RESPONSIVE */
 @media(max-width:900px){
@@ -248,7 +249,7 @@ footer p{color:var(--mut);font-size:.84rem}
   .about-grid,.contact-grid,.prof-grid{grid-template-columns:1fr}
   .nav-links{display:none}
   .hamburger{display:flex}
-  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--surf);border-bottom:1px solid var(--bd);padding:1rem 2rem;gap:.25rem;z-index:99}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--bd);padding:1rem 2rem;gap:.25rem;z-index:99}
   .img-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
@@ -262,24 +263,24 @@ footer p{color:var(--mut);font-size:.84rem}
 
 /* STUDENT HORIZONTAL CARDS */
 .students-horiz{display:flex;flex-direction:column;gap:1.5rem}
-.student-hcard{display:flex;gap:2rem;padding:2rem;background:var(--surf);border:1px solid var(--bd);border-radius:16px;align-items:flex-start;transition:all .2s}
+.student-hcard{display:flex;gap:2rem;padding:2rem;background:#fff;border:1px solid rgba(0,0,0,.1);box-shadow:0 2px 12px rgba(0,0,0,.05);border-radius:16px;align-items:flex-start;transition:all .2s}
 .student-hcard:hover{border-color:rgba(79,142,247,.35);transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
 .student-photo-wrap{position:relative;width:130px;min-height:150px;border-radius:14px;overflow:hidden;background:var(--surf2);border:1px solid var(--bd2);flex-shrink:0}
 .student-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block;min-height:150px}
 .student-ph-fallback{width:100%;min-height:150px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--acc);background:linear-gradient(135deg,var(--surf2),var(--surf3))}
 .student-photo-hint{position:absolute;bottom:0;left:0;right:0;background:rgba(7,9,14,.88);font-size:.6rem;color:var(--acc);font-family:var(--mono);text-align:center;padding:3px;line-height:1.3}
 .student-info{flex:1}
-.student-name-lg{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#fff;margin-bottom:.4rem}
+.student-name-lg{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:#1a1f2e;margin-bottom:.4rem}
 .student-badge{display:inline-block;background:rgba(79,142,247,.12);color:var(--acc);border:1px solid rgba(79,142,247,.25);font-size:.75rem;font-family:var(--mono);padding:.25rem .75rem;border-radius:20px;margin-bottom:.6rem;letter-spacing:.04em}
 .student-dept{font-size:.84rem;color:var(--mut);margin-bottom:.5rem}
 .student-status{font-size:.8rem;color:var(--acc3);margin-bottom:.75rem}
-.student-desc{color:var(--mut);font-size:.87rem;line-height:1.75}
+.student-desc{color:#455070;font-size:.87rem;line-height:1.75}
 @media(max-width:700px){.student-hcard{flex-direction:column}.student-photo-wrap{width:100%;min-height:180px}}
 
 /* NEWS TICKER */
 .news-ticker-wrap{position:fixed;right:1.2rem;top:50%;transform:translateY(-50%);z-index:90;width:198px}
 @media(max-width:1150px){.news-ticker-wrap{display:none}}
-.news-ticker-box{background:rgba(11,13,20,.96);backdrop-filter:blur(16px);border:1px solid var(--bd2);border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.news-ticker-box{background:rgba(25,38,65,.97);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.25)}
 .news-ticker-hdr{padding:.6rem 1rem;background:rgba(79,142,247,.1);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:.5rem}
 .news-ticker-hdr .nh-icon{font-size:.85rem}
 .news-ticker-hdr .nh-txt{font-family:var(--mono);font-size:.7rem;color:var(--acc);letter-spacing:.08em;text-transform:uppercase;font-weight:500;flex:1}
@@ -453,7 +454,7 @@ footer p{color:var(--mut);font-size:.84rem}
       <p>I am an Assistant Professor in the Mechanical &amp; Electrical Engineering Department at <a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank"><strong>Wilkes University</strong></a>, Wilkes-Barre, PA. I received my Ph.D. in Electrical Engineering from <a href="https://www.mst.edu/" target="_blank"><strong>Missouri S&amp;T</strong></a> in 2025, advised by <a href="https://ece.mst.edu/people/faculty-directory/jagannathan-sarangapani/" target="_blank">Prof. Sarangapani Jagannathan</a>.</p>
       <p>My research focuses on designing intelligent, safe, and adaptive control systems for uncertain nonlinear and cyber-physical systems — spanning adaptive optimal control, deep continual reinforcement learning, neuromorphic/spiking neural networks, and human–robot teaming. During my Ph.D., my work was funded by the <strong>Army Research Office (ARO)</strong>, <strong>Office of Naval Research (ONR)</strong>, and <strong>Air Force Office of Scientific Research (AFOSR)</strong>. I am currently PI on pending NSF proposals in graph neural control and spiking neural networks.</p>
       <p>I received my M.Tech. in Cyber-Physical Systems from <a href="https://www.iitj.ac.in/" target="_blank"><strong>IIT Jodhpur</strong></a>, India, working on integral sliding mode control for microgrid ripple mitigation funded by DST India, advised by <a href="https://sites.google.com/a/iitj.ac.in/deepak-fulwani/home" target="_blank">Dr. Deepak Fulwani</a>.</p>
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin:1.4rem 0 .7rem">Research Interests</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin:1.4rem 0 .7rem">Research Interests</h3>
       <div class="chips">
         <div class="chip">Adaptive Optimal Control</div>
         <div class="chip">Deep Reinforcement Learning</div>
@@ -468,7 +469,7 @@ footer p{color:var(--mut);font-size:.84rem}
       </div>
     </div>
     <div class="fade-in">
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.9rem">Education</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem">Education</h3>
       <ul class="edu-list">
         <li class="edu-item">
           <div class="edu-deg">Ph.D. Electrical Engineering</div>
@@ -492,11 +493,11 @@ footer p{color:var(--mut);font-size:.84rem}
         </li>
       </ul>
 
-      <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin:1.4rem 0 .7rem">Grants</h3>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin:1.4rem 0 .7rem">Grants</h3>
       <div style="display:flex;flex-direction:column;gap:.65rem">
-        <div class="grant-item"><div class="grant-status" style="color:var(--gold)">PI — Funded · $9,559 (2026)</div><div class="grant-desc">Summer Mentoring Grant, Wilkes University</div></div>
-        <div class="grant-item" style="border-left-color:var(--acc2)"><div class="grant-status" style="color:var(--acc2)">PI — Pending (NSF DCSD) · $149K</div><div class="grant-desc">Lyapunov-Based Deep GNNs for Safe Cooperative Control</div></div>
-        <div class="grant-item" style="border-left-color:var(--acc2)"><div class="grant-status" style="color:var(--acc2)">PI — Pending (NSF CPS) · $225K</div><div class="grant-desc">Energy-Efficient Safety-Critical Control using SNNs</div></div>
+        <div class="grant-item"><div class="grant-status" style="color:#9a6e00">PI — Funded · $9,559 (2026)</div><div class="grant-desc">Summer Mentoring Grant, Wilkes University</div></div>
+        <div class="grant-item" style="border-left-color:var(--acc2)"><div class="grant-status" style="color:#4a38b0">PI — Pending (NSF DCSD) · $149K</div><div class="grant-desc">Lyapunov-Based Deep GNNs for Safe Cooperative Control</div></div>
+        <div class="grant-item" style="border-left-color:var(--acc2)"><div class="grant-status" style="color:#4a38b0">PI — Pending (NSF CPS) · $225K</div><div class="grant-desc">Energy-Efficient Safety-Critical Control using SNNs</div></div>
       </div>
     </div>
   </div>
@@ -623,7 +624,7 @@ footer p{color:var(--mut);font-size:.84rem}
 <div class="container">
   <div class="sec-label">Education</div>
   <h2 class="sec-title">Teaching</h2>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#fff;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#fff;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
   <div class="course-grid fade-in" style="margin-bottom:2rem">
     <div class="course-item"><div class="course-code">EE-314 / S'26</div><div class="course-name">Control Systems</div></div>
     <div class="course-item"><div class="course-code">EE-314-L / S'26</div><div class="course-name">Control Systems Lab</div></div>
@@ -636,7 +637,7 @@ footer p{color:var(--mut);font-size:.84rem}
     <div class="course-item"><div class="course-code">EE-252-L / F'25</div><div class="course-name">Electronics II Laboratory</div></div>
     <div class="course-item"><div class="course-code">EE-283 / F'25</div><div class="course-name">Electrical Engineering Lab</div></div>
   </div>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#fff;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO · Spring 2025</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#fff;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO · Spring 2025</h3>
   <div class="course-grid fade-in">
     <div class="course-item"><div class="course-code">MECH/AERO 6410 / EE 6310</div><div class="course-name">Optimal Control and Estimation</div></div>
   </div>
@@ -870,9 +871,11 @@ footer p{color:var(--mut);font-size:.84rem}
         <span>LIVE SIMULATIONS</span>
         <button onclick="cpsSimTab(0,this)" id="cpsTab0" style="padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid rgba(79,142,247,.5);background:rgba(79,142,247,.2);color:#7aadff;font-family:var(--mono)">① CBF/TVBLF Control</button>
         <button onclick="cpsSimTab(1,this)" id="cpsTab1" style="padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid #1e2235;background:transparent;color:#5a6480;font-family:var(--mono)">② Barrier Function Transport</button>
+        <button onclick="cpsSimTab(2,this)" id="cpsTab2" style="padding:3px 12px;border-radius:20px;font-size:10px;font-weight:600;cursor:pointer;border:1px solid #1e2235;background:transparent;color:#5a6480;font-family:var(--mono)">③ Cyber-Physical Power System</button>
       </div>
       <div id="cps-anim-container"></div>
       <div id="cps-sim2-container" style="display:none"></div>
+      <div id="cps-sim3-container" style="display:none"></div>
     </div>
     <div class="modal-vid"><div class="vi">🎬</div><div><div class="vt">Safety Control Demo</div><div class="vh">Upload as: <code>videos/cps_demo.mp4</code></div></div></div>
     <div class="papers-title">Publications</div>
@@ -948,7 +951,7 @@ function buildAnim(id){
   if(id==='snn')bSNN();
   if(id==='hri'){bHRI();bHRISim2();}
   if(id==='gnn')bGNN();
-  if(id==='cps'){bCPS();bCPSSim2();}
+  if(id==='cps'){bCPS();bCPSSim2();bCPSSim3();}
   if(id==='acl')bACL();
 }
 
@@ -2732,7 +2735,8 @@ function bHRISim2(){
 window.cpsSimTab=function(idx,btn){
   document.getElementById('cps-anim-container').style.display=idx===0?'':'none';
   document.getElementById('cps-sim2-container').style.display=idx===1?'':'none';
-  ['cpsTab0','cpsTab1'].forEach((id,i)=>{
+  document.getElementById('cps-sim3-container').style.display=idx===2?'':'none';
+  ['cpsTab0','cpsTab1','cpsTab2'].forEach((id,i)=>{
     const el=document.getElementById(id);
     if(!el)return;
     el.style.background=i===idx?'rgba(79,142,247,.2)':'transparent';
@@ -2947,6 +2951,213 @@ function bCPSSim2(){
           <text x="32" y="25" font-size="8" fill="#374151">CBF acts only near obstacle/unsafe zone</text>
           <text x="32" y="38" font-size="8" fill="#16a34a">zero modification when far from constraints</text>
           <text x="155" y="125" font-size="8" fill="#555" text-anchor="middle">time</text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>`;
+}
+
+/* ── CPS SIMULATION 3: Cyber-Physical Power System ── */
+function bCPSSim3(){
+  const c=document.getElementById('cps-sim3-container');
+  if(!c)return;
+  c.innerHTML=`<div style="background:#07111f;border-radius:0 0 8px 8px;overflow:hidden;font-family:Arial,sans-serif;color:#e5eefc">
+<style>
+#cpsPS *{box-sizing:border-box}
+#cpsPS{width:100%;overflow:hidden;background:#07111f}
+.psp{position:relative;overflow:hidden;border-radius:8px;border:1px solid #29456a;background:#0b1628}
+.psp h4{margin:0;padding:7px 12px;font-size:13px;color:#bfdbfe;background:#0f2744;border-bottom:1px solid #29456a}
+@keyframes psBlink{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes psPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.85;transform:scale(1.04)}}
+@keyframes psDash{to{stroke-dashoffset:-36}}
+.psBlink{animation:psBlink 1s infinite}
+.psPulse{animation:psPulse 1.4s infinite;transform-origin:center}
+.psDash{animation:psDash 1.4s linear infinite}
+</style>
+<div id="cpsPS">
+  <div style="padding:8px 10px;display:grid;grid-template-columns:68% 32%;grid-template-rows:auto auto auto;gap:8px">
+
+    <div style="grid-column:1/3;background:linear-gradient(90deg,#0f172a,#0b3b77,#14532d);border:1px solid #315b8d;border-radius:8px;padding:10px 18px;font-size:14px;font-weight:700;text-align:center;color:#e5eefc">
+      Illustrative Cyber-Physical Power System Safety — CBF Prevents Constraint Violations Under Cyber Anomalies
+    </div>
+
+    <!-- Panel A: main CPS grid -->
+    <div class="psp" style="height:340px">
+      <h4>(A) CPS Simulation: Grid Measurements, Cyber Anomaly, Safety Constraints, Corrective Control</h4>
+      <!-- legend -->
+      <div style="position:absolute;left:12px;top:42px;background:rgba(7,17,31,.9);border:1px solid #315b8d;border-radius:7px;padding:7px 9px;font-size:11px;line-height:1.75;z-index:5">
+        <div><span style="display:inline-block;width:22px;border-top:2.5px dashed #4ade80;margin-right:5px;vertical-align:middle"></span>Normal operating flow</div>
+        <div><span style="display:inline-block;width:22px;border-top:2.5px dashed #ef4444;margin-right:5px;vertical-align:middle"></span>False-data / anomaly channel</div>
+        <div><span style="display:inline-block;width:22px;border-top:2.5px dashed #38bdf8;margin-right:5px;vertical-align:middle"></span>CBF-QP corrective action</div>
+        <div><span style="display:inline-block;width:22px;border-top:2.5px dashed #facc15;margin-right:5px;vertical-align:middle"></span>Control command to assets</div>
+      </div>
+      <svg viewBox="0 0 1000 310" style="width:100%;height:calc(100% - 35px);display:block">
+        <defs>
+          <marker id="pag" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0L0,6L7,3z" fill="#4ade80"/></marker>
+          <marker id="pab" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0L0,6L7,3z" fill="#38bdf8"/></marker>
+          <marker id="par" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0L0,6L7,3z" fill="#ef4444"/></marker>
+          <marker id="pay" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0L0,6L7,3z" fill="#facc15"/></marker>
+          <path id="pf1" d="M90,80 C200,65 320,75 450,110 C580,150 700,142 880,105"/>
+          <path id="pf2" d="M95,232 C200,222 320,210 450,182 C580,150 705,180 885,228"/>
+          <path id="pfc" d="M210,170 C310,150 390,127 450,110 C520,92 660,85 880,105"/>
+          <path id="pfa" d="M830,265 C760,228 700,192 620,150 C555,122 500,110 470,104"/>
+          <path id="pfy" d="M210,170 C280,187 370,192 450,182"/>
+        </defs>
+        <rect x="0" y="0" width="1000" height="310" fill="#07111f"/>
+        <g stroke="#1b2e45" stroke-width="0.7" opacity="0.7">
+          <path d="M0 62H1000 M0 124H1000 M0 186H1000 M0 248H1000"/>
+          <path d="M100 0V310 M200 0V310 M350 0V310 M500 0V310 M650 0V310 M800 0V310 M950 0V310"/>
+        </g>
+        <!-- safety envelope -->
+        <ellipse cx="640" cy="148" rx="310" ry="88" fill="rgba(34,197,94,.08)" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="7 5" class="psPulse"/>
+        <text x="620" y="46" font-size="10" fill="#4ade80" text-anchor="middle">Safe operating envelope h(x)&gt;0</text>
+        <!-- constraint boundary -->
+        <ellipse cx="450" cy="110" rx="105" ry="62" fill="rgba(239,68,68,.12)" stroke="#ef4444" stroke-width="1.8" stroke-dasharray="7 5" class="psBlink"/>
+        <text x="450" y="42" font-size="10" fill="#fb7185" text-anchor="middle">Approaching constraint boundary</text>
+        <!-- transmission lines -->
+        <path d="M90,80 C200,65 320,75 450,110 C580,150 700,142 880,105" fill="none" stroke="#3b516d" stroke-width="5"/>
+        <path d="M95,232 C200,222 320,210 450,182 C580,150 705,180 885,228" fill="none" stroke="#3b516d" stroke-width="5"/>
+        <path d="M450,182 C454,155 452,132 450,110" fill="none" stroke="#3b516d" stroke-width="5"/>
+        <path d="M90,80 C80,125 82,175 95,232" fill="none" stroke="#3b516d" stroke-width="5"/>
+        <path d="M880,105 C895,145 895,195 885,228" fill="none" stroke="#3b516d" stroke-width="5"/>
+        <!-- animated flows -->
+        <path d="M90,80 C200,65 320,75 450,110 C580,150 700,142 880,105" fill="none" stroke="#4ade80" stroke-width="3" stroke-dasharray="9 7" class="psDash" marker-end="url(#pag)" filter="url(#gf)"/>
+        <path d="M95,232 C200,222 320,210 450,182 C580,150 705,180 885,228" fill="none" stroke="#4ade80" stroke-width="3" stroke-dasharray="9 7" class="psDash" marker-end="url(#pag)"/>
+        <path d="M830,265 C760,228 700,192 620,150 C555,122 500,110 470,104" fill="none" stroke="#ef4444" stroke-width="2.8" stroke-dasharray="5 4" class="psBlink" marker-end="url(#par)"/>
+        <path d="M210,170 C310,150 390,127 450,110 C520,92 660,85 880,105" fill="none" stroke="#38bdf8" stroke-width="4" stroke-dasharray="11 7" class="psDash" marker-end="url(#pab)"/>
+        <path d="M210,170 C280,187 370,192 450,182" fill="none" stroke="#facc15" stroke-width="3" stroke-dasharray="6 5" class="psDash" marker-end="url(#pay)"/>
+        <!-- moving particles -->
+        <circle r="6" fill="#4ade80"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#pf1"/></animateMotion></circle>
+        <circle r="6" fill="#4ade80"><animateMotion dur="5s" repeatCount="indefinite"><mpath href="#pf2"/></animateMotion></circle>
+        <circle r="6" fill="#38bdf8"><animateMotion dur="3.2s" repeatCount="indefinite"><mpath href="#pfc"/></animateMotion></circle>
+        <circle r="6" fill="#ef4444"><animateMotion dur="2.1s" repeatCount="indefinite"><mpath href="#pfa"/></animateMotion></circle>
+        <circle r="5" fill="#facc15"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#pfy"/></animateMotion></circle>
+        <!-- generators -->
+        <circle cx="90" cy="80" r="34" fill="#132b4c" stroke="#60a5fa" stroke-width="2"/>
+        <text x="72" y="84" font-weight="700" font-size="11" fill="#e5eefc">Gen 1</text>
+        <text x="64" y="98" font-size="9" fill="#94a3b8">controllable</text>
+        <circle cx="95" cy="232" r="34" fill="#132b4c" stroke="#60a5fa" stroke-width="2"/>
+        <text x="77" y="236" font-weight="700" font-size="11" fill="#e5eefc">Gen 2</text>
+        <!-- buses -->
+        <rect x="418" y="90" width="64" height="40" rx="8" fill="#1f2937" stroke="#facc15" stroke-width="2"/>
+        <text x="436" y="115" font-weight="700" font-size="11" fill="#e5eefc">Bus A</text>
+        <rect x="418" y="162" width="64" height="40" rx="8" fill="#1f2937" stroke="#facc15" stroke-width="2"/>
+        <text x="436" y="187" font-weight="700" font-size="11" fill="#e5eefc">Bus B</text>
+        <!-- loads -->
+        <rect x="846" y="85" width="72" height="40" rx="8" fill="#102c1c" stroke="#4ade80" stroke-width="2"/>
+        <text x="868" y="110" font-weight="700" font-size="11" fill="#e5eefc">Load 1</text>
+        <rect x="850" y="210" width="72" height="40" rx="8" fill="#102c1c" stroke="#4ade80" stroke-width="2"/>
+        <text x="872" y="235" font-weight="700" font-size="11" fill="#e5eefc">Load 2</text>
+        <!-- control center -->
+        <rect x="100" y="148" width="225" height="80" rx="10" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+        <text x="118" y="170" font-weight="700" font-size="11" fill="#e5eefc">Control Center / EMS</text>
+        <text x="110" y="186" font-size="9" fill="#94a3b8">State estimation + anomaly detect</text>
+        <text x="110" y="200" font-size="9" fill="#94a3b8">CBF-QP: safe control computed</text>
+        <text x="110" y="214" font-size="9" fill="#4ade80">Status: constraints maintained</text>
+        <!-- comm lines -->
+        <path d="M210,148 C250,115 360,102 418,110" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-dasharray="5 4" opacity=".8"/>
+        <path d="M210,228 C310,215 370,200 418,185" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-dasharray="5 4" opacity=".8"/>
+        <!-- attacker -->
+        <polygon points="830,255 870,295 790,295" fill="rgba(239,68,68,.15)" stroke="#ef4444" stroke-width="2" class="psBlink"/>
+        <text x="780" y="308" font-size="9" fill="#fb7185">False-data injection</text>
+        <!-- PMUs -->
+        <rect x="392" y="68" width="38" height="18" rx="4" fill="#0d1b2e" stroke="#315b8d" stroke-width="1"/>
+        <text x="400" y="80" font-size="8" fill="#94a3b8">PMU</text>
+        <rect x="560" y="198" width="38" height="18" rx="4" fill="#0d1b2e" stroke="#315b8d" stroke-width="1"/>
+        <text x="568" y="210" font-size="8" fill="#94a3b8">PMU</text>
+        <!-- safety alert -->
+        <rect x="338" y="126" width="190" height="40" rx="6" fill="#2b1116" stroke="#ef4444" stroke-width="1.2" class="psBlink"/>
+        <text x="360" y="142" font-weight="700" font-size="10" fill="#fb7185">Safety margin decreasing</text>
+        <text x="343" y="157" font-size="8" fill="#94a3b8">CBF constraint becomes active before violation</text>
+        <!-- safe action -->
+        <rect x="610" y="158" width="215" height="44" rx="6" fill="#0d2418" stroke="#22c55e" stroke-width="1.2"/>
+        <text x="630" y="174" font-weight="700" font-size="10" fill="#4ade80">Corrective safe action</text>
+        <text x="616" y="190" font-size="8" fill="#94a3b8">generation redispatch / voltage support</text>
+      </svg>
+    </div>
+
+    <!-- Panel B: technical description -->
+    <div class="psp" style="height:340px">
+      <h4>(B) Technical Description</h4>
+      <svg viewBox="0 0 340 310" style="width:100%;height:calc(100% - 35px);display:block">
+        <!-- note -->
+        <rect x="10" y="12" width="320" height="62" rx="8" fill="#1c2433" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="22" y="30" font-weight="700" font-size="11" fill="#e5eefc">CPS Dynamic Model</text>
+        <text x="22" y="48" font-family="Georgia,serif" font-size="11" fill="#e5eefc">ẋ = f(x) + g(x)u + d_cyber</text>
+        <text x="22" y="64" font-size="9" fill="#b7c7dc">State x: voltage, frequency, phase, line-flow</text>
+        <!-- safety constraints -->
+        <rect x="10" y="84" width="320" height="72" rx="8" fill="#2b1116" stroke="#ef4444" stroke-width="1.2"/>
+        <text x="22" y="102" font-weight="700" font-size="11" fill="#e5eefc">Safety Constraints</text>
+        <text x="22" y="120" font-family="Georgia,serif" font-size="11" fill="#e5eefc">h_V(x) = (V−V_min)(V_max−V) ≥ 0</text>
+        <text x="22" y="138" font-family="Georgia,serif" font-size="11" fill="#e5eefc">h_f(x) = Δf²_max − Δf² ≥ 0</text>
+        <text x="22" y="152" font-size="9" fill="#94a3b8">Red boundary = loss of safety margin</text>
+        <!-- CBF-QP -->
+        <rect x="10" y="166" width="320" height="72" rx="8" fill="#0d2418" stroke="#22c55e" stroke-width="1.2"/>
+        <text x="22" y="184" font-weight="700" font-size="11" fill="#e5eefc">CBF-QP Safety Filter</text>
+        <text x="22" y="202" font-family="Georgia,serif" font-size="11" fill="#e5eefc">u_safe = argmin ‖u − u_nom‖²</text>
+        <text x="22" y="220" font-family="Georgia,serif" font-size="11" fill="#e5eefc">s.t.  ḣ(x,u) + α·h(x) ≥ 0</text>
+        <text x="22" y="236" font-size="9" fill="#4ade80">Modifies nominal only when safety at risk</text>
+        <!-- Lyapunov -->
+        <rect x="10" y="248" width="320" height="52" rx="8" fill="#0d1b2e" stroke="#315b8d" stroke-width="1.2"/>
+        <text x="22" y="266" font-weight="700" font-size="11" fill="#e5eefc">Lyapunov / UUB Stability</text>
+        <text x="22" y="282" font-size="9" fill="#b7c7dc">V̇_L ≤ −γ·‖e‖² + ε_b → UUB tracking</text>
+        <text x="22" y="294" font-size="9" fill="#4ade80">All safety sets forward-invariant ∀t</text>
+      </svg>
+    </div>
+
+    <!-- Bottom 3 charts -->
+    <div style="grid-column:1/3;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+      <div class="psp" style="height:165px">
+        <h4>(C) Frequency Safety Response</h4>
+        <svg viewBox="0 0 320 130" style="width:100%;height:calc(100% - 32px);display:block">
+          <rect x="0" y="0" width="320" height="130" fill="#07111f"/>
+          <path d="M28 110 H300 M28 110 V15" stroke="#6b7f99" fill="none" stroke-width="1"/>
+          <path d="M28 90 H300 M28 70 H300 M28 50 H300" stroke="#1b2e45" stroke-width="0.6"/>
+          <line x1="28" y1="38" x2="300" y2="38" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <line x1="28" y1="95" x2="300" y2="95" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <!-- nominal unsafe -->
+          <polyline points="30,62 58,56 86,46 114,36 142,30 170,38 198,52 226,70 254,86 282,98 298,104" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 4"/>
+          <!-- CBF corrected -->
+          <polyline points="30,62 58,57 86,52 114,47 142,52 170,62 198,68 226,65 254,60 282,58 298,57" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+          <!-- nominal safe -->
+          <polyline points="30,62 58,62 86,62 114,61 142,62 170,62 198,63 226,62 254,61 282,62 298,62" fill="none" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text x="32" y="25" font-size="8" fill="#b7c7dc">Unsafe nominal corrected before freq limits crossed</text>
+          <text x="230" y="34" font-size="7" fill="#fb7185">upper/lower bounds</text>
+        </svg>
+      </div>
+      <div class="psp" style="height:165px">
+        <h4>(D) Voltage Safety Barrier h_V(x)</h4>
+        <svg viewBox="0 0 320 130" style="width:100%;height:calc(100% - 32px);display:block">
+          <rect x="0" y="0" width="320" height="130" fill="#07111f"/>
+          <path d="M28 110 H300 M28 110 V15" stroke="#6b7f99" fill="none" stroke-width="1"/>
+          <path d="M28 90 H300 M28 70 H300 M28 50 H300" stroke="#1b2e45" stroke-width="0.6"/>
+          <line x1="28" y1="95" x2="300" y2="95" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <!-- nominal drops below -->
+          <polyline points="30,44 58,48 86,58 114,78 142,92 170,98 198,104 226,108 254,112 282,114 298,115" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="5 4"/>
+          <!-- CBF active -->
+          <polyline points="30,44 58,46 86,54 114,72 142,82 170,76 198,64 226,52 254,44 282,40 298,39" fill="none" stroke="#facc15" stroke-width="2"/>
+          <!-- CBF safe -->
+          <polyline points="30,52 58,53 86,56 114,60 142,62 170,58 198,52 226,46 254,42 282,40 298,39" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="32" y="25" font-size="8" fill="#b7c7dc">h_V(x) remains positive under corrective action</text>
+          <text x="32" y="107" font-size="7" fill="#fb7185">h_V=0 safety boundary</text>
+        </svg>
+      </div>
+      <div class="psp" style="height:165px">
+        <h4>(E) Measurement Attack Mitigation</h4>
+        <svg viewBox="0 0 320 130" style="width:100%;height:calc(100% - 32px);display:block">
+          <rect x="0" y="0" width="320" height="130" fill="#07111f"/>
+          <path d="M28 110 H300 M28 110 V15" stroke="#6b7f99" fill="none" stroke-width="1"/>
+          <path d="M28 90 H300 M28 70 H300 M28 50 H300" stroke="#1b2e45" stroke-width="0.6"/>
+          <!-- corrupted measurement -->
+          <polyline points="30,90 58,89 86,87 114,56 142,30 170,26 198,44 226,72 254,88 282,94 298,96" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="5 4"/>
+          <!-- filtered/safe response -->
+          <polyline points="30,90 58,89 86,87 114,80 142,68 170,58 198,64 226,75 254,84 282,89 298,91" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+          <text x="32" y="25" font-size="8" fill="#b7c7dc">Corrupted measurement bounded by safety filter</text>
+          <text x="96" y="27" font-size="7" fill="#fb7185">false-data spike</text>
+          <text x="156" y="60" font-size="7" fill="#4ade80">filtered</text>
         </svg>
       </div>
     </div>
