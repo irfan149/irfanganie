@@ -246,7 +246,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   .hero-inner{grid-template-columns:1fr}
   .photo-frame{max-width:320px;margin:0 auto}
   h1{white-space:normal}
-  .about-grid,.contact-grid,.prof-grid{grid-template-columns:1fr}
+  .about-grid,.contact-grid,.prof-grid,.contact-wrap{grid-template-columns:1fr}
   .nav-links{display:none}
   .hamburger{display:flex}
   .nav-links.open{display:flex;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--bd);padding:1rem 2rem;gap:.25rem;z-index:99}
@@ -258,6 +258,46 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   .hero-stats{gap:1.25rem}
   .modal-body{padding:1.25rem}
 }
+/* RESEARCH INTEREST CHIPS */
+.chips2{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.2rem}
+.chip2{font-size:.8rem;font-weight:500;padding:.38rem .9rem;border-radius:20px;border:1px solid;letter-spacing:.01em;white-space:nowrap}
+
+/* COMPACT STUDENT CARDS */
+.scard{display:flex;align-items:center;gap:.85rem;padding:.9rem 1.1rem;background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:all .18s}
+.scard:hover{border-color:rgba(29,95,196,.25);box-shadow:0 3px 12px rgba(0,0,0,.09)}
+.scard-av{width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,#dde5f4,#c8d5ea)}
+.scard-av img{width:100%;height:100%;object-fit:cover;display:block}
+.scard-init{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#1d5fc4;font-size:.85rem}
+.scard-info{flex:1;min-width:0}
+.scard-name{font-weight:600;color:#1a1f2e;font-size:.88rem;margin-bottom:.1rem}
+.scard-role{font-size:.72rem;color:#1d5fc4;font-family:var(--mono);margin-bottom:.15rem}
+.scard-topic{font-size:.72rem;color:#7080a0}
+.scard-dot{color:#0e8c6a;font-size:.65rem;margin-left:auto;flex-shrink:0}
+@media(max-width:600px){#students [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
+
+/* CONTACT SECTION — full redesign for dark bg */
+#contact{background:linear-gradient(135deg,#1a2540 0%,#1e2d52 100%)}
+#contact .sec-label{color:#7aadff}
+#contact .sec-title{color:#fff}
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
+.contact-info-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:1.8rem;backdrop-filter:blur(8px)}
+.ci2{display:flex;align-items:flex-start;gap:.85rem;padding:.85rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.ci2:last-child{border-bottom:none;padding-bottom:0}
+.ci2-icon{width:38px;height:38px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.ci2-lbl{font-size:.67rem;color:rgba(180,200,255,.6);text-transform:uppercase;letter-spacing:.1em;font-family:var(--mono);margin-bottom:.22rem}
+.ci2-val{font-size:.88rem;color:rgba(220,235,255,.95);line-height:1.5}
+.ci2-val a{color:#7aadff;text-decoration:none}
+.ci2-val a:hover{text-decoration:underline}
+.contact-links-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.4rem;backdrop-filter:blur(8px)}
+.contact-links-title{font-size:.72rem;color:rgba(180,200,255,.55);text-transform:uppercase;letter-spacing:.12em;font-family:var(--mono);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.08)}
+.pl2{display:flex;align-items:center;gap:.9rem;padding:.7rem .9rem;border-radius:10px;text-decoration:none;transition:all .18s;margin-bottom:.4rem;border:1px solid transparent}
+.pl2:last-child{margin-bottom:0}
+.pl2:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);transform:translateX(3px)}
+.pl2-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;color:#fff}
+.pl2-name{font-weight:600;font-size:.87rem;color:#e0eaff;margin-bottom:.08rem}
+.pl2-desc{font-size:.74rem;color:rgba(180,200,255,.55)}
+.pl2-arr{margin-left:auto;color:rgba(180,200,255,.4);font-size:.9rem}
+
 .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
@@ -452,20 +492,20 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   <div class="about-grid">
     <div class="about-text fade-in">
       <p>I am an Assistant Professor in the Mechanical &amp; Electrical Engineering Department at <a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank"><strong>Wilkes University</strong></a>, Wilkes-Barre, PA. I received my Ph.D. in Electrical Engineering from <a href="https://www.mst.edu/" target="_blank"><strong>Missouri S&amp;T</strong></a> in 2025, advised by <a href="https://ece.mst.edu/people/faculty-directory/jagannathan-sarangapani/" target="_blank">Prof. Sarangapani Jagannathan</a>.</p>
-      <p>My research focuses on designing intelligent, safe, and adaptive control systems for uncertain nonlinear and cyber-physical systems — spanning adaptive optimal control, deep continual reinforcement learning, neuromorphic/spiking neural networks, and human–robot teaming. During my Ph.D., my work was funded by the <strong>Army Research Office (ARO)</strong>, <strong>Office of Naval Research (ONR)</strong>, and <strong>Air Force Office of Scientific Research (AFOSR)</strong>. I am currently PI on pending NSF proposals in graph neural control and spiking neural networks.</p>
+      <p>My research focuses on designing intelligent, safe, and adaptive control systems for uncertain nonlinear and cyber-physical systems — spanning adaptive optimal control, deep continual reinforcement learning, neuromorphic/spiking neural networks, and human–robot teaming.</p>
       <p>I received my M.Tech. in Cyber-Physical Systems from <a href="https://www.iitj.ac.in/" target="_blank"><strong>IIT Jodhpur</strong></a>, India, working on integral sliding mode control for microgrid ripple mitigation funded by DST India, advised by <a href="https://sites.google.com/a/iitj.ac.in/deepak-fulwani/home" target="_blank">Dr. Deepak Fulwani</a>.</p>
       <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin:1.4rem 0 .7rem">Research Interests</h3>
-      <div class="chips">
-        <div class="chip">Adaptive Optimal Control</div>
-        <div class="chip">Deep Reinforcement Learning</div>
-        <div class="chip">Lifelong/Continual Learning</div>
-        <div class="chip">Human–Robot Teaming</div>
-        <div class="chip">Spiking Neural Networks</div>
-        <div class="chip">Graph Neural Networks</div>
-        <div class="chip">Safety-Critical Systems</div>
-        <div class="chip">Nonlinear Control</div>
-        <div class="chip">Multi-Robot Coordination</div>
-        <div class="chip">Cyber-Physical Systems</div>
+      <div class="chips2">
+        <div class="chip2">Adaptive Optimal Control</div>
+        <div class="chip2">Deep Reinforcement Learning</div>
+        <div class="chip2">Lifelong/Continual Learning</div>
+        <div class="chip2">Human–Robot Teaming</div>
+        <div class="chip2">Spiking Neural Networks</div>
+        <div class="chip2">Graph Neural Networks</div>
+        <div class="chip2">Safety-Critical Systems</div>
+        <div class="chip2">Nonlinear Control</div>
+        <div class="chip2">Multi-Robot Coordination</div>
+        <div class="chip2">Cyber-Physical Systems</div>
       </div>
     </div>
     <div class="fade-in">
@@ -512,23 +552,23 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   <p class="sec-desc">Click any project to explore live interactive simulations, publications, and results.</p>
   <div class="proj-grid">
     <div class="proj-card fade-in" onclick="openModal('snn')">
-      <div class="proj-img"><img src="img/proj_snn.jpg" alt="SNN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0d1b2a,#1a0a40)">⚡</div><div class="proj-ov"></div><div class="proj-tag">Neuromorphic</div></div>
+      <div class="proj-img"><img src="img/proj_snn.jpg" alt="SNN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0d1b2a,#1a0a40)">⚡</div><div class="proj-ov"></div></div>
       <div class="proj-body"><div class="proj-title">Adaptive Spiking Neural Control</div><p class="proj-desc">Energy-efficient safety-critical control using SNNs with online adaptation, Augmented Barrier States, SVD-regularized learning — 80% energy savings over ANNs.</p><span class="proj-cnt">◆ 2 papers</span><span class="proj-arr">→</span></div>
     </div>
     <div class="proj-card fade-in" onclick="openModal('hri')">
-      <div class="proj-img"><img src="img/proj_hri.jpg" alt="HRI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1a10,#0d2035)">🤝</div><div class="proj-ov"></div><div class="proj-tag">HRI / HSI</div></div>
+      <div class="proj-img"><img src="img/proj_hri.jpg" alt="HRI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1a10,#0d2035)">🤝</div><div class="proj-ov"></div></div>
       <div class="proj-body"><div class="proj-title">Human–Robot Interaction &amp; Teaming</div><p class="proj-desc">Two-level adaptive control: admittance-based intent estimation (high-level) + distributed actor-critic RL with BLF safety (low-level) for cooperative manipulation.</p><span class="proj-cnt">◆ 4 papers</span><span class="proj-arr">→</span></div>
     </div>
     <div class="proj-card fade-in" onclick="openModal('gnn')">
-      <div class="proj-img"><img src="img/proj_gnn.jpg" alt="GNN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1520,#102030)">🕸️</div><div class="proj-ov"></div><div class="proj-tag">Multi-Agent</div></div>
+      <div class="proj-img"><img src="img/proj_gnn.jpg" alt="GNN" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1520,#102030)">🕸️</div><div class="proj-ov"></div></div>
       <div class="proj-body"><div class="proj-title">Adaptive Graph Neural Control</div><p class="proj-desc">Non-stationary cooperative control via GNNs with Lyapunov-derived update laws, forward-invariant pairwise safety, provably improving performance bounds.</p><span class="proj-cnt">◆ 2 NSF proposals · Active</span><span class="proj-arr">→</span></div>
     </div>
     <div class="proj-card fade-in" onclick="openModal('cps')">
-      <div class="proj-img"><img src="img/proj_cps.jpg" alt="CPS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#1a0a0a,#200d20)">🛡️</div><div class="proj-ov"></div><div class="proj-tag">Safety-Critical</div></div>
+      <div class="proj-img"><img src="img/proj_cps.jpg" alt="CPS" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#1a0a0a,#200d20)">🛡️</div><div class="proj-ov"></div></div>
       <div class="proj-body"><div class="proj-title">Cyber-Physical Safety-Critical Systems</div><p class="proj-desc">Control barrier functions and time-varying barrier Lyapunov methods for safety in RL-based control of constrained nonlinear systems.</p><span class="proj-cnt">◆ 4 papers</span><span class="proj-arr">→</span></div>
     </div>
     <div class="proj-card fade-in" onclick="openModal('acl')">
-      <div class="proj-img"><img src="img/proj_acl.jpg" alt="ACL" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1010,#0d2530)">∞</div><div class="proj-ov"></div><div class="proj-tag">Lifelong Learning</div></div>
+      <div class="proj-img"><img src="img/proj_acl.jpg" alt="ACL" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="proj-ph" style="display:none;background:linear-gradient(135deg,#0a1010,#0d2530)">∞</div><div class="proj-ov"></div></div>
       <div class="proj-body"><div class="proj-title">Adaptive Continual Learning Control</div><p class="proj-desc">Lifelong deep RL for multi-task tracking of nonlinear systems — preventing catastrophic forgetting while continuously adapting to new environments.</p><span class="proj-cnt">◆ 10+ papers</span><span class="proj-arr">→</span></div>
     </div>
   </div>
@@ -578,43 +618,40 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 </section>
 
 <!-- CURRENT STUDENTS -->
-<section id="students">
+<section id="students" style="padding:2.5rem 2rem">
 <div class="container">
-  <div class="sec-label">Research Team</div>
-  <h2 class="sec-title">Research Students</h2>
-  <p class="sec-desc" style="margin-bottom:1.5rem">Undergraduate students currently working under my supervision.</p>
-  <div class="students-horiz">
-
-    <div class="student-hcard fade-in">
-      <div class="student-photo-wrap">
-        <img src="img/matthew_kralj.jpg" alt="Matthew Kralj" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="student-ph-fallback">MK</div>
-        <div class="student-photo-hint">Upload: img/matthew_kralj.jpg</div>
-      </div>
-      <div class="student-info">
-        <div class="student-name-lg">Matthew Kralj</div>
-        <div class="student-badge">Undergraduate Researcher</div>
-        <div class="student-dept">Mechanical &amp; Electrical Engineering<br>Wilkes University</div>
-        <div class="student-status">● Currently working under my supervision</div>
-        <p class="student-desc">Working on implementation and experimental validation of adaptive control algorithms on TurtleBot robotic platforms. Research involves trajectory tracking, formation control, and real-time ROS2 integration.</p>
-      </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.75rem">
+    <div>
+      <div class="sec-label">Research Team</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#1a1f2e;margin:0">Current Students</h2>
     </div>
-
-    <div class="student-hcard fade-in">
-      <div class="student-photo-wrap">
-        <img src="img/joshua_roman.jpg" alt="Joshua Roman" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="student-ph-fallback">JR</div>
-        <div class="student-photo-hint">Upload: img/joshua_roman.jpg</div>
+    <span style="font-size:.8rem;color:#556080;background:#f0f4fb;padding:.35rem .9rem;border-radius:20px;border:1px solid #d8e2f0">Wilkes University · 2025–Present</span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem">
+    <div class="scard fade-in">
+      <div class="scard-av">
+        <img src="img/matthew_kralj.jpg" alt="MK" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="scard-init">MK</div>
       </div>
-      <div class="student-info">
-        <div class="student-name-lg">Joshua Roman</div>
-        <div class="student-badge">Undergraduate Researcher</div>
-        <div class="student-dept">Mechanical &amp; Electrical Engineering<br>Wilkes University</div>
-        <div class="student-status">● Currently working under my supervision</div>
-        <p class="student-desc">Working on safe reinforcement learning-based control and hardware-in-the-loop testing using TurtleBot 4 and TurtleBot 4 Lite. Research involves obstacle avoidance and barrier Lyapunov function implementation.</p>
+      <div class="scard-info">
+        <div class="scard-name">Matthew Kralj</div>
+        <div class="scard-role">Undergraduate Researcher</div>
+        <div class="scard-topic">TurtleBot · Adaptive Control · ROS2</div>
       </div>
+      <span class="scard-dot" title="Currently active">●</span>
     </div>
-
+    <div class="scard fade-in">
+      <div class="scard-av">
+        <img src="img/joshua_roman.jpg" alt="JR" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="scard-init">JR</div>
+      </div>
+      <div class="scard-info">
+        <div class="scard-name">Joshua Roman</div>
+        <div class="scard-role">Undergraduate Researcher</div>
+        <div class="scard-topic">Safe RL · CBF · TurtleBot 4</div>
+      </div>
+      <span class="scard-dot" title="Currently active">●</span>
+    </div>
   </div>
 </div>
 </section>
@@ -624,7 +661,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 <div class="container">
   <div class="sec-label">Education</div>
   <h2 class="sec-title">Teaching</h2>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA · 2025–Present</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA, USA · 2025–Present</h3>
   <div class="course-grid fade-in" style="margin-bottom:2rem">
     <div class="course-item"><div class="course-code">EE-314 / S'26</div><div class="course-name">Control Systems</div></div>
     <div class="course-item"><div class="course-code">EE-314-L / S'26</div><div class="course-name">Control Systems Lab</div></div>
@@ -637,7 +674,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
     <div class="course-item"><div class="course-code">EE-252-L / F'25</div><div class="course-name">Electronics II Laboratory</div></div>
     <div class="course-item"><div class="course-code">EE-283 / F'25</div><div class="course-name">Electrical Engineering Lab</div></div>
   </div>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO · Spring 2025</h3>
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO, USA · Spring 2025</h3>
   <div class="course-grid fade-in">
     <div class="course-item"><div class="course-code">MECH/AERO 6410 / EE 6310</div><div class="course-name">Optimal Control and Estimation</div></div>
   </div>
@@ -764,22 +801,64 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 <!-- CONTACT -->
 <section id="contact">
 <div class="container">
-  <div class="sec-label">Get in Touch</div>
-  <h2 class="sec-title">Contact</h2>
-  <div class="contact-grid">
-    <div class="contact-card fade-in">
-      <div class="ci"><div class="ci-icon">📧</div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:irfanahmad.ganie@wilkes.edu">irfanahmad.ganie@wilkes.edu</a></div><div class="ci-val" style="margin-top:.2rem"><a href="mailto:ganieirfan27@gmail.com">ganieirfan27@gmail.com</a></div></div></div>
-      <div class="ci"><div class="ci-icon">🏛️</div><div><div class="ci-lbl">Institution</div><div class="ci-val">Mechanical &amp; Electrical Engineering<br><a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank">Wilkes University</a> · Wilkes-Barre, PA</div></div></div>
-      <div class="ci"><div class="ci-icon">📍</div><div><div class="ci-lbl">Location</div><div class="ci-val">Wilkes-Barre, Pennsylvania, USA</div></div></div>
-    </div>
-    <div class="fade-in">
-      <div class="profile-links">
-        <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank" class="pl-card"><span class="pl-icon">🎓</span><div><div class="pl-name">Google Scholar</div><div class="pl-desc">428+ citations · h-index 8 · i10-index 7</div></div><span class="pl-arr">→</span></a>
-        <a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank" class="pl-card"><span class="pl-icon">🏛️</span><div><div class="pl-name">Wilkes University Profile</div><div class="pl-desc">Faculty directory page</div></div><span class="pl-arr">→</span></a>
-        <a href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank" class="pl-card"><span class="pl-icon">💼</span><div><div class="pl-name">LinkedIn</div><div class="pl-desc">Professional profile</div></div><span class="pl-arr">→</span></a>
-        <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank" class="pl-card"><span class="pl-icon">🔬</span><div><div class="pl-name">ResearchGate</div><div class="pl-desc">Research profile &amp; preprints</div></div><span class="pl-arr">→</span></a>
-        <a href="https://github.com/irfan149" target="_blank" class="pl-card"><span class="pl-icon">⚙️</span><div><div class="pl-name">GitHub</div><div class="pl-desc">Code &amp; project demos</div></div><span class="pl-arr">→</span></a>
+  <div class="sec-label" style="color:#7aadff">Get in Touch</div>
+  <h2 class="sec-title" style="color:#fff;margin-bottom:2rem">Contact</h2>
+  <div class="contact-wrap">
+    <div class="contact-info-card fade-in">
+      <div class="ci2">
+        <div class="ci2-icon">📧</div>
+        <div><div class="ci2-lbl">Email</div>
+          <div class="ci2-val"><a href="mailto:irfanahmad.ganie@wilkes.edu">irfanahmad.ganie@wilkes.edu</a></div>
+          <div class="ci2-val" style="margin-top:.2rem"><a href="mailto:ganieirfan27@gmail.com">ganieirfan27@gmail.com</a></div>
+        </div>
       </div>
+      <div class="ci2">
+        <div class="ci2-icon">🏛️</div>
+        <div><div class="ci2-lbl">Institution</div>
+          <div class="ci2-val">Mechanical &amp; Electrical Engineering<br>
+          <a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank">Wilkes University</a> · Wilkes-Barre, PA, USA</div>
+        </div>
+      </div>
+      <div class="ci2">
+        <div class="ci2-icon">📍</div>
+        <div><div class="ci2-lbl">Location</div>
+          <div class="ci2-val">Wilkes-Barre, Pennsylvania, USA</div>
+        </div>
+      </div>
+      <div class="ci2">
+        <div class="ci2-icon">📄</div>
+        <div><div class="ci2-lbl">Curriculum Vitae</div>
+          <div class="ci2-val"><a href="cv/cv.pdf" target="_blank">Download CV (PDF) ↗</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-links-card fade-in">
+      <div class="contact-links-title">Profiles &amp; Links</div>
+      <a href="https://scholar.google.com/citations?user=_J8FRd4AAAAJ&hl=en" target="_blank" class="pl2">
+        <div class="pl2-icon" style="background:#4285f4">GS</div>
+        <div><div class="pl2-name">Google Scholar</div><div class="pl2-desc">428+ citations · h-index 8 · i10-index 7</div></div>
+        <span class="pl2-arr">→</span>
+      </a>
+      <a href="https://www.wilkes.edu/campus-directory/irfanahmad.ganie.aspx" target="_blank" class="pl2">
+        <div class="pl2-icon" style="background:#1d5fc4">W</div>
+        <div><div class="pl2-name">Wilkes University Profile</div><div class="pl2-desc">Faculty directory page</div></div>
+        <span class="pl2-arr">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/irfan-ahmad-ganie-285359118" target="_blank" class="pl2">
+        <div class="pl2-icon" style="background:#0077b5">in</div>
+        <div><div class="pl2-name">LinkedIn</div><div class="pl2-desc">Professional profile</div></div>
+        <span class="pl2-arr">→</span>
+      </a>
+      <a href="https://www.researchgate.net/profile/Irfan-Ganie-3" target="_blank" class="pl2">
+        <div class="pl2-icon" style="background:#00ccbb;font-size:.7rem">RG</div>
+        <div><div class="pl2-name">ResearchGate</div><div class="pl2-desc">Research profile &amp; preprints</div></div>
+        <span class="pl2-arr">→</span>
+      </a>
+      <a href="https://github.com/irfan149" target="_blank" class="pl2">
+        <div class="pl2-icon" style="background:#24292e">GH</div>
+        <div><div class="pl2-name">GitHub</div><div class="pl2-desc">Code &amp; project demos</div></div>
+        <span class="pl2-arr">→</span>
+      </a>
     </div>
   </div>
 </div>
@@ -793,7 +872,7 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   <div class="modal-body">
     <div class="sec-label" style="margin-bottom:.4rem">Neuromorphic Computing</div>
     <div class="modal-title">Adaptive Spiking Neural Control</div>
-    <p class="modal-abs">Safety-critical control using spiking neural networks (SNNs) — biologically inspired, event-driven architectures achieving <strong style="color:#fff">80% energy savings</strong> over conventional ANNs. The framework embeds safety via Augmented Barrier States (ABS), uses SVD-regularized online weight update laws to handle spike discontinuities, and achieves uniformly ultimately bounded (UUB) tracking. A second thrust applies SNN-based intent observers for human–multi-robot collaboration.</p>
+    <p class="modal-abs">Safety-critical control using spiking neural networks (SNNs) — biologically inspired, event-driven architectures achieving <strong style="color:#1d5fc4">80% energy savings</strong> over conventional ANNs. The framework embeds safety via Augmented Barrier States (ABS), uses SVD-regularized online weight update laws to handle spike discontinuities, and achieves uniformly ultimately bounded (UUB) tracking. A second thrust applies SNN-based intent observers for human–multi-robot collaboration.</p>
     <div class="anim-wrap"><div class="anim-lbl">LIVE SIMULATION — LIF neuron membrane · spike encoding · SNN layers · closed-loop control · online weight adaptation</div><div id="snn-anim-container"></div></div>
     <div class="modal-vid"><div class="vi">🎬</div><div><div class="vt">Project Demo Video</div><div class="vh">Upload as: <code>videos/snn_demo.mp4</code></div></div></div>
     <div class="papers-title">Publications</div>
