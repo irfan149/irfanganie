@@ -617,11 +617,14 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   <div class="sec-label">Research Funding</div>
   <h2 class="sec-title" style="margin-bottom:1.5rem">Grants</h2>
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem">
-    <div style="background:#fff8ee;border:1px solid #f0d090;border-radius:12px;padding:1.4rem;border-left:4px solid #b07d10">
+    <div onclick="document.getElementById('modal-grant').classList.add('active');document.body.style.overflow='hidden'" style="background:#fff8ee;border:1px solid #f0d090;border-radius:12px;padding:1.4rem;border-left:4px solid #b07d10;cursor:pointer;transition:all .2s" onmouseover="this.style.boxShadow='0 8px 28px rgba(176,125,16,.18)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
       <div style="font-weight:700;color:#9a6200;font-size:.9rem;margin-bottom:.4rem">PI — Funded · $9,559 · 2026</div>
       <div style="font-weight:600;color:#1a1f2e;font-size:.95rem;margin-bottom:.3rem">Summer Mentoring Grant</div>
       <div style="font-size:.84rem;color:#556080">Wilkes University · Undergraduate robotics research using TurtleBot 4 &amp; TurtleBot 4 Lite platforms</div>
-      <div style="margin-top:.75rem;display:inline-block;background:#b07d10;color:#fff;font-size:.7rem;padding:.2rem .65rem;border-radius:20px;font-family:monospace;font-weight:600">● FUNDED</div>
+      <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between">
+        <span style="display:inline-block;background:#b07d10;color:#fff;font-size:.7rem;padding:.2rem .65rem;border-radius:20px;font-family:monospace;font-weight:600">● FUNDED</span>
+        <span style="font-size:.75rem;color:#b07d10;font-weight:500">Click to explore →</span>
+      </div>
     </div>
     <div style="background:#f5f0ff;border:1px solid #cdc5f5;border-radius:12px;padding:1.4rem;border-left:4px solid #5548c8">
       <div style="font-weight:700;color:#4a38b0;font-size:.9rem;margin-bottom:.4rem">PI — Pending · $149K</div>
@@ -752,23 +755,6 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
     </div>
   </div>
 
-  <!-- Summer Grant Special Section -->
-  <div class="summer-grant fade-in" style="margin-top:2rem">
-    <div class="sg-header">
-      <div class="sg-title">🌟 Summer Mentoring Grant — $9,559 (Funded, 2026)</div>
-      <div class="sg-desc" style="margin-top:.75rem">
-        <strong>Student Research Mentorship Program, Wilkes University</strong>
-        <p style="margin-top:.75rem">We develop and apply adaptive control algorithms on <strong>TurtleBot 4</strong> and <strong>TurtleBot 4 Lite</strong> robotic platforms. Students implement and test advanced trajectory tracking algorithms in real-time, including optimal control strategies derived from actor-critic reinforcement learning frameworks. The robots navigate complex environments while maintaining safety constraints enforced by barrier Lyapunov functions.</p>
-        <p style="margin-top:.6rem">Key activities include: <strong>trajectory tracking</strong> of reference paths in 2D environments, <strong>formation control</strong> with multi-robot coordination, <strong>obstacle avoidance</strong> using real-time sensor feedback, <strong>hardware-in-the-loop validation</strong> of theoretical control laws, and integration of ROS2 for real-time execution. Students gain hands-on experience bridging theory and practice in adaptive nonlinear control systems.</p>
-      </div>
-    </div>
-    <div class="sg-imgs">
-      <div class="sg-img-item"><img src="img/turtlebot1.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sg-img-ph"><span>img/turtlebot1.jpg</span><p>Upload TurtleBot photo 1</p></div></div>
-      <div class="sg-img-item"><img src="img/turtlebot2.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sg-img-ph"><span>img/turtlebot2.jpg</span><p>Upload TurtleBot photo 2</p></div></div>
-      <div class="sg-img-item"><img src="img/turtlebot3.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sg-img-ph"><span>img/turtlebot3.jpg</span><p>Upload TurtleBot photo 3</p></div></div>
-      <div class="sg-img-item"><img src="img/turtlebot4.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="sg-img-ph"><span>img/turtlebot4.jpg</span><p>Upload TurtleBot photo 4</p></div></div>
-    </div>
-  </div>
 </div>
 </section>
 
@@ -885,6 +871,68 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
   </div>
 </div>
 </section>
+
+
+<!-- GRANT MODAL -->
+<div class="modal-ov" id="modal-grant">
+  <div class="modal">
+    <div class="modal-hero" style="background:linear-gradient(135deg,#3d2800,#7a5010);min-height:120px;display:flex;align-items:center;padding:2rem">
+      <div style="flex:1">
+        <div style="font-family:monospace;font-size:.72rem;color:#f0d090;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem">Research Grant · Funded</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;margin:0 0 .3rem">Summer Mentoring Grant</h2>
+        <div style="color:#f0d090;font-size:.95rem">$9,559 · Wilkes University · 2026</div>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modal-grant').classList.remove('active');document.body.style.overflow=''">✕</button>
+    </div>
+    <div class="modal-body" style="background:#fff">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+        <div style="background:#fff8ee;border:1px solid #f0d090;border-radius:10px;padding:1rem;text-align:center">
+          <div style="font-size:1.5rem;margin-bottom:.3rem">🤖</div>
+          <div style="font-weight:600;color:#1a1f2e;font-size:.88rem">TurtleBot 4 &amp; 4 Lite</div>
+          <div style="font-size:.78rem;color:#556080;margin-top:.15rem">Robotic platforms</div>
+        </div>
+        <div style="background:#f0faf6;border:1px solid #b0e0ce;border-radius:10px;padding:1rem;text-align:center">
+          <div style="font-size:1.5rem;margin-bottom:.3rem">👨‍🎓</div>
+          <div style="font-weight:600;color:#1a1f2e;font-size:.88rem">Undergraduate Research</div>
+          <div style="font-size:.78rem;color:#556080;margin-top:.15rem">Student Mentorship Program</div>
+        </div>
+      </div>
+      <p style="color:#455070;font-size:.91rem;line-height:1.82;margin-bottom:1rem">We develop and apply adaptive control algorithms on <strong style="color:#1a1f2e">TurtleBot 4</strong> and <strong style="color:#1a1f2e">TurtleBot 4 Lite</strong> robotic platforms. Students implement and test advanced trajectory tracking algorithms in real-time, including optimal control strategies derived from actor-critic reinforcement learning. The robots navigate complex environments while maintaining safety constraints enforced by barrier Lyapunov functions.</p>
+      <p style="color:#455070;font-size:.91rem;line-height:1.82;margin-bottom:1.5rem">Key activities: <strong style="color:#1a1f2e">trajectory tracking</strong> in 2D environments, <strong style="color:#1a1f2e">formation control</strong> with multi-robot coordination, <strong style="color:#1a1f2e">obstacle avoidance</strong> using real-time sensor feedback, <strong style="color:#1a1f2e">hardware-in-the-loop validation</strong> of theoretical control laws, and ROS2 integration for real-time execution.</p>
+      <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;color:#1a1f2e;margin-bottom:.85rem;padding-bottom:.5rem;border-bottom:1px solid rgba(0,0,0,.08)">Research Photos</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem">
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#e8ecf2">
+          <img src="img/turtlebot1.jpg" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;padding:1rem;text-align:center">
+            <div style="font-size:1.8rem">🤖</div>
+            <div style="font-family:monospace;font-size:.69rem;color:#1d5fc4">img/turtlebot1.jpg</div>
+          </div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#e8ecf2">
+          <img src="img/turtlebot2.jpg" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;padding:1rem;text-align:center">
+            <div style="font-size:1.8rem">🤖</div>
+            <div style="font-family:monospace;font-size:.69rem;color:#1d5fc4">img/turtlebot2.jpg</div>
+          </div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#e8ecf2">
+          <img src="img/turtlebot3.jpg" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;padding:1rem;text-align:center">
+            <div style="font-size:1.8rem">🤖</div>
+            <div style="font-family:monospace;font-size:.69rem;color:#1d5fc4">img/turtlebot3.jpg</div>
+          </div>
+        </div>
+        <div style="border-radius:10px;overflow:hidden;aspect-ratio:4/3;background:#e8ecf2">
+          <img src="img/turtlebot4.jpg" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;gap:.4rem;padding:1rem;text-align:center">
+            <div style="font-size:1.8rem">🤖</div>
+            <div style="font-family:monospace;font-size:.69rem;color:#1d5fc4">img/turtlebot4.jpg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer><p>© 2026 Irfan Ahmad Ganie · Assistant Professor, Wilkes University · Wilkes-Barre, PA</p></footer>
 
@@ -1043,10 +1091,22 @@ function closeModal(id){
   if(aR[id]){cancelAnimationFrame(aR[id]);aR[id]=null;aB[id]=false;}
 }
 document.querySelectorAll('.modal-ov').forEach(o=>{
-  o.addEventListener('click',e=>{if(e.target===o){closeModal(o.id.replace('modal-',''));}});
+  o.addEventListener('click',e=>{
+    if(e.target===o){
+      const id=o.id.replace('modal-','');
+      if(id==='grant'){o.classList.remove('active');document.body.style.overflow='';}
+      else closeModal(id);
+    }
+  });
 });
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape')document.querySelectorAll('.modal-ov.active').forEach(m=>closeModal(m.id.replace('modal-','')));
+  if(e.key==='Escape'){
+    document.querySelectorAll('.modal-ov.active').forEach(m=>{
+      const id=m.id.replace('modal-','');
+      if(id==='grant'){m.classList.remove('active');document.body.style.overflow='';}
+      else closeModal(id);
+    });
+  }
 });
 function buildAnim(id){
   if(id==='snn')bSNN();
