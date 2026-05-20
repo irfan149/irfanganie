@@ -298,6 +298,20 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 .pl2-desc{font-size:.74rem;color:rgba(180,200,255,.55)}
 .pl2-arr{margin-left:auto;color:rgba(180,200,255,.4);font-size:.9rem}
 
+/* COURSE LINES */
+.cline{display:flex;align-items:center;gap:.75rem;padding:.6rem 0;border-bottom:1px solid #edf0f5;cursor:pointer;transition:background .15s;border-radius:4px}
+.cline:hover{background:#f4f7fc;padding-left:.5rem;padding-right:.5rem;margin-left:-.5rem;margin-right:-.5rem}
+.cline:hover .carr{opacity:1;color:#1d5fc4}
+.ccode{font-family:var(--mono);font-size:.74rem;color:#1d5fc4;flex-shrink:0;min-width:140px}
+.cname{font-size:.88rem;color:#1a1f2e;font-weight:500;flex:1}
+.carr{font-size:.78rem;color:#aab;margin-left:auto;opacity:0;transition:opacity .15s;flex-shrink:0}
+/* COURSE MATERIAL SLOTS */
+.cmat-slot{background:#f8fafc;border:1.5px dashed #d0d8e8;border-radius:10px;padding:1rem;text-align:center;cursor:default}
+.cmat-icon{font-size:1.4rem;margin-bottom:.3rem}
+.cmat-lbl{font-weight:600;color:#1a1f2e;font-size:.84rem;margin-bottom:.2rem}
+.cmat-hint{font-size:.7rem;color:#8899bb;font-family:var(--mono)}
+/* COURSE MODAL */
+#modal-course.active{display:flex!important;opacity:1!important;pointer-events:auto!important}
 .fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
 
@@ -612,31 +626,26 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 </section>
 
 <!-- GRANTS -->
-<section id="grants" style="padding:3.5rem 2rem;background:#ffffff">
+<section id="grants" style="padding:3rem 2rem;background:#ffffff">
 <div class="container">
   <div class="sec-label">Research Funding</div>
   <h2 class="sec-title" style="margin-bottom:1.5rem">Grants</h2>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem">
-    <div onclick="document.getElementById('modal-grant').classList.add('active');document.body.style.overflow='hidden'" style="background:#fff8ee;border:1px solid #f0d090;border-radius:12px;padding:1.4rem;border-left:4px solid #b07d10;cursor:pointer;transition:all .2s" onmouseover="this.style.boxShadow='0 8px 28px rgba(176,125,16,.18)';this.style.transform='translateY(-3px)'" onmouseout="this.style.boxShadow='';this.style.transform=''">
-      <div style="font-weight:700;color:#9a6200;font-size:.9rem;margin-bottom:.4rem">PI — Funded · $9,559 · 2026</div>
-      <div style="font-weight:600;color:#1a1f2e;font-size:.95rem;margin-bottom:.3rem">Summer Mentoring Grant</div>
-      <div style="font-size:.84rem;color:#556080">Wilkes University · Undergraduate robotics research using TurtleBot 4 &amp; TurtleBot 4 Lite platforms</div>
-      <div style="margin-top:.75rem;display:flex;align-items:center;justify-content:space-between">
-        <span style="display:inline-block;background:#b07d10;color:#fff;font-size:.7rem;padding:.2rem .65rem;border-radius:20px;font-family:monospace;font-weight:600">● FUNDED</span>
-        <span style="font-size:.75rem;color:#b07d10;font-weight:500">Click to explore →</span>
-      </div>
+  <div style="display:flex;flex-direction:column;gap:.6rem;max-width:860px">
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.6rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.72rem;font-weight:600;font-family:monospace;background:#fff3cd;color:#7a5000;padding:.15rem .55rem;border-radius:4px;flex-shrink:0">FUNDED</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">Summer Mentoring Grant — $9,559</span>
+      <span style="font-size:.84rem;color:#556080">Wilkes University, 2026</span>
+      <span style="margin-left:auto;font-size:.8rem;color:#b07d10;cursor:pointer;flex-shrink:0" onclick="document.getElementById('modal-grant').classList.add('active');document.body.style.overflow='hidden'">View details →</span>
     </div>
-    <div style="background:#f5f0ff;border:1px solid #cdc5f5;border-radius:12px;padding:1.4rem;border-left:4px solid #5548c8">
-      <div style="font-weight:700;color:#4a38b0;font-size:.9rem;margin-bottom:.4rem">PI — Pending · $149K</div>
-      <div style="font-weight:600;color:#1a1f2e;font-size:.95rem;margin-bottom:.3rem">NSF DCSD</div>
-      <div style="font-size:.84rem;color:#556080">Lyapunov-Based Deep Graph Neural Networks for Safe Cooperative Control of Multi-Agent Systems</div>
-      <div style="margin-top:.75rem;display:inline-block;background:#5548c8;color:#fff;font-size:.7rem;padding:.2rem .65rem;border-radius:20px;font-family:monospace;font-weight:600">◎ SUBMITTED</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.6rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.72rem;font-weight:600;font-family:monospace;background:#ede9fe;color:#4338ca;padding:.15rem .55rem;border-radius:4px;flex-shrink:0">PENDING</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">NSF DCSD — $149K</span>
+      <span style="font-size:.84rem;color:#556080">Lyapunov-Based Deep GNNs for Safe Cooperative Control</span>
     </div>
-    <div style="background:#f5f0ff;border:1px solid #cdc5f5;border-radius:12px;padding:1.4rem;border-left:4px solid #5548c8">
-      <div style="font-weight:700;color:#4a38b0;font-size:.9rem;margin-bottom:.4rem">PI — Pending · $225K</div>
-      <div style="font-weight:600;color:#1a1f2e;font-size:.95rem;margin-bottom:.3rem">NSF CPS</div>
-      <div style="font-size:.84rem;color:#556080">Energy-Efficient Safety-Critical Control of Cyber-Physical Systems using Spiking Neural Networks</div>
-      <div style="margin-top:.75rem;display:inline-block;background:#5548c8;color:#fff;font-size:.7rem;padding:.2rem .65rem;border-radius:20px;font-family:monospace;font-weight:600">◎ SUBMITTED</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.6rem 0">
+      <span style="font-size:.72rem;font-weight:600;font-family:monospace;background:#ede9fe;color:#4338ca;padding:.15rem .55rem;border-radius:4px;flex-shrink:0">PENDING</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">NSF CPS — $225K</span>
+      <span style="font-size:.84rem;color:#556080">Energy-Efficient Safety-Critical Control using SNNs</span>
     </div>
   </div>
 </div>
@@ -686,75 +695,112 @@ footer p{color:rgba(180,200,255,.7);font-size:.84rem}
 <div class="container">
   <div class="sec-label">Education</div>
   <h2 class="sec-title">Teaching</h2>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA, USA · 2025–Present</h3>
-  <div class="course-grid fade-in" style="margin-bottom:2rem">
-    <div class="course-item"><div class="course-code">EE-314 / S'26</div><div class="course-name">Control Systems</div></div>
-    <div class="course-item"><div class="course-code">EE-314-L / S'26</div><div class="course-name">Control Systems Lab</div></div>
-    <div class="course-item"><div class="course-code">EGR-214 / S'26</div><div class="course-name">Linear Systems</div></div>
-    <div class="course-item"><div class="course-code">EGR-214-L / S'26</div><div class="course-name">Linear Systems Lab</div></div>
-    <div class="course-item"><div class="course-code">EE-498 / S'26</div><div class="course-name">AI-Based Control for Robotic Systems</div></div>
-    <div class="course-item"><div class="course-code">EE-241 / S'26</div><div class="course-name">Digital Design (+ Honors)</div></div>
-    <div class="course-item"><div class="course-code">EE-241-L / S'26</div><div class="course-name">Digital Design Laboratory</div></div>
-    <div class="course-item"><div class="course-code">EE-252 / F'25</div><div class="course-name">Electronics II</div></div>
-    <div class="course-item"><div class="course-code">EE-252-L / F'25</div><div class="course-name">Electronics II Laboratory</div></div>
-    <div class="course-item"><div class="course-code">EE-283 / F'25</div><div class="course-name">Electrical Engineering Lab</div></div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.75rem"><a href="https://www.wilkes.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Wilkes University</a>, Wilkes-Barre, PA, USA · 2025–Present</h3>
+  <div style="display:flex;flex-direction:column;gap:0;max-width:860px;margin-bottom:2rem">
+    <div class="cline" onclick="openCourse('ee314')"><span class="ccode">EE-314 / S'26</span><span class="cname">Control Systems</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('ee314l')"><span class="ccode">EE-314-L / S'26</span><span class="cname">Control Systems Lab</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('egr214')"><span class="ccode">EGR-214 / S'26</span><span class="cname">Linear Systems</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('egr214l')"><span class="ccode">EGR-214-L / S'26</span><span class="cname">Linear Systems Lab</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('ee498')"><span class="ccode">EE-498 / S'26</span><span class="cname">AI-Based Control for Robotic Systems</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('ee241')"><span class="ccode">EE-241 / S'26</span><span class="cname">Digital Design (+ Honors)</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('ee241l')"><span class="ccode">EE-241-L / S'26</span><span class="cname">Digital Design Laboratory</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('ee252')"><span class="ccode">EE-252 / F'25</span><span class="cname">Electronics II</span><span class="carr">View →</span></div>
+    <div class="cline" onclick="openCourse('ee252l')"><span class="ccode">EE-252-L / F'25</span><span class="cname">Electronics II Laboratory</span><span class="carr">View →</span></div>
+    <div class="cline" style="border-bottom:none" onclick="openCourse('ee283')"><span class="ccode">EE-283 / F'25</span><span class="cname">Electrical Engineering Lab</span><span class="carr">View →</span></div>
   </div>
-  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.9rem"><a href="https://www.mst.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO, USA · Spring 2025</h3>
-  <div class="course-grid fade-in">
-    <div class="course-item"><div class="course-code">MECH/AERO 6410 / EE 6310</div><div class="course-name">Optimal Control and Estimation</div></div>
+
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#1a1f2e;margin-bottom:.75rem"><a href="https://www.mst.edu/" target="_blank" style="color:#1d5fc4;text-decoration:none">Missouri S&amp;T</a>, Rolla, MO, USA · Spring 2025</h3>
+  <div style="display:flex;flex-direction:column;gap:0;max-width:860px">
+    <div class="cline" style="border-bottom:none" onclick="openCourse('mst6410')"><span class="ccode">MECH/AERO 6410 / EE 6310</span><span class="cname">Optimal Control and Estimation</span><span class="carr">View →</span></div>
   </div>
 </div>
 </section>
+
+<!-- COURSE MODAL -->
+<div class="modal-ov" id="modal-course" style="display:none;opacity:0;pointer-events:none">
+  <div class="modal" style="max-width:640px">
+    <button class="modal-close" onclick="closeCourse()">✕</button>
+    <div id="cModal-hero" style="background:linear-gradient(135deg,#1a2540,#1f3060);padding:1.8rem 2rem 1.4rem">
+      <div id="cModal-code" style="font-family:monospace;font-size:.72rem;color:#7aadff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem"></div>
+      <div id="cModal-title" style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.25rem"></div>
+      <div id="cModal-meta" style="font-size:.84rem;color:rgba(180,200,255,.75)"></div>
+    </div>
+    <div class="modal-body" style="background:#fff;padding:1.8rem">
+      <!-- Upload slots -->
+      <div style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#1a1f2e;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid #edf0f5">Course Materials</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1.4rem">
+        <div class="cmat-slot" id="cmat-syllabus">
+          <div class="cmat-icon">📄</div>
+          <div class="cmat-lbl">Syllabus</div>
+          <div class="cmat-hint">Upload: <span class="cmat-path"></span></div>
+        </div>
+        <div class="cmat-slot" id="cmat-slides">
+          <div class="cmat-icon">📊</div>
+          <div class="cmat-lbl">Lecture Slides</div>
+          <div class="cmat-hint">Upload: <span class="cmat-path"></span></div>
+        </div>
+        <div class="cmat-slot" id="cmat-notes">
+          <div class="cmat-icon">📝</div>
+          <div class="cmat-lbl">Notes</div>
+          <div class="cmat-hint">Upload: <span class="cmat-path"></span></div>
+        </div>
+        <div class="cmat-slot" id="cmat-assignments">
+          <div class="cmat-icon">✏️</div>
+          <div class="cmat-lbl">Assignments</div>
+          <div class="cmat-hint">Upload: <span class="cmat-path"></span></div>
+        </div>
+      </div>
+      <div style="background:#f0f4fb;border-radius:8px;padding:.85rem 1rem;font-size:.8rem;color:#556080;line-height:1.6">
+        <strong style="color:#1a1f2e">To add materials:</strong> upload files to your GitHub repo under <code style="background:#dde5f4;padding:.1rem .35rem;border-radius:4px;font-size:.77rem">courses/&lt;code&gt;/</code> and they will appear here automatically once linked.
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- AWARDS -->
 <section id="awards">
 <div class="container">
   <div class="sec-label">Recognition</div>
   <h2 class="sec-title">Honors &amp; Awards</h2>
-  <div class="award-grid">
-    <div class="award-card fade-in">
-      <span class="aw-icon">🏆</span>
-      <div class="aw-title"><a href="https://news.mst.edu/2025/05/sts-college-of-engineering-and-computing-honors-9-ph-d-students/" target="_blank">Dean's Scholar Award</a></div>
-      <div class="aw-org">College of Engineering, Missouri S&amp;T — One of six Ph.D. students recognized for outstanding scholarly contributions and exceptional research productivity</div>
-      <div class="aw-yr">2025</div>
+  <div style="display:flex;flex-direction:column;gap:0;max-width:860px">
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.65rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.8rem;flex-shrink:0">🏆</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500"><a href="https://news.mst.edu/2025/05/sts-college-of-engineering-and-computing-honors-9-ph-d-students/" target="_blank" style="color:#1a1f2e;text-decoration:none;border-bottom:1px dotted #aab">Dean's Scholar Award</a></span>
+      <span style="font-size:.83rem;color:#556080">College of Engineering, Missouri S&amp;T</span>
+      <span style="margin-left:auto;font-size:.78rem;color:#b07d10;flex-shrink:0">2025</span>
     </div>
-    <div class="award-card fade-in">
-      <span class="aw-icon">🎤</span>
-      <div class="aw-title">Invited Speaker — tecBRIDGE Innovation Conference</div>
-      <div class="aw-org">"From Commands to Cooperation: Designing Intelligent Human–Robot Teams with AI" · Scranton, PA</div>
-      <div class="aw-yr">2025</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.65rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.8rem;flex-shrink:0">🎤</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">Invited Speaker — tecBRIDGE Innovation Conference</span>
+      <span style="font-size:.83rem;color:#556080">Scranton, PA</span>
+      <span style="margin-left:auto;font-size:.78rem;color:#b07d10;flex-shrink:0">2025</span>
     </div>
-    <div class="award-card fade-in">
-      <span class="aw-icon">🥈</span>
-      <div class="aw-title"><a href="https://econnection.mst.edu/2023/10/isc-poster-presentation-winners-announced-4/" target="_blank">ISC Poster Presentation Award — 2nd Place</a></div>
-      <div class="aw-org">Intelligent Systems Center, Missouri S&amp;T College of Engineering &amp; Computing</div>
-      <div class="aw-yr">2023</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.65rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.8rem;flex-shrink:0">🥈</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500"><a href="https://econnection.mst.edu/2023/10/isc-poster-presentation-winners-announced-4/" target="_blank" style="color:#1a1f2e;text-decoration:none;border-bottom:1px dotted #aab">ISC Poster Presentation Award — 2nd Place</a></span>
+      <span style="font-size:.83rem;color:#556080">Intelligent Systems Center, Missouri S&amp;T</span>
+      <span style="margin-left:auto;font-size:.78rem;color:#b07d10;flex-shrink:0">2023</span>
     </div>
-    <div class="award-card fade-in">
-      <span class="aw-icon">✈️</span>
-      <div class="aw-title">IEEE CSS Conference Travel Award</div>
-      <div class="aw-org">IEEE Control Systems Society · Funded travel to IEEE CCTA 2023, Bridgetown, Barbados
-        <div class="img-grid" style="margin-top:.85rem">
-          <div class="img-item"><img src="img/ccta_award1.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="img-ph" style="display:none"><div class="ii">📷</div><div class="ip">img/ccta_award1.jpg</div><div class="il">Upload award photo 1</div></div></div>
-          <div class="img-item"><img src="img/ccta_award2.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="img-ph" style="display:none"><div class="ii">📷</div><div class="ip">img/ccta_award2.jpg</div><div class="il">Upload award photo 2</div></div></div>
-        </div>
-      </div>
-      <div class="aw-yr">2023</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.65rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.8rem;flex-shrink:0">✈️</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">IEEE CSS Conference Travel Award</span>
+      <span style="font-size:.83rem;color:#556080">IEEE CCTA 2023, Bridgetown, Barbados</span>
+      <span style="margin-left:auto;font-size:.78rem;color:#b07d10;flex-shrink:0">2023</span>
     </div>
-    <div class="award-card fade-in">
-      <span class="aw-icon">🔬</span>
-      <div class="aw-title">Ph.D. Research Funding</div>
-      <div class="aw-org">During Ph.D. at Missouri S&amp;T: Army Research Office (ARO) · Office of Naval Research (ONR) · Air Force Office of Scientific Research (AFOSR)</div>
-      <div class="aw-yr">2021–2025</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.65rem 0;border-bottom:1px solid #edf0f5">
+      <span style="font-size:.8rem;flex-shrink:0">🔬</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">Ph.D. Research Funding</span>
+      <span style="font-size:.83rem;color:#556080">ARO · ONR · AFOSR — Missouri S&amp;T</span>
+      <span style="margin-left:auto;font-size:.78rem;color:#b07d10;flex-shrink:0">2021–2025</span>
     </div>
-    <div class="award-card fade-in">
-      <span class="aw-icon">🎓</span>
-      <div class="aw-title">Government of India Fellowship</div>
-      <div class="aw-org">Master's Program Fellowship · Indian Government</div>
-      <div class="aw-yr">2019–2021</div>
+    <div style="display:flex;align-items:baseline;gap:.75rem;padding:.65rem 0">
+      <span style="font-size:.8rem;flex-shrink:0">🎓</span>
+      <span style="font-size:.88rem;color:#1a1f2e;font-weight:500">Government of India Fellowship</span>
+      <span style="font-size:.83rem;color:#556080">Master's Program · Indian Government</span>
+      <span style="margin-left:auto;font-size:.78rem;color:#b07d10;flex-shrink:0">2019–2021</span>
     </div>
   </div>
-
 </div>
 </section>
 
@@ -1104,6 +1150,7 @@ document.addEventListener('keydown',e=>{
     document.querySelectorAll('.modal-ov.active').forEach(m=>{
       const id=m.id.replace('modal-','');
       if(id==='grant'){m.classList.remove('active');document.body.style.overflow='';}
+      else if(id==='course'){closeCourse();}
       else closeModal(id);
     });
   }
@@ -3327,6 +3374,42 @@ function bCPSSim3(){
 </div>
 </div>`;
 }
+
+/* ── COURSE MODAL ── */
+const COURSES={
+  ee314:  {code:'EE-314 / S\'26', title:'Control Systems', meta:'Wilkes University · Spring 2026 · 3 credits', folder:'ee314'},
+  ee314l: {code:'EE-314-L / S\'26', title:'Control Systems Lab', meta:'Wilkes University · Spring 2026 · 1 credit', folder:'ee314l'},
+  egr214: {code:'EGR-214 / S\'26', title:'Linear Systems', meta:'Wilkes University · Spring 2026 · 3 credits', folder:'egr214'},
+  egr214l:{code:'EGR-214-L / S\'26', title:'Linear Systems Lab', meta:'Wilkes University · Spring 2026 · 1 credit', folder:'egr214l'},
+  ee498:  {code:'EE-498 / S\'26', title:'AI-Based Control for Robotic Systems', meta:'Wilkes University · Spring 2026 · 3 credits', folder:'ee498'},
+  ee241:  {code:'EE-241 / S\'26', title:'Digital Design (+ Honors)', meta:'Wilkes University · Spring 2026 · 3 credits', folder:'ee241'},
+  ee241l: {code:'EE-241-L / S\'26', title:'Digital Design Laboratory', meta:'Wilkes University · Spring 2026 · 1 credit', folder:'ee241l'},
+  ee252:  {code:'EE-252 / F\'25', title:'Electronics II', meta:'Wilkes University · Fall 2025 · 3 credits', folder:'ee252'},
+  ee252l: {code:'EE-252-L / F\'25', title:'Electronics II Laboratory', meta:'Wilkes University · Fall 2025 · 1 credit', folder:'ee252l'},
+  ee283:  {code:'EE-283 / F\'25', title:'Electrical Engineering Lab', meta:'Wilkes University · Fall 2025 · 1 credit', folder:'ee283'},
+  mst6410:{code:'MECH/AERO 6410 / EE 6310', title:'Optimal Control and Estimation', meta:'Missouri S&T · Spring 2025 · Graduate', folder:'mst6410'},
+};
+window.openCourse=function(id){
+  const c=COURSES[id]; if(!c)return;
+  document.getElementById('cModal-code').textContent=c.code;
+  document.getElementById('cModal-title').textContent=c.title;
+  document.getElementById('cModal-meta').textContent=c.meta;
+  const f=c.folder;
+  document.querySelector('#cmat-syllabus .cmat-path').textContent='courses/'+f+'/syllabus.pdf';
+  document.querySelector('#cmat-slides .cmat-path').textContent='courses/'+f+'/slides.pdf';
+  document.querySelector('#cmat-notes .cmat-path').textContent='courses/'+f+'/notes.pdf';
+  document.querySelector('#cmat-assignments .cmat-path').textContent='courses/'+f+'/assignments.pdf';
+  const m=document.getElementById('modal-course');
+  m.classList.add('active');
+  document.body.style.overflow='hidden';
+};
+window.closeCourse=function(){
+  document.getElementById('modal-course').classList.remove('active');
+  document.body.style.overflow='';
+};
+document.getElementById('modal-course').addEventListener('click',function(e){
+  if(e.target===this)closeCourse();
+});
 
 function filterPubs(type,btn){
   document.querySelectorAll('.filt').forEach(b=>b.classList.remove('on'));
